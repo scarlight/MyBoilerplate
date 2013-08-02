@@ -1,0 +1,199 @@
+span, a, p, em, label, th, td { 
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight:normal; font-style:normal;
+    word-spacing:0em; letter-spacing:0em;
+    line-height:1.5;
+    text-align:left; vertical-align:baseline;
+    color:#343434;
+    font-size:1.2em;
+}
+
+textarea { 
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight:normal; font-style:normal;
+    word-spacing:0em; letter-spacing:0em;
+    line-height:1.4;
+    text-align:left; vertical-align:baseline;
+    color:#343434;
+    font-size: 1.1em;
+}
+
+cite {
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight:normal; font-style:normal;
+    word-spacing: 0; letter-spacing:0em;
+    line-height:1.5;
+    vertical-align:baseline;
+    color:#404040;
+    font-size:1em;
+}
+
+ul, ol { 
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight:normal; font-style:normal;
+    word-spacing:0em; letter-spacing:0em;
+    line-height:1.5;
+    text-align:left; vertical-align:baseline;
+    color:#343434; 
+    font-size:1.2em;
+}
+
+li p { 
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight:normal; font-style:normal;
+    word-spacing:0em; letter-spacing:0em;
+    line-height:1.4; 
+    text-align:left; vertical-align:baseline;
+    color:#343434;
+    font-size:inherit;
+}
+
+p a         { font-size:inherit; }
+a:link      { text-decoration:normal; }
+a:visited   { color:#333333 ;}
+a:hover     { text-decoration:underline; }
+a:active    { text-decoration:underline; }
+
+em          { font-size:inherit; font-style:italic; color:inherit;}
+code        { font-size:1.0em; font-style:normal; }
+pre         { font-size:1.3em; font-style:normal; }
+sup         { font-size:0.8em; vertical-align:top; letter-spacing:0em; position:relative; top:-2px; }
+sub         { font-size:0.8em; vertical-align:bottom; letter-spacing:0em; position:relative; bottom:-2px; }
+blockquote  { font-size:1.5em; font-weight:900; font-style:italic; }
+
+h6 { font-family: 'Open Sans', Tahoma, Arial, sans-serif; }
+h5 { font-family: 'Open Sans', Tahoma, Arial, sans-serif; }
+h4 { font-family: 'Open Sans', Tahoma, Arial, sans-serif; }
+h3 { font-family: 'Open Sans', Tahoma, Arial, sans-serif; }
+h2 { font-family: 'Open Sans', Tahoma, Arial, sans-serif; }
+h1 { font-family: 'Open Sans', Tahoma, Arial, sans-serif; }
+
+h6,h5,h4,h3,h2,h1 { font-weight:400; font-style:normal; word-spacing:0em; letter-spacing:0em; line-height:1.4; text-align:left; vertical-align:baseline; color:#222; }
+
+h6 { font-size:1.3em; }
+h5 { font-size:1.5em; }
+h4 { font-size:1.75em; }
+h3 { font-size:2.0em; }
+h2 { font-size:2.2em; }
+h1 { font-size:2.8em; }
+
+ul { list-style-type:disc; }
+ol { list-style-type:lower-roman; }
+ul li, ol li { font-size:inherit; }
+/*ul ul, ul ol, ol ol, ol ul { margin:5px 0px 10px 20px; }*/
+table { border-collapse:collapse; }
+
+p{ margin-bottom:20px; }
+
+body{
+    
+}
+
+#browser-wrapper
+{
+    position:relative;
+    display:block;
+    width:100%;
+    min-width:100%;
+    height:100%;
+    min-width:100%;
+    margin:0px auto;
+}
+
+#main-wrapper
+{
+    position:relative;
+    display:block;
+    width:100%;
+    min-width:100%;
+    height:auto !important;
+    height:100%;
+    min-height:100%;
+    overflow: hidden;
+    margin:0px auto;
+}
+
+#viewport-wrapper
+{
+    position:relative;
+    display:block;
+    width:100%;
+    height:auto;
+    margin:0px auto;
+    padding-bottom:30px;
+}
+
+#COMPANYNAME-company-logo{
+    position:relative;
+    display:block;
+}
+
+h1#company{
+    position: relative;
+    display: inline-block;
+    text-indent:-99999px;
+    line-height:0em;
+    padding:0px;
+}
+
+h1#company a{
+    display : block;
+    font-size: 1.2em;
+    padding:0px 0px;
+}
+
+div#company-logo{
+  display: block;
+  position: relative;
+  border: 0px none;
+  width:100px;
+  height:100px;
+  background : transparent url(http://dummyimage.com/100x100/ffffff/222222/&text=Company%20Logo) no-repeat center center scroll;/*../images/COMPANYNAME-logo.png*/
+  top:0px;
+}
+
+#COMPANYNAME-header-wrp{
+    position:relative;
+    display:block;
+    width:100%;
+    height:auto;
+}
+
+#COMPANYNAME-header{
+    position:relative;
+    display:block;
+    width:960px;
+    height:100px;
+    margin: 0px auto;
+}
+
+#COMPANYNAME-body-wrp{
+    position:relative;
+    display:block;
+    width:100%;
+    height:auto;
+}
+
+#COMPANYNAME-body{
+    position:relative;
+    display:block;
+    width:960px;
+    height:400px;
+    margin: 0px auto;
+}
+
+#COMPANYNAME-footer-wrp{
+    position:absolute;
+    display:block;
+    width:100%;
+    height:auto;
+    bottom:0px;
+}
+
+#COMPANYNAME-footer{
+    position:relative;
+    display:block;
+    width:960px;
+    height:30px;
+    margin: 0px auto;
+}
