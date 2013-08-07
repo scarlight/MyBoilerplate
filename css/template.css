@@ -5,7 +5,7 @@ span, a, p, em, label, th, td {
     line-height:1.5;
     text-align:left; vertical-align:baseline;
     color:#343434;
-    font-size:1.2em;
+    font-size:1.3em;
 }
 
 textarea { 
@@ -29,13 +29,14 @@ cite {
 }
 
 ul, ol { 
+    list-style-position: outside;
     font-family: 'Open Sans', Arial, sans-serif;
     font-weight:normal; font-style:normal;
     word-spacing:0em; letter-spacing:0em;
     line-height:1.5;
     text-align:left; vertical-align:baseline;
     color:#343434; 
-    font-size:1.2em;
+    font-size:1.3em;
 }
 
 li p { 
@@ -70,11 +71,11 @@ h1 { font-family: 'Open Sans', Tahoma, Arial, sans-serif; }
 
 h6,h5,h4,h3,h2,h1 { font-weight:400; font-style:normal; word-spacing:0em; letter-spacing:0em; line-height:1.4; text-align:left; vertical-align:baseline; color:#222; }
 
-h6 { font-size:1.3em; }
-h5 { font-size:1.5em; }
+h6 { font-size:1.2em; }
+h5 { font-size:1.4em; }
 h4 { font-size:1.75em; }
 h3 { font-size:2.0em; }
-h2 { font-size:2.2em; }
+h2 { font-size:2.4em; }
 h1 { font-size:2.8em; }
 
 ul { list-style-type:disc; }
@@ -120,7 +121,7 @@ body{
     width:100%;
     height:auto;
     margin:0px auto;
-    padding-bottom:30px;
+    padding-bottom:30px;/*modify - optional*/
 }
 
 #COMPANYNAME-company-logo{
@@ -146,8 +147,8 @@ div#company-logo{
   display: block;
   position: relative;
   border: 0px none;
-  width:100px;
-  height:100px;
+  width:100px;/*modify*/
+  height:100px;/*modify*/
   background : transparent url(http://dummyimage.com/100x100/ffffff/222222/&text=Company%20Logo) no-repeat center center scroll;/*../images/COMPANYNAME-logo.png*/
   top:0px;
 }
@@ -163,7 +164,7 @@ div#company-logo{
     position:relative;
     display:block;
     width:960px;
-    height:100px;
+    height:100px;/*modify - optional*/
     margin: 0px auto;
 }
 
@@ -178,7 +179,7 @@ div#company-logo{
     position:relative;
     display:block;
     width:960px;
-    height:400px;
+    height:400px;/*modify - optional*/
     margin: 0px auto;
 }
 
@@ -194,6 +195,20 @@ div#company-logo{
     position:relative;
     display:block;
     width:960px;
-    height:30px;
+    height:30px;/*modify - optional*/
     margin: 0px auto;
 }
+
+/* start adding style below */
+
+
+
+/*** 
+START - main menu
+**/
+
+
+
+/*** 
+END - main menu
+**/
