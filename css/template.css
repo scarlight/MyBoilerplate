@@ -54,6 +54,11 @@ a:link      { text-decoration:underline; }
 a:visited   { color:#333333 ;}
 a:hover     { text-decoration:underline; }
 a:active    { text-decoration:underline; }
+a           { -webkit-transition: all 0.2s ease;
+              -msie-transition: all 0.2s ease;
+              -moz-transition: all 0.2s ease;
+              -o-transition: all 0.2s ease;
+              transition: all 0.2s ease; }
 
 em          { font-size:inherit; font-style:italic; color:inherit;}
 code        { font-size:1.0em; font-style:normal; }
@@ -84,7 +89,18 @@ ul li, ol li { font-size:inherit; }
 /*ul ul, ul ol, ol ol, ol ul { margin:5px 0px 10px 20px; }*/
 table { border-collapse:collapse; }
 
+.opaq-5{
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";/* IE 8 */
+    filter: alpha(opacity=50);/* IE 5-7 */
+    -moz-opacity: 0.5;/* Netscape */
+    -khtml-opacity: 0.5;/* Safari 1.x */
+    opacity: 0.5;/* Good browsers */
+}
+
 p{ margin-bottom:20px; }
+
+html, body
+{ height:100%; }
 
 body{
     
