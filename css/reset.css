@@ -1,19 +1,51 @@
-html
-{ font-size: 100%; }
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
 
-div, span, applet, object, iframe, p, blockquote, pre, abbr, acronym, address, big, cite, code, del,
-dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center,
-dl, dt, dd, label, legend,table, caption, tbody, tfoot, thead, tr, th, td html, body, ul, ol, li, p,
-h1, h2, h3, h4, h5, h6, form, fieldset, a
-{ margin: 0; padding: 0; border: 0; outline: 0; vertical-align: baseline; background: transparent; }
+/* use this reset with normalize.css */
 
-body
-{ font-size:62.5%; line-height:1; }
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
 
-ol, ul
-{ list-style-position:inside; /*list-style-type: none;*/ }
+label,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0; /*<- added my own*/
+    /*font-size: 100%; <- commented out by me in favour to normalize.css*/
+    /*font: inherit; <- new by eric, commented out by me in favour to normalize.css*/
+    vertical-align: baseline;
+}
 
-a
-{ text-decoration:none; color:#1f54ff; }
+/*ol, ul, li, dl, dd, dt, blockquote, fieldset, form, legend   <--- removed from above pure reset in favour to normalize.css*/
+/* HTML5 display-role reset for older browsers <--- removed from pure reset in favour to normalize.css*/
+
+body {
+    font-size:62.5%; /*<- added my own, font can be used with em with mutiple of 10*/
+    line-height: 1;
+}
+
+/*blockquote, q <- removed from pure reset in favour to normalize.css*/
+
+/* below is my new addition based on https://code.google.com/p/reset5/*/
+
+input, select {
+    vertical-align: middle;
+}
+
+/*a img <- removed to normalize better*/
+
+/* apply a natural box layout model to all elements */
+*, *:before, *:after { -moz-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box; }
 
 /*-----------------------------------------|end of reset & global properties;*/
