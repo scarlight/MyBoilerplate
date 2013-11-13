@@ -30,7 +30,7 @@ h3 { font-size:1.9em; }
 h2 { font-size:2.4em; }
 h1 { font-size:3.2em; }
 
-div {position:relative; display:block; }
+div { position:relative; display:block; }
 p, legend { margin-bottom:20px; }
 
 .op-5
