@@ -1,152 +1,144 @@
-.op-5
-{
-    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";/* IE 8 */
-    filter:alpha(opacity=50);/* IE 5-7 */
-    -moz-opacity:0.5;/* Netscape */
-    -khtml-opacity:0.5;/* Safari 1.x */
-    opacity:0.5;/* Good browsers */
+@import "a_template_mixin.less";
+@import "a_colorcode.less";
+@import "a_filler.less";
+
+html[data-useragent*='MSIE 10.0'] {} //sample css to target ie10; must add the javascript part to work
+
+h1,h2,h3,h4,h5,h6{ -webkit-font-smoothing: subpixel-antialiased; -webkit-text-stroke: 0.2px; }
+
+.oilpaper(){
+    background: transparent url(../_/images/oilpaper/index.jpg) no-repeat center 0 scroll;
+    //background: none;
 }
-html[data-useragent*='MSIE 10.0'] {}
+@full-browser-width: 100%;
+@full-browser-height: 100%;
+@viewport-width: 100%;
+@working-width: 930px;
+@template-base-color: #282828; //new
+
+// START CONTAINER LAYOUT FULL OR SPECIFIED, ALSO IT CAN BE MADE FIXED FOOTER IF NEEDED
+// --------------------------------------------------
 html, body { height:100%; }
-body 
-{
-    font-family:'Open Sans', Tahoma, Arial, sans-serif;
+#browser-wrapper{
+    .wrap;
+    width          : @full-browser-width;
+    min-width      : @full-browser-width;
+    height         : @full-browser-height;
+    min-height     : @full-browser-height;
+    margin         : 0 auto;
+    .oilpaper;
 }
-
-#browser-wrapper
-{
-    position:relative;
-    display:block;
-    width:100%;
-    min-width:100%;
-    height:100%;
-    min-width:100%;
-    margin:0 auto;
+#main-wrapper{
+    .wrap;
+    width          : @full-browser-width;
+    min-width      : @full-browser-width;
+    height         : auto !important;
+    height         : @full-browser-height;
+    min-height     : @full-browser-height;
+    overflow       : hidden;
+    margin         : 0 auto;
 }
-
-#main-wrapper
-{
-    position:relative;
-    display:block;
-    width:100%;
-    min-width:100%;
-    height:auto !important;
-    height:100%;
-    min-height:100%;
-    overflow:hidden;
-    margin:0 auto;
+#viewport-wrapper{
+    .wrap;
+    width          : @viewport-width;
+    height         : auto;
+    margin         : 0 auto;
+    padding-bottom : 0; //modify - optional if you need fixed footer (must match the footer height)
 }
+// --------------------------------------------------
+// END CONTAINER LAYOUT
 
-#viewport-wrapper
-{
-    position:relative;
-    display:block;
-    width:100%;
-    height:auto;
-    margin:0 auto;
-    padding-bottom:30px;/*modify - optional*/
-}
-
+// START COMPANY LOGO
+// --------------------------------------------------
 #COMPANYNAME-company-logo
 {
-    position:relative;
-    display:block;
+    .wrap;
+    line-height:0;
+    width:277px;
+    height:73px;
+    margin-left:-12px;
+    float: left;
+    .bg(10);
+    .op(5);
 }
-
-h1#company
-{
-    position:relative;
-    display:inline-block;
+h1#company{
+    .wrap(inline-block);
+    line-height:0;
     text-indent:-99999px;
-    line-height:0em;
-    padding:0;
+    a
+    {
+        .wrap(inline-block);
+        line-height:0;
+        font-size:1.2em;
+    }
 }
-
-h1#company a
-{
-    display:block;
-    font-size:1.2em;
-    padding:0;
+div#company-logo{
+    .wrap;
+    width:277px;
+    height:73px;
+    background:transparent url(../images/logo.png) no-repeat center center scroll;
+    top:0;
 }
+// --------------------------------------------------
+// END COMPANY LOGO
 
-div#company-logo
-{
-  display:block;
-  position:relative;
-  border:0 none;
-  width:100px;/*modify*/
-  height:100px;/*modify*/
-  background:transparent url(http://dummyimage.com/100x100/ffffff/222222/&text=Company%20Logo) no-repeat center center scroll;/*../images/COMPANYNAME-logo.png*/
-  top:0;
-}
-
+// START COMPANYNAME BODY STRUCTURE
+// --------------------------------------------------
 #COMPANYNAME-header-wrp
 {
-    position:relative;
-    display:block;
+    .wrap;
     width:100%;
-    height:auto;
+    height:155px;
+    margin: 0px auto;
+    .bg(2);
+    .op(5);
 }
 
 #COMPANYNAME-header
 {
-    position:relative;
-    display:block;
-    width:960px;
-    height:100px;/*modify - optional*/
+    .wrap;
+    width:@working-width;
+    height: auto; //modify - optional
     margin:0 auto;
+    padding-top:19px;
+    .bg(6);
+    .op(5);
 }
 
 #COMPANYNAME-body-wrp
 {
-    position:relative;
-    display:block;
+    .wrap;
     width:100%;
     height:auto;
+    margin: 0px auto;
 }
 
 #COMPANYNAME-body
 {
-    position:relative;
-    display:block;
-    width:960px;
-    height:auto;/*modify - optional*/
+    .wrap;
+    width:@working-width;
+    height:auto; //modify - optional
     margin:0 auto;
 }
 
 #COMPANYNAME-footer-wrp
 {
-    position:absolute;
-    display:block;
+    .wrap-absolute;
     width:100%;
     height:auto;
     bottom:0;
+    bg(30);
+    op(5);
 }
 
 #COMPANYNAME-footer
 {
-    position:relative;
-    display:block;
-    width:960px;
-    height:30px;/*modify - optional*/
+    .wrap;
+    width:@working-width;
+    height:30px;//modify - optional
     margin:0 auto;
+    bg(32);
+    op(5);
 }
-
-p.copyright
-{
-    
-}
-
-/* start adding style below */
-
-
-
-/*** 
-START - main menu
-**/
-
-
-
-/*** 
-END - main menu
-**/
+// --------------------------------------------------
+// END COMPANYNAME BODY STRUCTURE
