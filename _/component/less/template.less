@@ -29,7 +29,7 @@ h1,h2,h3,h4,h5,h6{ -webkit-font-smoothing: subpixel-antialiased; -webkit-text-st
 // CONTAINER LAYOUT FULL OR SPECIFIED, ALSO IT CAN BE MADE FIXED FOOTER IF NEEDED.
 //**********************************************************************************************//
 html, body { height:100%; }
-#browser-wrapper, #main-wrapper, #viewport-wrapper { #wrap > .relative; }
+#browser-wrapper, #main-wrapper, #viewport-wrapper { #wrap > .vrelative; }
 #browser-wrapper{
     width          : @full-browser-width;
     min-width      : @full-browser-width;
@@ -65,7 +65,7 @@ html, body { height:100%; }
     @logo-height:63px;
     @logo-background:transparent url(../images/logo.png) no-repeat center center scroll;
 
-    #wrap > .relative;
+    #wrap > .vrelative;
     width:@logo-width;
     height:@logo-height;
     line-height:0;
@@ -76,18 +76,18 @@ html, body { height:100%; }
     #transform > .opacity(0.8);
 
     h1{
-        #wrap > .relative;
+        #wrap > .vrelative;
         line-height:0;
         text-indent:-99999px;
         a
         {
-            #wrap > .relative;
+            #wrap > .vrelative;
             line-height:0;
             font-size:1.2em;
             text-indent:0;
             span
             {
-                #wrap > .relative;
+                #wrap > .vrelative;
                 width:@logo-width;
                 height:@logo-height;
                 text-indent:0;
@@ -105,7 +105,7 @@ html, body { height:100%; }
 //**********************************************************************************************//
 #COMPANYNAME-header-wrp
 {
-    #wrap > .relative;
+    #wrap > .vrelative;
     width:100%;
     height:auto;
     margin: 0px auto;
@@ -116,7 +116,7 @@ html, body { height:100%; }
 
 #COMPANYNAME-header
 {
-    #wrap > .relative;
+    #wrap > .vrelative;
     width:@working-width;
     height: auto; //modify - optional
     margin:0 auto;
@@ -127,7 +127,7 @@ html, body { height:100%; }
 
 #COMPANYNAME-body-wrp
 {
-    #wrap > .relative;
+    #wrap > .vrelative;
     width:100%;
     height:auto;
     margin: 0px auto;
@@ -135,7 +135,7 @@ html, body { height:100%; }
 
 #COMPANYNAME-body
 {
-    #wrap > .relative;
+    #wrap > .vrelative;
     width:@working-width;
     height:auto; //modify - optional
     margin:0 auto;
@@ -143,7 +143,7 @@ html, body { height:100%; }
 
 #COMPANYNAME-footer-wrp
 {
-    #wrap > .absolute;
+    #wrap > .vabsolute;
     width:100%;
     height:auto;
     bottom:0;
@@ -154,7 +154,7 @@ html, body { height:100%; }
 
 #COMPANYNAME-footer
 {
-    #wrap > .relative;
+    #wrap > .vrelative;
     width:@working-width;
     height:30px;//modify - optional
     margin:0 auto;
