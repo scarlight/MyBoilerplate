@@ -8,16 +8,16 @@ html[data-useragent*='MSIE 10.0'] {} //sample css to target ie10; must add the j
 h1,h2,h3,h4,h5,h6{ -webkit-font-smoothing: subpixel-antialiased; -webkit-text-stroke: 0.15px; }
 
 //**********************************************************************************************//
-// VARIABLES.
+// GLOBAL VARIABLES.
 //**********************************************************************************************//
 @full-browser-width: 100%;
 @full-browser-height: 100%;
 @viewport-width: 100%;
-@working-width: 930px;
+@working-width: 960px;
 @template-base-color: #282828; //new
 
 //**********************************************************************************************//
-// OTHER MISC CSS
+// OTHER MISC CSS FOR THIS TEMPLATE.
 //**********************************************************************************************//
 .whatcolor-text { color: #888888; }
 
@@ -51,7 +51,7 @@ html, body { height:100%; }
     width          : @viewport-width;
     height         : auto;
     margin         : 0 auto;
-    padding-bottom : 0; //modify - optional if you need fixed footer (must match the footer height)
+    padding-bottom : 60px; //modify - optional if you need fixed footer (must match the footer height)
 }
 
 
@@ -60,31 +60,44 @@ html, body { height:100%; }
 //**********************************************************************************************//
 #COMPANYNAME-company-logo
 {
+    // setting here
+    @logo-width:64px;
+    @logo-height:63px;
+    @logo-background:transparent url(../images/logo.png) no-repeat center center scroll;
+
     #wrap > .relative;
+    width:@logo-width;
+    height:@logo-height;
     line-height:0;
-    width:277px;
-    height:73px;
-    margin-left:-12px;
+    margin-left:0;
     float: left;
-}
-h1#company{
-    #wrap > .relative(inline-block);
-    line-height:0;
-    text-indent:-99999px;
-    a
-    {
-        #wrap > .relative(inline-block);
+
+    .bg(18);
+    #transform > .opacity(0.8);
+
+    h1{
+        #wrap > .relative;
         line-height:0;
-        font-size:1.2em;
+        text-indent:-99999px;
+        a
+        {
+            #wrap > .relative;
+            line-height:0;
+            font-size:1.2em;
+            text-indent:0;
+            span
+            {
+                #wrap > .relative;
+                width:@logo-width;
+                height:@logo-height;
+                text-indent:0;
+                background:@logo-background;
+            }
+        }
     }
 }
-div#company-logo{
-    #wrap > .relative;
-    width:277px;
-    height:73px;
-    background:transparent url(../images/logo.png) no-repeat center center scroll;
-    top:0;
-}
+
+
 
 
 //**********************************************************************************************//
@@ -94,8 +107,11 @@ div#company-logo{
 {
     #wrap > .relative;
     width:100%;
-    height:155px;
+    height:auto;
     margin: 0px auto;
+
+    .bg(4);
+    #transform > .opacity(0.8);
 }
 
 #COMPANYNAME-header
@@ -104,7 +120,9 @@ div#company-logo{
     width:@working-width;
     height: auto; //modify - optional
     margin:0 auto;
-    padding-top:19px;
+
+    .bg(10);
+    #transform > .opacity(0.8);
 }
 
 #COMPANYNAME-body-wrp
@@ -129,6 +147,9 @@ div#company-logo{
     width:100%;
     height:auto;
     bottom:0;
+
+    .bg(2);
+    #transform > .opacity(0.8);
 }
 
 #COMPANYNAME-footer
@@ -137,6 +158,9 @@ div#company-logo{
     width:@working-width;
     height:30px;//modify - optional
     margin:0 auto;
+
+    .bg(8);
+    #transform > .opacity(0.8);
 }
 
 

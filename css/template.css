@@ -104,7 +104,7 @@ body {
   width: 100%;
   height: auto;
   margin: 0 auto;
-  padding-bottom: 0;
+  padding-bottom: 60px;
 }
 #COMPANYNAME-company-logo {
   position: relative;
@@ -112,40 +112,54 @@ body {
   margin: 0;
   padding: 0;
   border: 0;
+  width: 64px;
+  height: 63px;
   line-height: 0;
-  width: 277px;
-  height: 73px;
-  margin-left: -12px;
+  margin-left: 0;
   float: left;
+  background-color: #a3e3c5;
+  /* IE 8 */
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+  /* IE 5-7 */
+  filter: alpha(opacity=80);
+  /* Netscape */
+  -moz-opacity: 0.8;
+  /* Safari 1.x */
+  -khtml-opacity: 0.8;
+  /* Webkit */
+  -webkit-opacity: 0.8;
+  /* Good browsers */
+  opacity: 0.8;
 }
-h1#company {
+#COMPANYNAME-company-logo h1 {
   position: relative;
-  display: inline-block;
+  display: block;
   margin: 0;
   padding: 0;
   border: 0;
   line-height: 0;
   text-indent: -99999px;
 }
-h1#company a {
-  position: relative;
-  display: inline-block;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  line-height: 0;
-  font-size: 1.2em;
-}
-div#company-logo {
+#COMPANYNAME-company-logo h1 a {
   position: relative;
   display: block;
   margin: 0;
   padding: 0;
   border: 0;
-  width: 277px;
-  height: 73px;
+  line-height: 0;
+  font-size: 1.2em;
+  text-indent: 0;
+}
+#COMPANYNAME-company-logo h1 a span {
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: 64px;
+  height: 63px;
+  text-indent: 0;
   background: transparent url(../images/logo.png) no-repeat center center scroll;
-  top: 0;
 }
 #COMPANYNAME-header-wrp {
   position: relative;
@@ -154,8 +168,21 @@ div#company-logo {
   padding: 0;
   border: 0;
   width: 100%;
-  height: 155px;
+  height: auto;
   margin: 0px auto;
+  background-color: #369bd5;
+  /* IE 8 */
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+  /* IE 5-7 */
+  filter: alpha(opacity=80);
+  /* Netscape */
+  -moz-opacity: 0.8;
+  /* Safari 1.x */
+  -khtml-opacity: 0.8;
+  /* Webkit */
+  -webkit-opacity: 0.8;
+  /* Good browsers */
+  opacity: 0.8;
 }
 #COMPANYNAME-header {
   position: relative;
@@ -163,10 +190,22 @@ div#company-logo {
   margin: 0;
   padding: 0;
   border: 0;
-  width: 930px;
+  width: 960px;
   height: auto;
   margin: 0 auto;
-  padding-top: 19px;
+  background-color: #1f597a;
+  /* IE 8 */
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+  /* IE 5-7 */
+  filter: alpha(opacity=80);
+  /* Netscape */
+  -moz-opacity: 0.8;
+  /* Safari 1.x */
+  -khtml-opacity: 0.8;
+  /* Webkit */
+  -webkit-opacity: 0.8;
+  /* Good browsers */
+  opacity: 0.8;
 }
 #COMPANYNAME-body-wrp {
   position: relative;
@@ -184,7 +223,7 @@ div#company-logo {
   margin: 0;
   padding: 0;
   border: 0;
-  width: 930px;
+  width: 960px;
   height: auto;
   margin: 0 auto;
 }
@@ -197,6 +236,19 @@ div#company-logo {
   width: 100%;
   height: auto;
   bottom: 0;
+  background-color: #3daeef;
+  /* IE 8 */
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+  /* IE 5-7 */
+  filter: alpha(opacity=80);
+  /* Netscape */
+  -moz-opacity: 0.8;
+  /* Safari 1.x */
+  -khtml-opacity: 0.8;
+  /* Webkit */
+  -webkit-opacity: 0.8;
+  /* Good browsers */
+  opacity: 0.8;
 }
 #COMPANYNAME-footer {
   position: relative;
@@ -204,7 +256,20 @@ div#company-logo {
   margin: 0;
   padding: 0;
   border: 0;
-  width: 930px;
+  width: 960px;
   height: 30px;
   margin: 0 auto;
+  background-color: #28729c;
+  /* IE 8 */
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+  /* IE 5-7 */
+  filter: alpha(opacity=80);
+  /* Netscape */
+  -moz-opacity: 0.8;
+  /* Safari 1.x */
+  -khtml-opacity: 0.8;
+  /* Webkit */
+  -webkit-opacity: 0.8;
+  /* Good browsers */
+  opacity: 0.8;
 }

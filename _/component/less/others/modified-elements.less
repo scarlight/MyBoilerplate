@@ -1,8 +1,36 @@
-#box-sizing (@type: border-box){ //my own addition http://css-tricks.com/snippets/css/useful-css3-less-mixins/
-  -webkit-box-sizing: @type;
-  -moz-box-sizing: @type;
-  box-sizing: @type;
-}
+
+// #gradient > .vertical(@color: #F5F5F5, @start: #EEE, @stop: #FFF, @posStart: 0, @posEnd: 1);
+// #gradient > .horizontal(@color: #F5F5F5, @start: #EEE, @stop: #FFF);
+// #gradient > .bw(@color: #F5F5F5, @start: 0, @stop: 255);
+// #gradient > .radial(@color: #F5F5F5, @start: #000, @stop: #FFF, @shape: circle farthest-corner, @position: center);
+// #gradient > .none();
+
+// #border > .bordered(@top-color: #EEE, @right-color: #EEE, @bottom-color: #EEE, @left-color: #EEE);
+// #border > .rounded(@radius: 2px);
+// #border > .radius(@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0);
+ 
+// #shadow > .drop(@x-axis: 0, @y-axis: 1px, @blur: 2px, @alpha: 0.1, @color: #000);
+// #shadow > .inner(@horizontal:0, @vertical:1px, @blur:2px, @alpha: 0.4, @color: #000);
+// #shadow > .both(@horizontalOut:0, @verticalOut:1px, @blurOut:2px, @alphaOut: 0.4, @colorOut: #000,@horizontalIn:0, @verticalIn:1px, @blurIn:2px, @alphaIn: 0.4, @colorIn: #000);
+// #shadow > .box(@arguments);
+// #shadow > .text(@arguments);
+// #shadow > .none();
+ 
+// #transform > .box-sizing (@type: border-box);          //my own addition http://css-tricks.com/snippets/css/useful-css3-less-mixins/
+// #transform > .rotation(@deg:5deg);
+// #transform > .scale(@ratio:1.5);
+// #transform > .translate(@x:0, @y:0);
+// #transform > .skew (@deg, @deg2);                      //my own addition http://css-tricks.com/snippets/css/useful-css3-less-mixins/
+// #transform > .translate3d (@x: 0, @y: 0, @z: 0);       //my own addition http://css-tricks.com/snippets/css/useful-css3-less-mixins/
+// #transform > .perspective (@value: 1000);              //my own addition http://css-tricks.com/snippets/css/useful-css3-less-mixins/
+// #transform > .transform-origin (@x:center, @y:center); //my own addition http://css-tricks.com/snippets/css/useful-css3-less-mixins/
+// #transform > .opacity(@opacity: 0.5);
+ 
+// #transition > .all(@duration:0.2s, @ease:ease-out);
+// #transition > .property(@property: width,@delay: 200ms, @ease:ease-out);
+// #transition > .duration(@duration: 0.2s);
+ 
+// #content > .columns(@colwidth: 250px, @colcount: 0, @colgap: 50px, @columnRuleColor: #EEE, @columnRuleStyle: solid, @columnRuleWidth: 1px);
 
 #gradient {
   .vertical(@color: #F5F5F5, @start: #EEE, @stop: #FFF, @posStart: 0, @posEnd: 1) {
@@ -132,6 +160,11 @@
 }
 
 #transform {
+  .box-sizing (@type: border-box){ //my own addition http://css-tricks.com/snippets/css/useful-css3-less-mixins/
+    -webkit-box-sizing: @type;
+    -moz-box-sizing: @type;
+    box-sizing: @type;
+  }
   .rotation(@deg:5deg){
     -webkit-transform: rotate(@deg);
     -moz-transform: rotate(@deg);
