@@ -58,17 +58,19 @@ ol.plain {
   list-style: none;
   margin-left: 0px;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  -webkit-font-smoothing: subpixel-antialiased;
-  -webkit-text-stroke: 0.15px;
-}
 .whatcolor-text {
   color: #888888;
+}
+::selection {
+  background: #FFC01D;
+  color: white;
+  text-shadow: none;
+  -webkit-text-stroke: 0px rgba(0, 0, 0, 0);
+}
+::-moz-selection {
+  background: #FFC01D;
+  color: white;
+  text-shadow: none;
 }
 html,
 body {
@@ -272,4 +274,7 @@ body {
   -webkit-opacity: 0.8;
   /* Good browsers */
   opacity: 0.8;
+}
+.copyright {
+  font-size: 12px;
 }
