@@ -1,0 +1,81 @@
+// #wrap adds useful namespace that is easy to remember, and is organized
+#wrap {
+    .default(@position:relative, @display:block) {
+        position:@position;
+        display:@display;
+    }
+    .void() {
+        margin:0;
+        padding:0;
+        border:0;
+    }
+    .vrelative(@display:block) {
+        .default(relative, @display);
+        .void();
+    }
+    .vabsolute(@display:block) {
+        .default(absolute, @display);
+        .void();
+    }
+}
+
+.oilpaper(@filename:"index.png") {
+    @path:"../_/project-psd-source/oilpaper/";
+    @file:@filename;
+    @url:"@{path}@{file}";
+    background: transparent url(@url) no-repeat center 0 scroll;
+}
+
+// 1) extend can be used to reduce css file size by copying all of the properties into a selector
+// 2) you must DECLARE CSS RULE if calling directly to use in extend,
+// 3) we know a mixin function does not immediately DECLARE CSS RULE, sadly if called directly into extend it wont work
+// Reference: http://lesscss.org/features/#extend-feature-reducing-css-size;
+// 4) On the contrary, you can have mixins inside your DECLARED RULE (workaround)
+.reset  { #wrap > .vrelative(); }
+.center { margin: 0px auto; }
+
+.clear  { clear:both; }
+.show   { display:block !important; }
+.hide   { display:none; }
+.bg-off { background:none; }
+.floatl { float:left; }
+.floatr { float:right; }
+
+// USE BACK TEXT-"ALIGNMENT" IN BOOTSTRAP TYPE.LESS. FYI it comes without"display:block;"" property
+
+// LESS: Referencing parent selectors with &
+// use align"direction" as its common in wordpress as well
+img
+{
+    &.alignleft
+    {
+        &:extend(.show);
+        &:extend(.floatl);
+    }
+    &.alignright
+    {
+        &:extend(.show);
+        &:extend(.floatr);
+    }
+    &.aligncenter
+    {
+        &:extend(.show);
+        margin: 0px auto;
+    }
+}
+
+// Changing selector order
+// Reference: http://lesscss.org/features/#parent-selectors-feature-changing-selector-order
+.plain {
+    ul&
+    {
+        list-style:none;
+        #wrap > .void();
+    }
+    ol&
+    {
+        &:extend(ul.plain); // Extending nested Selectors - http://lesscss.org/features/#extend-feature-extending-nested-selectors
+    }
+}
+
+//pending: form-mixin //list-mixin

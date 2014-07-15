@@ -1,0 +1,27 @@
+{
+    "_comment": "pass jsLib as an array to task",
+    "jsLib": [
+        "_/dev/vendor/jquery/jquery.min.js",
+        "_/dev/vendor/jquery.easing/jquery.easing.min.js",
+        "_/dev/vendor/bootstrap/js/bootstrap.min.js",
+        "_/dev/vendor/carouFredSel/helper-plugins/jquery.ba-throttle-debounce.min.js",
+        "_/dev/vendor/carouFredSel/helper-plugins/jquery.mousewheel.min.js",
+        "_/dev/vendor/carouFredSel/helper-plugins/jquery.touchSwipe.min.js",
+        "_/dev/vendor/carouFredSel/helper-plugins/jquery.transit.min.js",
+        "_/dev/vendor/carouFredSel/jquery.carouFredSel-6.2.1-packed.js",
+        "_/dev/vendor/slimbox2/js/slimbox2.js",
+        "_/dev/vendor/greensock/TweenMax.min.js",
+        "_/dev/vendor/jquery-hoverIntent/jquery.hoverIntent.js",
+        "_/dev/vendor/superfish/supersubs.js",
+        "_/dev/vendor/superfish/superfish.min.js",
+        "_/dev/vendor/pajinate/jquery.pajinate.min.js"
+    ],
+    "grunt"           : "grunt",
+    "dev"             : "_/dev",
+    "devLess"         : "_/dev/less",
+    "devCss"          : "_/dev/css",
+    "devJs"           : "_/dev/js",
+    "devOwn"          : "_/dev/own",
+    "devVendor"       : "_/dev/vendor",
+    "wordpress"       : "../../../sites2/wordpress_area51/lp/wp-content/themes/languagepro"
+}

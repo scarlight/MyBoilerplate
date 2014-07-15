@@ -1,0 +1,757 @@
+module.exports = function ( grunt )
+{
+    'use strict';
+
+    var chalk = require('chalk');
+    var wordpressOutput = true;
+
+    // Force use of Unix newlines. Copied from Bootstrap Gruntfile.js
+    grunt.util.linefeed = '\n';
+
+    // Project configuration
+    grunt.initConfig(
+    {
+        // Metadata
+        projectPath: grunt.file.readJSON( '_/dev/filepath.json' ),
+        bowerrc: grunt.file.readJSON( '.bowerrc' ),
+        pkg: grunt.file.readJSON( 'package.json' ),
+        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+            '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+            '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "\\n*/\\n" %>' +
+            '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>' +
+            '<%= pkg.license ? "\\n* Licensed under" + pkg.license + "( " + pkg.license.url + " ) */\\n" : "\\n*/\\n" %>',
+
+        options:
+        {
+            wordpress: false
+        },
+
+        // Task configuration
+        jshint:
+        {
+            options:
+            {
+                jshintrc: '<%= projectPath.devJs %>/.jshintrc',
+                reporter: require( 'jshint-stylish' )
+            },
+            grunt:
+            {
+                options:
+                {
+                    jshintrc: '<%= projectPath.grunt %>/.jshintrc'
+                },
+                src: [ 'Gruntfile.js', '<%= projectPath.grunt %>/*.js' ]
+            },
+            development:
+            {
+                src: [ '<%= projectPath.devJs %>/custom.js' ]
+            },
+            projectPath:
+            {
+                src: [ '<%= projectPath.dev %>/filepath.json' ]
+            }
+        },
+
+        uglify:
+        {
+            customDev: //send to dev folder
+            {
+                options:
+                {
+                    preserveComments: true,
+                    mangle: false,
+                    compress: false,
+                    beautify: true,
+                    report: 'min'
+                },
+                files: [
+                    {
+                        expand: true, // set true to enable the following options.
+                        ext: '.js',
+                        extDot: 'first',
+                        flatten: true, // remove all path parts from generated dest paths.
+                        src: '<%= projectPath.devJs %>/custom.js',
+                        dest: 'dev/js/'
+                    }
+                ]
+            },
+            customDevWp: //send to wordpress dev folder
+            {
+                options:
+                {
+                    preserveComments: true,
+                    mangle: false,
+                    compress: false,
+                    beautify: true,
+                    report: 'min'
+                },
+                files: [
+                    {
+                        expand: true,
+                        ext: '.js',
+                        extDot: 'first',
+                        flatten: true,
+                        src: '<%= projectPath.devJs %>/custom.js',
+                        dest: '<%= projectPath.wordpress %>/dev/js/'
+                    }
+                ]
+            },
+            customSrc: //send to src folder
+            {
+                options:
+                {
+                    preserveComments: false,
+                    mangle: true,
+                    compress: true,
+                    report: 'min'
+                },
+                files: [
+                    {
+                        expand: true,
+                        ext: '.min.js',
+                        extDot: 'first',
+                        flatten: true,
+                        src: '<%= projectPath.devJs %>/custom.js',
+                        dest: 'js/'
+                    }
+                ]
+            },
+            customSrcWp: // send all the way to wordpress dir
+            {
+                options:
+                {
+                    preserveComments: false,
+                    mangle: true,
+                    compress: true,
+                    report: 'min'
+                },
+                files: [
+                    {
+                        expand: true,
+                        ext: '.min.js',
+                        extDot: 'first',
+                        flatten: true,
+                        src: '<%= projectPath.devJs %>/custom.js',
+                        dest: '<%= projectPath.wordpress %>/js/'
+                    }
+                ]
+            },
+            lib: //send to src folder
+            {
+                options:
+                {
+                    preserveComments: false,
+                    mangle: false,
+                    compress: true,
+                    report: 'min'
+                },
+                files: [
+                    {
+                        expand: true,
+                        ext: '.min.js',
+                        extDot: 'first',
+                        flatten: true,
+                        src: 'dev/js/lib.js',
+                        dest: 'js/'
+                    }
+                ]
+            },
+            wplib: // compress back into worpdress js/
+            {
+                options:
+                {
+                    preserveComments: false,
+                    mangle: false,
+                    compress: true,
+                    report: 'min'
+                },
+                files: [
+                    {
+                        expand: true,
+                        ext: '.min.js',
+                        extDot: 'first',
+                        flatten: true,
+                        src: '<%= projectPath.wordpress %>/dev/js/lib.js',
+                        dest: '<%= projectPath.wordpress %>/js/'
+                    }
+                ]
+            },
+        },
+
+        concat:
+        {
+            options:
+            {
+                separator: grunt.util.linefeed + ';',
+                stripBanners: false,
+                nonull: true,
+            },
+            lib:
+            {
+                src: [ '<%= projectPath.jsLib %>' ],
+                dest: 'dev/js/lib.js'
+            },
+            wplib: // send all the way to wordpress dir
+            {
+                src: [ '<%= projectPath.jsLib %>' ],
+                dest: '<%= projectPath.wordpress %>/dev/js/lib.js'
+            }
+        },
+
+        less: //just do less compiling and leave cssmin to do its job better
+        {
+            development:
+            {
+                options:
+                {
+                    path: [ '<%= projectPath.devLess %>/bootstrap/less', '<%= projectPath.devOwn %>' ],
+                    strictMath: true,
+                    dumpLineNumbers: 'comments'
+                },
+                files: [
+                    {
+                        expand: true, // set true to enable the following options.
+                        ext: '.css',
+                        extDot: 'first',
+                        flatten: true, // remove all path parts from generated dest paths.
+                        src: [ '<%= projectPath.devLess %>/*.less' ],
+                        dest: 'dev/css/'
+                    }
+                ]
+            },
+            wordpress:
+            {
+                options:
+                {
+                    path: [ '<%= projectPath.devLess %>/bootstrap/less', '<%= projectPath.devOwn %>' ],
+                    strictMath: true,
+                    dumpLineNumbers: 'comments'
+                },
+                files: [
+                    {
+                        expand: true, // set true to enable the following options.
+                        ext: '.css',
+                        extDot: 'first',
+                        flatten: true, // remove all path parts from generated dest paths.
+                        src: [ '<%= projectPath.devLess %>/*.less' ],
+                        dest: '<%= projectPath.wordpress %>/dev/css/'
+                    }
+                ]
+            }
+        },
+
+        cssmin: //just do cssmin
+        {
+            production:
+            {
+                options:
+                {
+                    banner: '<%= banner %>',
+                    keepSpecialComments: 0,
+                    report: 'min'
+                },
+                files: [
+                    {
+                        expand: true, // set true to enable the following options.
+                        ext: '.min.css',
+                        extDot: 'first',
+                        flatten: true, // remove all path parts from generated dest paths.
+                        src: [ 'dev/css/*.css' ],
+                        dest: 'css/'
+                    }
+                ]
+            },
+            wordpress:
+            {
+                options:
+                {
+                    banner: '<%= banner %>',
+                    keepSpecialComments: 0,
+                    report: 'min'
+                },
+                files: [
+                    {
+                        expand: true, // set true to enable the following options.
+                        ext: '.min.css',
+                        extDot: 'first',
+                        flatten: true, // remove all path parts from generated dest paths.
+                        src: [ '<%= projectPath.wordpress %>/dev/css/*.css' ],
+                        dest: '<%= projectPath.wordpress %>/css/'
+                    }
+                ]
+            }
+        },
+
+        clean:
+        {
+            dist: []
+        },
+
+        concurrent: // maybe during file compression i can use this for development this can slow me down
+        {
+            srcCompiling: [ 'less', 'javascript-concat' ],
+            srcMinification: [ 'cssmin', 'ungligy' ],
+            srcHinting: [ 'jshint:development', 'notify:jsFileDevelopment' ],
+            notifyCompletion: [ 'notify:cssmin', 'notify:lessFile' ]
+        },
+
+        // usebanner: //if a grunt plugin dont have a banner options for its task, then use this plugin to add banner to the dest file
+        // {
+        //     cssfile:
+        //     {
+        //         options:
+        //         {
+        //             position: 'top',
+        //             banner: '<%= banner %>'
+        //         },
+        //         files:
+        //         {
+        //             src: [ 'dev/css/*.css', 'css/*.css', '!dev/css/theme.css', '!css/theme.min.css' ] // excluded because usebanner is prepending on every run
+        //         }
+        //     }
+        // },
+
+        exec:
+        {
+            // helloSimpson:
+            // {
+            //     cmd: function ( firstName, lastName )
+            //     {
+            //         var formattedName =
+            //         [
+            //             lastName.toUpperCase(),
+            //             firstName.toUpperCase()
+            //         ].join( ', ' );
+
+            //         return 'echo ' + formattedName;
+            //     }
+            // },
+            gruntVersion:
+            {
+                cmd: function ()
+                {
+                    return 'echo ' + this.version;
+                }
+            },
+            checkVersion:
+            {
+                command: 'bower cache clean && bower list -r'
+            }
+
+        },
+
+        copy:
+        {
+            vendorJquery:
+            {
+                files: [
+                    {
+                        expand: true,
+                        nonull: true,
+                        cwd: '<%= bowerrc.directory %>/jquery/dist/',
+                        src: [ '*.min.js' ],
+                        dest: '<%= projectPath.devVendor %>/jquery'
+                    },
+                ]
+            },
+            vendorBootstrap:
+            {
+                files: [
+                    {
+                        expand: true,
+                        nonull: true,
+                        cwd: '<%= bowerrc.directory %>/',
+                        src: [ 'bootstrap/less/**' ], // includes files within path and its sub-directories
+                        dest: '<%= projectPath.devVendor %>'
+                    },
+                    {
+                        expand: true,
+                        nonull: true,
+                        cwd: '<%= bowerrc.directory %>/bootstrap/dist/',
+                        src: [ 'js/*.min.js' ],
+                        dest: '<%= projectPath.devVendor %>/bootstrap'
+                    },
+                    {
+                        expand: true,
+                        nonull: true,
+                        cwd: '<%= bowerrc.directory %>/bootstrap/dist/fonts/',
+                        src: [ '*' ],
+                        dest: 'fonts/'
+                    }
+                ]
+            },
+            vendorAnimateCSS:
+            {
+                files: [
+                    {
+                        expand: true,
+                        nonull: true,
+                        cwd: '<%= bowerrc.directory %>/',
+                        src: [ 'animate-css/*.min.css' ],
+                        dest: '<%= projectPath.devVendor %>'
+                    }
+                ]
+            },
+            vendorFontAwesome:
+            {
+                files: [
+                    {
+                        expand: true,
+                        nonull: true,
+                        cwd: '<%= bowerrc.directory %>/font-awesome/css/',
+                        src: [ '*.min.css' ],
+                        dest: '<%= projectPath.devVendor %>/font-awesome'
+                    },
+                    {
+                        expand: true,
+                        nonull: true,
+                        cwd: '<%= bowerrc.directory %>/font-awesome/fonts/',
+                        src: [ '*' ],
+                        dest: 'fonts/'
+                    }
+                ]
+            },
+            vendorLessElement:
+            {
+                files: [
+                    {
+                        expand: true,
+                        nonull: true,
+                        cwd: '<%= bowerrc.directory %>/',
+                        src: [ 'less-elements/*.less' ],
+                        dest: '<%= projectPath.devVendor %>'
+                    }
+                ]
+            },
+            vendorGreensock:
+            {
+                files: [
+                    {
+                        expand: true,
+                        nonull: true,
+                        cwd: '<%= bowerrc.directory %>/greensock/src/minified/',
+                        src: [ '**' ],
+                        dest: '<%= projectPath.devVendor %>/greensock'
+                    }
+                ]
+            },
+            vendorCarouFredSel:
+            {
+                files: [
+                    {
+                        expand: true,
+                        nonull: true,
+                        cwd: '<%= bowerrc.directory %>/',
+                        src: [ 'carouFredSel/*packed.js', 'carouFredSel/helper-plugins/*.js' ],
+                        dest: '<%= projectPath.devVendor %>'
+                    }
+                ]
+            },
+            vendorJqueryEasing:
+            {
+                files: [
+                    {
+                        expand: true,
+                        nonull: true,
+                        cwd: '<%= bowerrc.directory %>/jquery.easing/js/',
+                        src: [ 'jquery.easing.min.js' ],
+                        dest: '<%= projectPath.devVendor %>/jquery.easing'
+                    }
+                ]
+            },
+            vendorHoverIntent:
+            {
+                files: [
+                    {
+                        expand: true,
+                        nonull: true,
+                        cwd: '<%= bowerrc.directory %>/',
+                        src: [ 'jquery-hoverIntent/*.js' ],
+                        dest: '<%= projectPath.devVendor %>'
+                    }
+                ]
+            },
+            vendorSuperfish:
+            {
+                files: [
+                    {
+                        expand: true,
+                        nonull: true,
+                        cwd: '<%= bowerrc.directory %>/superfish/dist/js/',
+                        src: [ 'superfish.min.js', 'supersubs.js' ],
+                        dest: '<%= projectPath.devVendor %>/superfish'
+                    }
+                ]
+            },
+            vendorPajinate:
+            {
+                files: [
+                    {
+                        expand: true,
+                        nonull: true,
+                        cwd: '<%= bowerrc.directory %>/',
+                        src: [ 'pajinate/*.min.js' ],
+                        dest: '<%= projectPath.devVendor %>'
+                    }
+                ]
+            },
+            vendorSlimbox2:
+            {
+                files: [
+                    {
+                        expand: true,
+                        nonull: true,
+                        cwd: '<%= bowerrc.directory %>/',
+                        src: [ 'slimbox2/js/*.js' ],
+                        dest: '<%= projectPath.devVendor %>'
+                    },
+                    {
+                        expand: true,
+                        nonull: true,
+                        cwd: '<%= bowerrc.directory %>/slimbox2/css/',
+                        src: [ '*.gif' ],
+                        dest: 'images/'
+                    }
+                ]
+            },
+            // changing content needs a unique target and cannot combine with the above target
+            // also each file to receive changes must hardcode the file name
+            vendorSlimbox2CSSURL:
+            {
+                options:
+                {
+                    process: function ( content, srcpath )
+                    {
+                        return content.replace( /(url\()/gmi, 'url(../images/' );
+                    }
+                },
+                nonull: true,
+                files: [
+                    {
+                        src: [ '<%= bowerrc.directory %>/slimbox2/css/slimbox2.css' ],
+                        dest: '<%= projectPath.devVendor %>/slimbox2/css/slimbox2.css',
+                    },
+                    {
+                        src: [ '<%= bowerrc.directory %>/slimbox2/css/slimbox2-rtl.css' ],
+                        dest: '<%= projectPath.devVendor %>/slimbox2/css/slimbox2-rtl.css',
+                    }
+                ]
+            },
+            fontsNImagesToWordpress:
+            {
+                files: [
+                    { // copy fonts to wordpress font folder
+                        expand: true,
+                        nonull: true,
+                        flatten: true,
+                        cwd: 'fonts/',
+                        src: [ '**' ],
+                        dest: '<%= projectPath.wordpress %>/fonts/'
+                    },
+                    { // copy images to wordpress images folder
+                        expand: true,
+                        nonull: true,
+                        flatten: true,
+                        cwd: 'images/',
+                        src: [ '**' ],
+                        dest: '<%= projectPath.wordpress %>/images/'
+                    }
+                ]
+            },
+        },
+
+        watch:
+        {
+            options:
+            {
+                livereload: 35729
+            },
+            lessFile:
+            {
+                options:
+                {
+                    spawn: false // false may be prone to failing but its faster so toggle as needed
+                },
+                files: [ '_/**/*.less' ], //to work with grunt-watch plugin just specify in array without files array format eg:src:['']
+                tasks: [ 'less:development', 'cssmin:production', 'notify:lessFile', 'wordpress-css' ]
+            },
+            jsFileDevelopment:
+            {
+                files: [ '<%= projectPath.devJs %>/*.js' ],
+                tasks: [ 'jshint:development', 'uglify:customDev', 'uglify:customSrc', 'notify:jsFileDevelopment', 'wordpress-js' ]
+            },
+            projectPath:
+            {
+                files: [ '<%= projectPath.dev %>/filepath.json' ],
+                tasks: [ 'jshint:projectPath', 'concat:lib', 'uglify:lib', 'notify:projectPath', 'wordpress-js-lib' ]
+            },
+            htmlNFontsNImages:
+            {
+                files: [ '**/*.html', 'fonts/**', '**/*.{png,jpg,jpeg,gif,webp,svg}' ],
+                tasks: [ 'notify:reload', 'notify:wordpressfontNImages', 'wordpress-font-images' ]
+            },
+            wordpress:
+            {
+                files: [ '<%= projectPath.wordpress %>/**/*.html',
+                         '<%= projectPath.wordpress %>/fonts/**',
+                         '<%= projectPath.wordpress %>/**/*.php',
+                         '<%= projectPath.wordpress %>/**/*.{png,jpg,jpeg,gif,webp,svg}',
+                         '<%= projectPath.wordpress %>/**/*.css',
+                         '<%= projectPath.wordpress %>/**/*.js'
+                        ],
+                tasks: [ 'notify:wpreload' ]
+            },
+            gruntfile:
+            {
+                options:
+                {
+                    reload: true
+                },
+                files: [ 'Gruntfile.js', '<%= projectPath.grunt %>/*.js' ],
+                tasks: [ 'jshint:grunt', 'notify:gruntfile' ]
+            }
+        },
+
+        notify:
+        {
+            lessFile:
+            {
+                options:
+                {
+                    title: 'TASK: less:development, cssmin:production, wordpress-css',
+                    message: 'LESS to CSS build done.'
+                }
+            },
+            jsFileDevelopment:
+            {
+                options:
+                {
+                    title: 'TASK: jshint:development, uglify:customDev, uglify:customSrc, wordpress-js',
+                    message: 'Run completed.'
+                }
+            },
+            projectPath:
+            {
+                options:
+                {
+                    title: 'TASK: jshint:projectPath, concat:lib, uglify:lib, wordpress-js-lib',
+                    message: 'Run completed.'
+                }
+            },
+            wordpressfontNImages:
+            {
+                options:
+                {
+                    title: 'TASK: wordpress-font-images',
+                    message: 'Added fonts and images to wordpress directory.'
+                }
+            },
+            reload:
+            {
+                options:
+                {
+                    title: 'TASK: Livereload',
+                    message: 'Website reloaded'
+                }
+            },
+            wpreload:
+            {
+                options:
+                {
+                    title: 'TASK: Livereload',
+                    message: 'Wordpress site reloaded'
+                }
+            },
+            gruntfile:
+            {
+                options:
+                {
+                    title: 'TASK: jshint:grunt',
+                    message: 'Gruntfile.js reloaded.'
+                }
+            }
+        }
+    } );
+
+    // These plugins provide necessary tasks.
+    // 'load-grunt-tasks' will analyze package.json file, determine which of the dependencies are Grunt plugins
+    // and load them all automatically. No more manual load task work
+    // grunt-newer not running how i intended
+    require( 'load-grunt-tasks' )( grunt,
+    {
+        scope: 'devDependencies'
+    } );
+
+    // measures the time each task takes
+    require( 'time-grunt' )( grunt );
+
+    // Default task
+    grunt.registerTask( 'default', [ 'watch' ] );
+    grunt.registerTask( 'prep', [ 'exec', 'copy' ] );
+    grunt.registerTask( 'compile-less', [ 'less', 'cssmin', 'notify:lessFile' ] );
+
+    grunt.registerTask( 'wordpress-css', function ()
+    {
+        if ( !wordpressOutput )
+        {
+            grunt.log.writeln( chalk.red.bold('TASK-NOTICE: wordpress option is FALSE, TASK:wordpress-css will not run.') );
+        }
+        else
+        {
+            grunt.task.run(
+                [
+                    'less:wordpress', 'cssmin:wordpress', 'notify:wpreload'
+                ]
+            );
+        }
+    } );
+
+    grunt.registerTask( 'wordpress-js', function ()
+    {
+        if ( !wordpressOutput )
+        {
+            grunt.log.writeln( chalk.red.bold('TASK-NOTICE: wordpress option is FALSE, TASK:wordpress-js will not run.') );
+        }
+        else
+        {
+            grunt.task.run(
+                [
+                    'uglify:customDevWp', 'uglify:customSrcWp', 'notify:wpreload'
+                ]
+            );
+        }
+    } );
+
+    grunt.registerTask( 'wordpress-js-lib', function ()
+    {
+        if ( !wordpressOutput )
+        {
+            grunt.log.writeln( chalk.red.bold('TASK-NOTICE: wordpress option is FALSE, TASK:wordpress-js-lib will not run.') );
+        }
+        else
+        {
+            grunt.task.run(
+                [
+                    'concat:wplib', 'uglify:wplib', 'notify:wpreload'
+                ]
+            );
+        }
+    } );
+
+    grunt.registerTask( 'wordpress-font-images', function ()
+    {
+        if ( !wordpressOutput )
+        {
+            grunt.log.writeln( chalk.red.bold('TASK-NOTICE: wordpress option is FALSE, TASK:wordpress-font-images will not run.') );
+        }
+        else
+        {
+            grunt.task.run(
+                [
+                    'copy:fontsNImagesToWordpress', 'notify:wpreload'
+                ]
+            );
+        }
+    } );
+
+};
