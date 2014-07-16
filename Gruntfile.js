@@ -3,7 +3,7 @@ module.exports = function ( grunt )
     'use strict';
 
     var chalk = require('chalk');
-    var wordpressOutput = true;
+    var wordpressOutput = false;
 
     // Force use of Unix newlines. Copied from Bootstrap Gruntfile.js
     grunt.util.linefeed = '\n';
@@ -20,11 +20,6 @@ module.exports = function ( grunt )
             '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "\\n*/\\n" %>' +
             '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>' +
             '<%= pkg.license ? "\\n* Licensed under" + pkg.license + "( " + pkg.license.url + " ) */\\n" : "\\n*/\\n" %>',
-
-        options:
-        {
-            wordpress: false
-        },
 
         // Task configuration
         jshint:
@@ -210,10 +205,10 @@ module.exports = function ( grunt )
                 },
                 files: [
                     {
-                        expand: true, // set true to enable the following options.
+                        expand: true,
                         ext: '.css',
                         extDot: 'first',
-                        flatten: true, // remove all path parts from generated dest paths.
+                        flatten: true,
                         src: [ '<%= projectPath.devLess %>/*.less' ],
                         dest: 'dev/css/'
                     }
@@ -229,10 +224,10 @@ module.exports = function ( grunt )
                 },
                 files: [
                     {
-                        expand: true, // set true to enable the following options.
+                        expand: true,
                         ext: '.css',
                         extDot: 'first',
-                        flatten: true, // remove all path parts from generated dest paths.
+                        flatten: true,
                         src: [ '<%= projectPath.devLess %>/*.less' ],
                         dest: '<%= projectPath.wordpress %>/dev/css/'
                     }
@@ -252,10 +247,10 @@ module.exports = function ( grunt )
                 },
                 files: [
                     {
-                        expand: true, // set true to enable the following options.
+                        expand: true,
                         ext: '.min.css',
                         extDot: 'first',
-                        flatten: true, // remove all path parts from generated dest paths.
+                        flatten: true,
                         src: [ 'dev/css/*.css' ],
                         dest: 'css/'
                     }
@@ -271,10 +266,10 @@ module.exports = function ( grunt )
                 },
                 files: [
                     {
-                        expand: true, // set true to enable the following options.
+                        expand: true,
                         ext: '.min.css',
                         extDot: 'first',
-                        flatten: true, // remove all path parts from generated dest paths.
+                        flatten: true,
                         src: [ '<%= projectPath.wordpress %>/dev/css/*.css' ],
                         dest: '<%= projectPath.wordpress %>/css/'
                     }
@@ -287,7 +282,7 @@ module.exports = function ( grunt )
             dist: []
         },
 
-        concurrent: // maybe during file compression i can use this for development this can slow me down
+        concurrent: // maybe during file compression i can use this for development cause now this can slow me down
         {
             srcCompiling: [ 'less', 'javascript-concat' ],
             srcMinification: [ 'cssmin', 'ungligy' ],
@@ -295,37 +290,36 @@ module.exports = function ( grunt )
             notifyCompletion: [ 'notify:cssmin', 'notify:lessFile' ]
         },
 
-        // usebanner: //if a grunt plugin dont have a banner options for its task, then use this plugin to add banner to the dest file
-        // {
-        //     cssfile:
-        //     {
-        //         options:
-        //         {
-        //             position: 'top',
-        //             banner: '<%= banner %>'
-        //         },
-        //         files:
-        //         {
-        //             src: [ 'dev/css/*.css', 'css/*.css', '!dev/css/theme.css', '!css/theme.min.css' ] // excluded because usebanner is prepending on every run
-        //         }
-        //     }
-        // },
+        /* usebanner: //if a grunt plugin dont have a banner options for its task, then use this plugin to add banner to the dest file
+        {
+            cssfile:
+            {
+                options:
+                {
+                    position: 'top',
+                    banner: '<%= banner %>'
+                },
+                files:
+                {
+                    src: [ 'dev/css/*.css', 'css/*.css', '!dev/css/theme.css', '!css/theme.min.css' ] // excluded because usebanner is prepending on every run
+                }
+            }
+        }, */
 
         exec:
         {
-            // helloSimpson:
-            // {
-            //     cmd: function ( firstName, lastName )
-            //     {
-            //         var formattedName =
-            //         [
-            //             lastName.toUpperCase(),
-            //             firstName.toUpperCase()
-            //         ].join( ', ' );
-
-            //         return 'echo ' + formattedName;
-            //     }
-            // },
+            /* helloSimpson:
+            {
+                cmd: function ( firstName, lastName )
+                {
+                    var formattedName =
+                    [
+                        lastName.toUpperCase(),
+                        firstName.toUpperCase()
+                    ].join( ', ' );
+                    return 'echo ' + formattedName;
+                }
+            }, */
             gruntVersion:
             {
                 cmd: function ()
@@ -515,7 +509,7 @@ module.exports = function ( grunt )
                 ]
             },
             // changing content needs a unique target and cannot combine with the above target
-            // also each file to receive changes must hardcode the file name
+            // also each file that needs content change must have its file name hardcoded
             vendorSlimbox2CSSURL:
             {
                 options:
