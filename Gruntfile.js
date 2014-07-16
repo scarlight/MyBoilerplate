@@ -2,11 +2,14 @@ module.exports = function ( grunt )
 {
     'use strict';
 
-    var chalk = require('chalk');
-    var wordpressOutput = false;
+    require( 'time-grunt' )( grunt ); // measures the time each task takes
+    require( 'jit-grunt' )( grunt ); // A JIT(Just In Time) plugin loader for Grunt. Replacing load-grunt-tasks to improve performance
 
     // Force use of Unix newlines. Copied from Bootstrap Gruntfile.js
     grunt.util.linefeed = '\n';
+
+    var chalk = require('chalk');
+    var wordpressOutput = false;
 
     // Project configuration
     grunt.initConfig(
@@ -666,18 +669,6 @@ module.exports = function ( grunt )
             }
         }
     } );
-
-    // These plugins provide necessary tasks.
-    // 'load-grunt-tasks' will analyze package.json file, determine which of the dependencies are Grunt plugins
-    // and load them all automatically. No more manual load task work
-    // grunt-newer not running how i intended
-    require( 'load-grunt-tasks' )( grunt,
-    {
-        scope: 'devDependencies'
-    } );
-
-    // measures the time each task takes
-    require( 'time-grunt' )( grunt );
 
     // Default task
     grunt.registerTask( 'default', [ 'watch' ] );
