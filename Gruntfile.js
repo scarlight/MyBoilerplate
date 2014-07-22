@@ -8,7 +8,7 @@ module.exports = function ( grunt )
     // Force use of Unix newlines. Copied from Bootstrap Gruntfile.js
     grunt.util.linefeed = '\n';
 
-    var chalk = require('chalk');
+    var chalk = require( 'chalk' );
     var wordpressOutput = false;
 
     // Project configuration
@@ -581,14 +581,23 @@ module.exports = function ( grunt )
             {
                 livereload: 35729
             },
-            lessFile:
+            // lessFile:
+            // {
+            //     options:
+            //     {
+            //         spawn: false // false may be prone to failing but its faster so toggle as needed
+            //     },
+            //     files: [ '_/**/*.less' ], //to work with grunt-watch plugin just specify in array without files array format eg:src:['']
+            //     tasks: [ 'less:development', 'cssmin:production', 'notify:lessFile', 'wordpress-css' ]
+            // },
+            devLessFile:
             {
                 options:
                 {
                     spawn: false // false may be prone to failing but its faster so toggle as needed
                 },
-                files: [ '_/**/*.less' ], //to work with grunt-watch plugin just specify in array without files array format eg:src:['']
-                tasks: [ 'less:development', 'cssmin:production', 'notify:lessFile', 'wordpress-css' ]
+                files: [ '_/**/*.less' ],
+                tasks: [ 'newer:less:development', 'notify:devLessFile', ]
             },
             jsFileDevelopment:
             {
@@ -600,10 +609,15 @@ module.exports = function ( grunt )
                 files: [ '<%= projectPath.dev %>/filepath.json' ],
                 tasks: [ 'jshint:projectPath', 'concat:lib', 'uglify:lib', 'notify:projectPath', 'wordpress-js-lib' ]
             },
-            htmlNFontsNImages:
+            html:
             {
                 files: [ '**/*.html', 'fonts/**', '**/*.{png,jpg,jpeg,gif,webp,svg}' ],
-                tasks: [ 'notify:reload', 'notify:wordpressfontNImages', 'wordpress-font-images' ]
+                tasks: [ 'notify:reload' ]
+            },
+            fontsNImages:
+            {
+                files: [ 'fonts/**', '**/*.{png,jpg,jpeg,gif,webp,svg}' ],
+                tasks: [ 'wordpress-font-images' ]
             },
             wordpress:
             {
@@ -634,6 +648,14 @@ module.exports = function ( grunt )
                 options:
                 {
                     title: 'TASK: less:development, cssmin:production, wordpress-css',
+                    message: 'LESS to CSS build done.'
+                }
+            },
+            devLessFile:
+            {
+                options:
+                {
+                    title: 'TASK: less:development',
                     message: 'LESS to CSS build done.'
                 }
             },
@@ -697,7 +719,7 @@ module.exports = function ( grunt )
     {
         if ( !wordpressOutput )
         {
-            grunt.log.writeln( chalk.red.bold('TASK-NOTICE: wordpress option is FALSE, TASK:wordpress-css will not run.') );
+            grunt.log.writeln( chalk.red.bold( 'TASK-NOTICE: wordpress option is FALSE, TASK:wordpress-css will not run.' ) );
         }
         else
         {
@@ -713,7 +735,7 @@ module.exports = function ( grunt )
     {
         if ( !wordpressOutput )
         {
-            grunt.log.writeln( chalk.red.bold('TASK-NOTICE: wordpress option is FALSE, TASK:wordpress-js will not run.') );
+            grunt.log.writeln( chalk.red.bold( 'TASK-NOTICE: wordpress option is FALSE, TASK:wordpress-js will not run.' ) );
         }
         else
         {
@@ -729,7 +751,7 @@ module.exports = function ( grunt )
     {
         if ( !wordpressOutput )
         {
-            grunt.log.writeln( chalk.red.bold('TASK-NOTICE: wordpress option is FALSE, TASK:wordpress-js-lib will not run.') );
+            grunt.log.writeln( chalk.red.bold( 'TASK-NOTICE: wordpress option is FALSE, TASK:wordpress-js-lib will not run.' ) );
         }
         else
         {
@@ -745,13 +767,13 @@ module.exports = function ( grunt )
     {
         if ( !wordpressOutput )
         {
-            grunt.log.writeln( chalk.red.bold('TASK-NOTICE: wordpress option is FALSE, TASK:wordpress-font-images will not run.') );
+            grunt.log.writeln( chalk.red.bold( 'TASK-NOTICE: wordpress option is FALSE, TASK:wordpress-font-images will not run.' ) );
         }
         else
         {
             grunt.task.run(
                 [
-                    'copy:fontsNImagesToWordpress', 'notify:wpreload'
+                    'copy:fontsNImagesToWordpress', 'notify:wordpressfontNImages', 'notify:wpreload'
                 ]
             );
         }
