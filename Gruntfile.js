@@ -597,7 +597,7 @@ module.exports = function ( grunt )
                     spawn: false // false may be prone to failing but its faster so toggle as needed
                 },
                 files: [ '<%= projectPath.devLess %>/*.less' ],
-                tasks: [ 'newer:less:development', 'notify:devLessFile', ]
+                tasks: [ 'less:development', 'notify:devLessFile', ]
             },
             jsFileDevelopment:
             {
