@@ -217,6 +217,25 @@ module.exports = function ( grunt )
                     }
                 ]
             },
+            quickDev:
+            {
+                options:
+                {
+                    path: [ '<%= projectPath.devLess %>/bootstrap/less', '<%= projectPath.devOwn %>' ],
+                    strictMath: true,
+                    dumpLineNumbers: 'comments'
+                },
+                files: [
+                    {
+                        expand: true,
+                        ext: '.css',
+                        extDot: 'first',
+                        flatten: true,
+                        src: [ '<%= projectPath.devLess %>/*.less' ],
+                        dest: 'css/'
+                    }
+                ]
+            },
             wordpress:
             {
                 options:
@@ -590,14 +609,14 @@ module.exports = function ( grunt )
             //     files: [ '<%= projectPath.devLess %>/*.less' ], //to work with grunt-watch plugin just specify in array without files array format eg:src:['']
             //     tasks: [ 'less:development', 'cssmin:production', 'notify:lessFile', 'wordpress-css' ]
             // },
-            devLessFile:
+            quickDev:
             {
                 options:
                 {
                     spawn: false // false may be prone to failing but its faster so toggle as needed
                 },
                 files: [ '<%= projectPath.devLess %>/*.less' ],
-                tasks: [ 'less:development', 'notify:devLessFile', ]
+                tasks: [ 'less:quickDev', 'notify:quickDev', ]
             },
             jsFileDevelopment:
             {
@@ -651,11 +670,11 @@ module.exports = function ( grunt )
                     message: 'LESS to CSS build done.'
                 }
             },
-            devLessFile:
+            quickDev:
             {
                 options:
                 {
-                    title: 'TASK: less:development',
+                    title: 'TASK: less:quickDev',
                     message: 'LESS to CSS build done.'
                 }
             },
