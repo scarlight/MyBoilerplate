@@ -587,7 +587,7 @@ module.exports = function ( grunt )
             //     {
             //         spawn: false // false may be prone to failing but its faster so toggle as needed
             //     },
-            //     files: [ '_/**/*.less' ], //to work with grunt-watch plugin just specify in array without files array format eg:src:['']
+            //     files: [ '<%= projectPath.devLess %>/*.less' ], //to work with grunt-watch plugin just specify in array without files array format eg:src:['']
             //     tasks: [ 'less:development', 'cssmin:production', 'notify:lessFile', 'wordpress-css' ]
             // },
             devLessFile:
@@ -596,7 +596,7 @@ module.exports = function ( grunt )
                 {
                     spawn: false // false may be prone to failing but its faster so toggle as needed
                 },
-                files: [ '_/**/*.less' ],
+                files: [ '<%= projectPath.devLess %>/*.less' ],
                 tasks: [ 'newer:less:development', 'notify:devLessFile', ]
             },
             jsFileDevelopment:
