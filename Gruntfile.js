@@ -334,7 +334,25 @@ module.exports = function ( grunt )
             {
                 command: 'bower cache clean && bower list -r'
             }
+        },
 
+        devUpdate:
+        {
+            main:
+            {
+                options:
+                {
+                    updateType: 'report', //just report outdated packages
+                    reportUpdated: false, //don't report already updated packages
+                    semver: true, //use package.json semver rules when updating
+                    packages:
+                    { //what packages to check
+                        devDependencies: true,
+                        dependencies: true
+                    },
+                    packageJson: null //find package.json automatically
+                }
+            }
         },
 
         copy:
