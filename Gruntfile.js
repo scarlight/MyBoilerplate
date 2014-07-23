@@ -231,7 +231,7 @@ module.exports = function ( grunt )
                         ext: '.css',
                         extDot: 'first',
                         flatten: true,
-                        src: [ '<%= projectPath.devLess %>/*.less' ],
+                        src: [ '<%= projectPath.devLess %>/*.less', '!<%= projectPath.devLess %>/theme.less' ],
                         dest: 'css/'
                     }
                 ]
@@ -598,25 +598,19 @@ module.exports = function ( grunt )
         {
             options:
             {
-                livereload: 35729
+                livereload: 35729,
+                livereloadOnError:false,
+                spawn: true // false may be prone to failing but its faster so toggle as needed. Found out false value behaves like block process and makes other process temporarily stuck EG: sublime text
             },
             // lessFile:
             // {
-            //     options:
-            //     {
-            //         spawn: false // false may be prone to failing but its faster so toggle as needed
-            //     },
             //     files: [ '<%= projectPath.devLess %>/*.less' ], //to work with grunt-watch plugin just specify in array without files array format eg:src:['']
             //     tasks: [ 'less:development', 'cssmin:production', 'notify:lessFile', 'wordpress-css' ]
             // },
             quickDev:
             {
-                options:
-                {
-                    spawn: false // false may be prone to failing but its faster so toggle as needed
-                },
                 files: [ '<%= projectPath.devLess %>/*.less' ],
-                tasks: [ 'less:quickDev', 'notify:quickDev', ]
+                tasks: [ 'less:quickDev', 'notify:quickDev' ]
             },
             jsFileDevelopment:
             {
