@@ -77,5 +77,34 @@ img
         &:extend(ul.plain); // Extending nested Selectors - http://lesscss.org/features/#extend-feature-extending-nested-selectors
     }
 }
+ul.plain-menu
+{
+    &:extend(ul.plain);
+    li
+    {
+        &:extend(.reset);
+        display:inline-block;
+        width:auto;
+        height:auto;
+        padding:3px 10px;
+
+        &:before
+        {
+            &:extend(.reset);
+            position:absolute;
+            display:inline-block;
+            content:"|";
+            top:2;
+            right:-5px;
+        }
+    }
+    li:last-child
+    {
+        &:before
+        {
+            display:none;
+        }
+    }
+}
 
 //pending: form-mixin //list-mixin

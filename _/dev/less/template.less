@@ -82,8 +82,7 @@ html, body { height:100%; }
     line-height:0;
     &:extend(.floatl);
 
-    .bg(18);
-    #transform > .opacity(0.8);
+    .bg(18, 'blue');
 
     h1{
         &:extend(.reset);
@@ -118,8 +117,7 @@ html, body { height:100%; }
     height:auto;
     &:extend(.center);
 
-    .bg(4);
-    #transform > .opacity(0.8);
+    .bg(4, 'green');
 }
 
 #COMPANYNAME-header
@@ -129,8 +127,7 @@ html, body { height:100%; }
     height: auto; //modify - optional
     &:extend(.center);
 
-    .bg(10);
-    #transform > .opacity(0.8);
+    .bg(10, 'purple');
 }
 
 #COMPANYNAME-body-wrp
@@ -157,8 +154,7 @@ html, body { height:100%; }
     height:auto;
     bottom:0;
 
-    .bg(2);
-    #transform > .opacity(0.8);
+    .bg(20, 'red');
 }
 
 #COMPANYNAME-footer
@@ -168,8 +164,7 @@ html, body { height:100%; }
     height:30px;//modify - optional
     &:extend(.center);
 
-    .bg(8);
-    #transform > .opacity(0.8);
+    .bg(30, 'cyan');
 }
 
 
@@ -177,8 +172,8 @@ html, body { height:100%; }
 // START COPYRIGHT INFO.
 //**********************************************************************************************//
 .copyright{
-    font-size:12px;
     &:extend(.reset);
+    font-size:12px;
     a.developed
     {
 
