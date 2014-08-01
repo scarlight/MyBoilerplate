@@ -592,6 +592,43 @@ module.exports = function ( grunt )
                     }
                 ]
             },
+            wordpressOTC:
+            {
+                files: [
+                    { // copy fonts to wordpress font folder
+                        expand: true,
+                        nonull: true,
+                        flatten: true,
+                        cwd: 'fonts/',
+                        src: [ '**' ],
+                        dest: '<%= projectPath.wordpress %>/fonts/'
+                    },
+                    { // copy images to wordpress images folder
+                        expand: true,
+                        nonull: true,
+                        flatten: true,
+                        cwd: 'images/',
+                        src: [ '**' ],
+                        dest: '<%= projectPath.wordpress %>/images/'
+                    },
+                    { // copy css to wordpress css folder
+                        expand: true,
+                        nonull: true,
+                        flatten: true,
+                        cwd: 'css/',
+                        src: [ '**' ],
+                        dest: '<%= projectPath.wordpress %>/css/'
+                    },
+                    { // copy js to wordpress js folder
+                        expand: true,
+                        nonull: true,
+                        flatten: true,
+                        cwd: 'js/',
+                        src: [ '**' ],
+                        dest: '<%= projectPath.wordpress %>/js/'
+                    }
+                ]
+            }
         },
 
         watch:
