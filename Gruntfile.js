@@ -9,7 +9,7 @@ module.exports = function ( grunt )
     grunt.util.linefeed = '\n';
 
     var chalk = require( 'chalk' );
-    var wordpressOutput = false;
+    var wordpressOutput = false; // when set to true, uncomment watch:lessFile and optional to comment watch:quickDev as the html is still using the .css without .min
 
     // Project configuration
     grunt.initConfig(
@@ -88,7 +88,7 @@ module.exports = function ( grunt )
                         expand: true,
                         ext: '.js',
                         extDot: 'first',
-                        flatten: true,
+                        flatten: false, // do not flatten else all subdirectory files get spit out to the top level dest directory
                         src: '<%= projectPath.devJs %>/custom.js',
                         dest: '<%= projectPath.wordpress %>/dev/js/'
                     }
@@ -128,7 +128,7 @@ module.exports = function ( grunt )
                         expand: true,
                         ext: '.min.js',
                         extDot: 'first',
-                        flatten: true,
+                        flatten: false, // do not flatten else all subdirectory files get spit out to the top level dest directory
                         src: '<%= projectPath.devJs %>/custom.js',
                         dest: '<%= projectPath.wordpress %>/js/'
                     }
@@ -168,7 +168,7 @@ module.exports = function ( grunt )
                         expand: true,
                         ext: '.min.js',
                         extDot: 'first',
-                        flatten: true,
+                        flatten: false, // do not flatten else all subdirectory files get spit out to the top level dest directory
                         src: '<%= projectPath.wordpress %>/dev/js/lib.js',
                         dest: '<%= projectPath.wordpress %>/js/'
                     }
@@ -249,7 +249,7 @@ module.exports = function ( grunt )
                         expand: true,
                         ext: '.css',
                         extDot: 'first',
-                        flatten: true,
+                        flatten: false, // do not flatten else all subdirectory files get spit out to the top level dest directory
                         src: [ '<%= projectPath.devLess %>/*.less' ],
                         dest: '<%= projectPath.wordpress %>/dev/css/'
                     }
@@ -291,7 +291,7 @@ module.exports = function ( grunt )
                         expand: true,
                         ext: '.min.css',
                         extDot: 'first',
-                        flatten: true,
+                        flatten: false, // do not flatten else all subdirectory files get spit out to the top level dest directory
                         src: [ '<%= projectPath.wordpress %>/dev/css/*.css' ],
                         dest: '<%= projectPath.wordpress %>/css/'
                     }
@@ -577,7 +577,7 @@ module.exports = function ( grunt )
                     { // copy fonts to wordpress font folder
                         expand: true,
                         nonull: true,
-                        flatten: true,
+                        flatten: false, // do not flatten else all subdirectory files get spit out to the top level dest directory
                         cwd: 'fonts/',
                         src: [ '**' ],
                         dest: '<%= projectPath.wordpress %>/fonts/'
@@ -585,7 +585,7 @@ module.exports = function ( grunt )
                     { // copy images to wordpress images folder
                         expand: true,
                         nonull: true,
-                        flatten: true,
+                        flatten: false, // do not flatten else all subdirectory files get spit out to the top level dest directory
                         cwd: 'images/',
                         src: [ '**' ],
                         dest: '<%= projectPath.wordpress %>/images/'
@@ -598,7 +598,7 @@ module.exports = function ( grunt )
                     { // copy fonts to wordpress font folder
                         expand: true,
                         nonull: true,
-                        flatten: true,
+                        flatten: false, // do not flatten else all subdirectory files get spit out to the top level dest directory
                         cwd: 'fonts/',
                         src: [ '**' ],
                         dest: '<%= projectPath.wordpress %>/fonts/'
@@ -606,7 +606,7 @@ module.exports = function ( grunt )
                     { // copy images to wordpress images folder
                         expand: true,
                         nonull: true,
-                        flatten: true,
+                        flatten: false, // do not flatten else all subdirectory files get spit out to the top level dest directory
                         cwd: 'images/',
                         src: [ '**' ],
                         dest: '<%= projectPath.wordpress %>/images/'
@@ -614,7 +614,7 @@ module.exports = function ( grunt )
                     { // copy css to wordpress css folder
                         expand: true,
                         nonull: true,
-                        flatten: true,
+                        flatten: false, // do not flatten else all subdirectory files get spit out to the top level dest directory
                         cwd: 'css/',
                         src: [ '**' ],
                         dest: '<%= projectPath.wordpress %>/css/'
@@ -622,7 +622,7 @@ module.exports = function ( grunt )
                     { // copy js to wordpress js folder
                         expand: true,
                         nonull: true,
-                        flatten: true,
+                        flatten: false, // do not flatten else all subdirectory files get spit out to the top level dest directory
                         cwd: 'js/',
                         src: [ '**' ],
                         dest: '<%= projectPath.wordpress %>/js/'
