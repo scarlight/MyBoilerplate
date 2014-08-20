@@ -1,9 +1,9 @@
-//**********************************************************************************************//
-// LESS AND CSS IMPORT.
-//
-// @import statement has a bug when used in variable interpolation
-// discussed here: http://stackoverflow.com/questions/10676628/less-css-import-path-from-variable
-//**********************************************************************************************//
+/*********************************************************************************************************
+* LESS AND CSS IMPORT.
+*
+* @import statement has a bug when used in variable interpolation
+* discussed here: http://stackoverflow.com/questions/10676628/less-css-import-path-from-variable
+*********************************************************************************************************/
 
 @import "../vendors/less-elements/elements.less"; //ver:0.8 - https://github.com/Oreolek/elements
 @import "own/template-mixin.less";
@@ -14,9 +14,9 @@
 html[data-useragent*='MSIE 10.0'] {} //sample css to target ie10; must add the javascript part to work
 
 
-//**********************************************************************************************//
-// TEMPLATE GLOBAL VARIABLES.
-//**********************************************************************************************//
+/*********************************************************************************************************
+* TEMPLATE GLOBAL VARIABLES.
+*********************************************************************************************************/
 @full-browser-width: 100%;
 @full-browser-height: 100%;
 @viewport-width: 100%;
@@ -24,18 +24,18 @@ html[data-useragent*='MSIE 10.0'] {} //sample css to target ie10; must add the j
 @template-base-color: #282828; //new
 
 
-//**********************************************************************************************//
-// OTHER MISC CSS FOR THIS TEMPLATE.
-//**********************************************************************************************//
+/*********************************************************************************************************
+* OTHER MISC CSS FOR THIS TEMPLATE.
+*********************************************************************************************************/
 .white-text { color: #ffffff; }
 .whatcolor-text { color: #888888; }
 ::selection      { background: #FFC01D; color:white; text-shadow:none; -webkit-text-stroke: 0px rgba(0,0,0,0); } // Safari & Chrome
 ::-moz-selection { background: #FFC01D; color:white; text-shadow:none; } // Firefox
 
 
-//**********************************************************************************************//
-// CONTAINER LAYOUT FULL OR SPECIFIED, ALSO IT CAN BE MADE FIXED FOOTER IF NEEDED.
-//**********************************************************************************************//
+/*********************************************************************************************************
+* CONTAINER LAYOUT FULL OR SPECIFIED, ALSO IT CAN BE MADE FIXED FOOTER IF NEEDED.
+*********************************************************************************************************/
 html, body { height:100%; }
 
 #browser-wrapper{
@@ -63,12 +63,18 @@ html, body { height:100%; }
     height         : auto;
     &:extend(.center);
     padding-bottom : 60px; //modify - optional if you need fixed footer (must match the footer height)
+
+    // for wordpress content to ensure image don't flow out of the content
+    p img, div img, li img
+    {
+        max-width: 100%;
+    }
 }
 
 
-//**********************************************************************************************//
-// COMPANY LOGO.
-//**********************************************************************************************//
+/*********************************************************************************************************
+* COMPANY LOGO.
+*********************************************************************************************************/
 #COMPANYNAME-company-logo
 {
     // setting here
@@ -107,9 +113,9 @@ html, body { height:100%; }
 }
 
 
-//**********************************************************************************************//
-// START COMPANYNAME BODY STRUCTURE.
-//**********************************************************************************************//
+/*********************************************************************************************************
+* START COMPANYNAME BODY STRUCTURE.
+*********************************************************************************************************/
 #COMPANYNAME-header-wrp
 {
     &:extend(.reset);
@@ -168,9 +174,60 @@ html, body { height:100%; }
 }
 
 
-//**********************************************************************************************//
-// START COPYRIGHT INFO.
-//**********************************************************************************************//
+/*********************************************************************************************************
+* COMPANYNAME 404 SECTION.
+*********************************************************************************************************/
+.COMPANYNAME-404
+{
+    &:extend(.reset);
+    margin-top:20px;
+    padding-left:300px;
+
+    .notice, .desc
+    {
+        &:extend(.reset);
+    }
+    .notice
+    {
+        @arguments:0 -1px 1px #ffffff;
+
+        font-size:49px;
+        font-weight: 900;
+        color:lighten(#000000, 85);
+        line-height:1.1;
+        letter-spacing: -1px;
+        padding-top:30px;
+        padding-bottom:15px;
+        border-bottom:solid 5px #f8f8f8;
+        #shadow > .text(@arguments);
+        -webkit-font-smoothing: antialiased; -webkit-text-stroke: 1px rgba(0,0,0,0);
+
+        &:before
+        {
+            @arguments:0 -1px 1px #cecece;
+
+            #wrap > .vabsolute(inline-block);
+            content:"\f085";
+            font-family:"FontAwesome";
+            font-size:235px;
+            color:#eeeeee;
+            left:-300px;
+            z-index:-1;
+            #shadow > .text(@arguments);
+            -webkit-font-smoothing: antialiased; -webkit-text-stroke: 0px rgba(0,0,0,0);
+        }
+    }
+    .desc, ul
+    {
+        font-size:15px;
+        margin-top:10px;
+    }
+}
+
+
+/*********************************************************************************************************
+* START COPYRIGHT INFO.
+*********************************************************************************************************/
 .copyright{
     &:extend(.reset);
     font-size:12px;

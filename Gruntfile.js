@@ -88,7 +88,7 @@ module.exports = function ( grunt )
                         expand: true,
                         ext: '.js',
                         extDot: 'first',
-                        flatten: false, // do not flatten else all subdirectory files get spit out to the top level dest directory
+                        flatten: true, // flatten the path - sub directory is not used here
                         src: '<%= projectPath.devJs %>/custom.js',
                         dest: '<%= projectPath.wordpress %>/dev/js/'
                     }
@@ -128,7 +128,7 @@ module.exports = function ( grunt )
                         expand: true,
                         ext: '.min.js',
                         extDot: 'first',
-                        flatten: false, // do not flatten else all subdirectory files get spit out to the top level dest directory
+                        flatten: true, // flatten the path - sub directory is not used here
                         src: '<%= projectPath.devJs %>/custom.js',
                         dest: '<%= projectPath.wordpress %>/js/'
                     }
@@ -168,7 +168,7 @@ module.exports = function ( grunt )
                         expand: true,
                         ext: '.min.js',
                         extDot: 'first',
-                        flatten: false, // do not flatten else all subdirectory files get spit out to the top level dest directory
+                        flatten: true, // flatten the path - sub directory is not used here
                         src: '<%= projectPath.wordpress %>/dev/js/lib.js',
                         dest: '<%= projectPath.wordpress %>/js/'
                     }
@@ -249,7 +249,7 @@ module.exports = function ( grunt )
                         expand: true,
                         ext: '.css',
                         extDot: 'first',
-                        flatten: false, // do not flatten else all subdirectory files get spit out to the top level dest directory
+                        flatten: true, // flatten the path - sub directory is not used here
                         src: [ '<%= projectPath.devLess %>/*.less' ],
                         dest: '<%= projectPath.wordpress %>/dev/css/'
                     }
@@ -291,7 +291,7 @@ module.exports = function ( grunt )
                         expand: true,
                         ext: '.min.css',
                         extDot: 'first',
-                        flatten: false, // do not flatten else all subdirectory files get spit out to the top level dest directory
+                        flatten: true, // flatten the path - sub directory is not used here
                         src: [ '<%= projectPath.wordpress %>/dev/css/*.css' ],
                         dest: '<%= projectPath.wordpress %>/css/'
                     }
