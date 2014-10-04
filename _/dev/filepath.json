@@ -14,7 +14,9 @@
         "_/dev/vendors/jquery-hoverIntent/jquery.hoverIntent.js",
         "_/dev/vendors/superfish/supersubs.js",
         "_/dev/vendors/superfish/superfish.min.js",
-        "_/dev/vendors/pajinate/jquery.pajinate.min.js"
+        "_/dev/vendors/pajinate/jquery.pajinate.min.js",
+        "_/dev/vendors/jquery.scrollTo/jquery.scrollTo.min.js",
+        "_/dev/vendors/bootstrap-select/bootstrap-select.min.js"
     ],
     "grunt"           : "grunt",
     "dev"             : "_/dev",

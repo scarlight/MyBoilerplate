@@ -9,7 +9,8 @@
 @import "own/template-mixin.less";
 @import "own/colorcode.less";
 @import "own/extra-elements.less"; // so much better with namespace
-// @import (less) "../vendor/animate-css/animate.min.css"; //use it if needed https://daneden.me/animate/
+@import "own/bootstrap-custom.less";
+// @import (less) "../vendors/animate-css/animate.min.css"; //use it if needed https://daneden.me/animate/
 
 html[data-useragent*='MSIE 10.0'] {} //sample css to target ie10; must add the javascript part to work
 
@@ -28,15 +29,31 @@ html[data-useragent*='MSIE 10.0'] {} //sample css to target ie10; must add the j
 * OTHER MISC CSS FOR THIS TEMPLATE.
 *********************************************************************************************************/
 .white-text { color: #ffffff; }
+a.white-text{
+    color:#ffffff;
+    &:hover
+    {
+        color: inherit;
+        text-decoration:underline;
+    }
+}
 .whatcolor-text { color: #888888; }
 ::selection      { background: #FFC01D; color:white; text-shadow:none; -webkit-text-stroke: 0px rgba(0,0,0,0); } // Safari & Chrome
 ::-moz-selection { background: #FFC01D; color:white; text-shadow:none; } // Firefox
+p.linespace { margin-bottom:0; }
+.generate-p-linespace(10); //total number of loops
+.generate-p-linespace(@n, @i: 1) when (@i =< @n) { // the loop
+    p.linespace@{i}0 {
+        margin-bottom: (@i * 100px / @n);
+    }
+    .generate-p-linespace(@n, (@i + 1)); // increment loop
+}
 
 
 /*********************************************************************************************************
 * CONTAINER LAYOUT FULL OR SPECIFIED, ALSO IT CAN BE MADE FIXED FOOTER IF NEEDED.
 *********************************************************************************************************/
-html, body { height:100%; }
+html, body { height:100%; color: @template-base-color; }
 
 #browser-wrapper{
     &:extend(.reset);
@@ -53,7 +70,7 @@ html, body { height:100%; }
     height         : auto !important;
     height         : @full-browser-height;
     min-height     : @full-browser-height;
-    overflow       : hidden;
+    overflow       : hidden; // be aware just incase need to remove this to give room for custom scroller
     &:extend(.center);
     .oilpaper("index.png");
 }
@@ -65,9 +82,15 @@ html, body { height:100%; }
     padding-bottom : 60px; //modify - optional if you need fixed footer (must match the footer height)
 
     // for wordpress content to ensure image don't flow out of the content
-    p img, div img, li img
+    p img, div img, li img,
+    canvas, iframe, video, svg
     {
         max-width: 100%;
+    }
+
+    img
+    {
+        box-sizing: content-box;
     }
 }
 
@@ -170,7 +193,7 @@ html, body { height:100%; }
     height:30px;//modify - optional
     &:extend(.center);
 
-    .bg(30, 'cyan');
+    .bg(30, 'aqua');
 }
 
 
@@ -236,3 +259,79 @@ html, body { height:100%; }
 
     }
 }
+
+
+/*********************************************************************************************************
+* CONTACT FORM 7.
+*********************************************************************************************************/
+/*
+@wpcf7-text-error: #ffffff;
+@wpcf7-text-ok: #000000;
+
+@wpcf7-bg-error: #001B66;
+@error-bg: hsla( hue( @wpcf7-bg-error ), saturation( @wpcf7-bg-error ), lightness(  @wpcf7-bg-error ), 1 );
+
+@wpcf7-bg-ok: #A8DE00;
+@ok-bg   : hsla( hue( @wpcf7-bg-ok ), saturation( @wpcf7-bg-ok ), lightness(  @wpcf7-bg-ok ), 1 );
+
+div.wpcf7-response-output {
+    margin: 0px 5px 10px;
+    padding: 5px 10px;
+}
+span.wpcf7-not-valid-tip
+{
+    #wrap > .vabsolute(inline-block);
+    width: auto;
+    height: auto;
+    font-size: 13px;
+    color: @wpcf7-text-error;
+    text-align:center;
+    padding: 5px 10px;
+    top: -7px;
+    right: 0%;
+    left:0%;
+    background-color: @error-bg;
+    border: solid 1px @error-bg;
+    #border > .rounded(3px);
+    #shadow > .drop(0, 0, 5px, 1, lighten(@error-bg, 15));
+    z-index: 99;
+}
+div.wpcf7-validation-errors
+{
+    color:@wpcf7-text-error;
+    text-align:center;
+    background:darken(@error-bg, 15%);
+    border:none;
+    #border > .rounded(3px);
+    #shadow > .drop(0, 0, 8px, 1, lighten(@error-bg, 15));
+}
+div.wpcf7-mail-sent-ok
+{
+    color:@wpcf7-text-ok;
+    border:none;
+    background:@ok-bg;
+    #shadow > .drop(0, 0, 5px, 1, lighten(@ok-bg, 10));
+}
+span.wpcf7-list-item
+{
+    margin:0;
+}
+span.wpcf7-list-item-label {
+    color: #606060;
+    font-size:13px;
+    font-style:normal;
+    font-weight:600;
+    margin:0;
+}
+div.wpcf7 .screen-reader-response {
+    #wrap > .vabsolute();
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    width: 1px;
+}
+div.wpcf7 img.ajax-loader
+{
+    float:left;
+}
+*/

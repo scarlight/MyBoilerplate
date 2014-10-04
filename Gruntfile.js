@@ -628,6 +628,51 @@ module.exports = function ( grunt )
                         dest: '<%= projectPath.wordpress %>/js/'
                     }
                 ]
+            },
+            vendorScrollTo:
+            {
+                files: [
+                    {
+                        expand: true,
+                        nonull: true,
+                        cwd: '<%= bowerrc.directory %>/',
+                        src: [ 'jquery.scrollTo/*.min.js' ],
+                        dest: '<%= projectPath.devVendor %>'
+                    }
+                ]
+            },
+            vendorSelectPicker:
+            {
+                files: [
+                    {
+                        expand: true,
+                        nonull: true,
+                        cwd: '<%= bowerrc.directory %>/bootstrap-select/dist/js/',
+                        src: [ 'bootstrap-select.min.js' ],
+                        dest: '<%= projectPath.devVendor %>/bootstrap-select/js'
+                    },
+                    {
+                        expand: true,
+                        nonull: true,
+                        cwd: '<%= bowerrc.directory %>/bootstrap-select/dist/css/',
+                        src: [ 'bootstrap-select.min.css' ],
+                        dest: '<%= projectPath.devVendor %>/bootstrap-select/css'
+                    },
+                    {
+                        expand: true,
+                        nonull: true,
+                        cwd: '<%= bowerrc.directory %>/bootstrap-select/dist/css/',
+                        src: [ 'bootstrap-select.min.css' ],
+                        dest: 'css/'
+                    },
+                    {
+                        expand: true,
+                        nonull: true,
+                        cwd: '<%= bowerrc.directory %>/bootstrap-select/less/',
+                        src: [ 'bootstrap-select.less' ],
+                        dest: '<%= projectPath.devVendor %>/bootstrap-select/less'
+                    }
+                ]
             }
         },
 
