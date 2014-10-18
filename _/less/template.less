@@ -1,0 +1,338 @@
+/*********************************************************************************************************
+* LESS AND CSS IMPORT.
+*
+* @import statement has a bug when used in variable interpolation
+* discussed here: http://stackoverflow.com/questions/10676628/less-css-import-path-from-variable
+*********************************************************************************************************/
+
+@import "../vendors/less-elements/elements.less"; //ver:0.8 - https://github.com/Oreolek/elements
+@import "own/lessConfig.less";
+@import "own/template-mixin.less";
+@import "own/colorcode.less";
+@import "own/extra-elements.less"; // so much better with namespace
+@import "own/bootstrap-custom.less";
+// @import (less) "../vendors/animate-css/animate.min.css"; //use it if needed https://daneden.me/animate/
+
+html[data-useragent*='MSIE 10.0'] {} //sample css to target ie10; must add the javascript part to work
+
+
+/*********************************************************************************************************
+* TEMPLATE GLOBAL VARIABLES.
+*********************************************************************************************************/
+@full-browser-width: 100%;
+@full-browser-height: 100%;
+@viewport-width: 100%;
+@working-width: 960px;
+@template-base-color: #282828; //new
+
+
+/*********************************************************************************************************
+* OTHER MISC CSS FOR THIS TEMPLATE.
+*********************************************************************************************************/
+.white-text { color: #ffffff; }
+a.white-text{
+    color:#ffffff;
+    &:hover
+    {
+        color: inherit;
+        text-decoration:underline;
+    }
+}
+.whatcolor-text { color: #888888; }
+::selection      { background: #FFC01D; color:white; text-shadow:none; -webkit-text-stroke: 0px rgba(0,0,0,0); } // Safari & Chrome
+::-moz-selection { background: #FFC01D; color:white; text-shadow:none; } // Firefox
+p.linespace { margin-bottom:0; }
+.generate-p-linespace(10); //total number of loops
+.generate-p-linespace(@n, @i: 1) when (@i =< @n) { // the loop
+    p.linespace@{i}0 {
+        margin-bottom: (@i * 100px / @n);
+    }
+    .generate-p-linespace(@n, (@i + 1)); // increment loop
+}
+
+
+/*********************************************************************************************************
+* CONTAINER LAYOUT FULL OR SPECIFIED, ALSO IT CAN BE MADE FIXED FOOTER IF NEEDED.
+*********************************************************************************************************/
+html, body { height:100%; color: @template-base-color; }
+
+#browser-wrapper{
+    &:extend(.reset);
+    width          : @full-browser-width;
+    min-width      : @full-browser-width;
+    height         : @full-browser-height;
+    min-height     : @full-browser-height;
+    &:extend(.center);
+}
+#main-wrapper{
+    &:extend(.reset);
+    width          : @full-browser-width;
+    min-width      : @full-browser-width;
+    height         : auto !important;
+    height         : @full-browser-height;
+    min-height     : @full-browser-height;
+    overflow       : hidden; // be aware just incase need to remove this to give room for custom scroller
+    &:extend(.center);
+    .oilpaper("index.png");
+}
+#viewport-wrapper{
+    &:extend(.reset);
+    width          : @viewport-width;
+    height         : auto;
+    &:extend(.center);
+    padding-bottom : 60px; //modify - optional if you need fixed footer (must match the footer height)
+
+    // for wordpress content to ensure image don't flow out of the content
+    p img, div img, li img,
+    canvas, iframe, video, svg
+    {
+        max-width: 100%;
+    }
+
+    img
+    {
+        box-sizing: content-box;
+    }
+}
+
+
+/*********************************************************************************************************
+* COMPANY LOGO.
+*********************************************************************************************************/
+#COMPANYNAME-company-logo
+{
+    // setting here
+    @logo-width:64px;
+    @logo-height:63px;
+    @logo-background:transparent url(../images/logo.png) no-repeat center center scroll;
+
+    &:extend(.reset);
+    width:@logo-width;
+    height:@logo-height;
+    line-height:0;
+    &:extend(.floatl);
+
+    .bg(18, 'blue');
+
+    h1{
+        &:extend(.reset);
+        line-height:0;
+        text-indent:-99999px;
+        a
+        {
+            &:extend(.reset);
+            line-height:0;
+            font-size:1.2em;
+            text-indent:0;
+            span
+            {
+                &:extend(.reset);
+                width:@logo-width;
+                height:@logo-height;
+                text-indent:0;
+                background:@logo-background;
+            }
+        }
+    }
+}
+
+
+/*********************************************************************************************************
+* START COMPANYNAME BODY STRUCTURE.
+*********************************************************************************************************/
+#COMPANYNAME-header-wrp
+{
+    &:extend(.reset);
+    width:100%;
+    height:auto;
+    &:extend(.center);
+
+    .bg(4, 'green');
+}
+
+#COMPANYNAME-header
+{
+    &:extend(.reset);
+    width:@working-width;
+    height: auto; //modify - optional
+    &:extend(.center);
+
+    .bg(10, 'purple');
+}
+
+#COMPANYNAME-body-wrp
+{
+    &:extend(.reset);
+    width:100%;
+    height:auto;
+    &:extend(.center);
+}
+
+#COMPANYNAME-body
+{
+    &:extend(.reset);
+    width:@working-width;
+    height:auto; //modify - optional
+    &:extend(.center);
+}
+
+#COMPANYNAME-footer-wrp
+{
+    &:extend(.reset);
+    position:absolute;
+    width:100%;
+    height:auto;
+    bottom:0;
+
+    .bg(20, 'red');
+}
+
+#COMPANYNAME-footer
+{
+    &:extend(.reset);
+    width:@working-width;
+    height:30px;//modify - optional
+    &:extend(.center);
+
+    .bg(30, 'aqua');
+}
+
+
+/*********************************************************************************************************
+* COMPANYNAME 404 SECTION.
+*********************************************************************************************************/
+.COMPANYNAME-404
+{
+    &:extend(.reset);
+    margin-top:20px;
+    padding-left:300px;
+
+    .notice, .desc
+    {
+        &:extend(.reset);
+    }
+    .notice
+    {
+        @arguments:0 -1px 1px #ffffff;
+
+        font-size:49px;
+        font-weight: 900;
+        color:lighten(#000000, 85);
+        line-height:1.1;
+        letter-spacing: -1px;
+        padding-top:30px;
+        padding-bottom:15px;
+        border-bottom:solid 5px #f8f8f8;
+        #shadow > .text(@arguments);
+        -webkit-font-smoothing: antialiased; -webkit-text-stroke: 1px rgba(0,0,0,0);
+
+        &:before
+        {
+            @arguments:0 -1px 1px #cecece;
+
+            #wrap > .vabsolute(inline-block);
+            content:"\f085";
+            font-family:"FontAwesome";
+            font-size:235px;
+            color:#eeeeee;
+            left:-300px;
+            z-index:-1;
+            #shadow > .text(@arguments);
+            -webkit-font-smoothing: antialiased; -webkit-text-stroke: 0px rgba(0,0,0,0);
+        }
+    }
+    .desc, ul
+    {
+        font-size:15px;
+        margin-top:10px;
+    }
+}
+
+
+/*********************************************************************************************************
+* START COPYRIGHT INFO.
+*********************************************************************************************************/
+.copyright{
+    &:extend(.reset);
+    font-size:12px;
+    a.developed
+    {
+
+    }
+}
+
+
+/*********************************************************************************************************
+* CONTACT FORM 7.
+*********************************************************************************************************/
+/*
+@wpcf7-text-error: #ffffff;
+@wpcf7-text-ok: #000000;
+
+@wpcf7-bg-error: #001B66;
+@error-bg: hsla( hue( @wpcf7-bg-error ), saturation( @wpcf7-bg-error ), lightness(  @wpcf7-bg-error ), 1 );
+
+@wpcf7-bg-ok: #A8DE00;
+@ok-bg   : hsla( hue( @wpcf7-bg-ok ), saturation( @wpcf7-bg-ok ), lightness(  @wpcf7-bg-ok ), 1 );
+
+div.wpcf7-response-output {
+    margin: 0px 5px 10px;
+    padding: 5px 10px;
+}
+span.wpcf7-not-valid-tip
+{
+    #wrap > .vabsolute(inline-block);
+    width: auto;
+    height: auto;
+    font-size: 13px;
+    color: @wpcf7-text-error;
+    text-align:center;
+    padding: 5px 10px;
+    top: -7px;
+    right: 0%;
+    left:0%;
+    background-color: @error-bg;
+    border: solid 1px @error-bg;
+    #border > .rounded(3px);
+    #shadow > .drop(0, 0, 5px, 1, lighten(@error-bg, 15));
+    z-index: 99;
+}
+div.wpcf7-validation-errors
+{
+    color:@wpcf7-text-error;
+    text-align:center;
+    background:darken(@error-bg, 15%);
+    border:none;
+    #border > .rounded(3px);
+    #shadow > .drop(0, 0, 8px, 1, lighten(@error-bg, 15));
+}
+div.wpcf7-mail-sent-ok
+{
+    color:@wpcf7-text-ok;
+    border:none;
+    background:@ok-bg;
+    #shadow > .drop(0, 0, 5px, 1, lighten(@ok-bg, 10));
+}
+span.wpcf7-list-item
+{
+    margin:0;
+}
+span.wpcf7-list-item-label {
+    color: #606060;
+    font-size:13px;
+    font-style:normal;
+    font-weight:600;
+    margin:0;
+}
+div.wpcf7 .screen-reader-response {
+    #wrap > .vabsolute();
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    width: 1px;
+}
+div.wpcf7 img.ajax-loader
+{
+    float:left;
+}
+*/
