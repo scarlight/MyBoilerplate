@@ -13,7 +13,7 @@ module.exports = function (grunt, options) {
                 expand: true,
                 nonull: true,
                 flatten: true,
-                cwd: options.hbs.page + '/less/',
+                cwd: options.src.hbs.page + '/less/',
                 src: [ 'lessConfig.hbs' ],
                 dest: options.src.lessOwn
             }

@@ -5,9 +5,9 @@ module.exports = function (grunt, options) {
 
     var assemble = {
         options: { // optionally add a target level option to override task option
-            data    : [ options.hbs.data + '/*.{yml,yaml,json}' ],
-            helpers : [ options.hbs.helper + '/**/*.js' ],
-            partials: [ options.hbs.partial + '/**/*.hbs' ],
+            data    : [ options.src.hbs.data + '/*.{yml,yaml,json}' ],
+            helpers : [ options.src.hbs.helper + '/**/*.js' ],
+            partials: [ options.src.hbs.partial + '/**/*.hbs' ],
             ext     : '.html',
             engine  : 'handlebars',
             postprocess: function(src) { //refer: https://github.com/assemble/assemble/commit/6c564b68796e2cf2f7704e7e6373df760d1079aa

@@ -34,14 +34,20 @@ module.exports = function(grunt) {
                 var
                     grunt   = 'grunt',
                     dev     = '_',
-                    html    = dev + '/html',
-                    font    = dev + '/font',
-                    image   = dev + '/image',
-                    js      = dev + '/js',
-                    less    = dev + '/less',
+                    html    = dev  + '/html',
+                    font    = dev  + '/font',
+                    image   = dev  + '/image',
+                    js      = dev  + '/js',
+                    less    = dev  + '/less',
                     lessOwn = less + '/own',
-                    include = dev + '/include',
-                    vendor  = dev + '/vendors'; // like a christmas tree, you just grab the value for use!
+                    include = dev  + '/include',
+                    vendor  = dev  + '/vendors', // like a christmas tree, you just grab the value for use!
+                    hbs     = dev  + '/hbs',     // we going to use handlebar.js with assemble to compile html
+                    data    = hbs  + '/data',
+                    layout  = hbs  + '/layout',
+                    page    = hbs  + '/page',
+                    partial = hbs  + '/partial',
+                    helper  = hbs  + '/helper';
 
                 return {
                      // key : value
@@ -54,7 +60,13 @@ module.exports = function(grunt) {
                     less    : less,
                     lessOwn : lessOwn,
                     include : include,
-                    vendor  : vendor
+                    vendor  : vendor,
+                    hbs     : hbs,
+                    data    : data,
+                    layout  : layout,
+                    page    : page,
+                    partial : partial,
+                    helper  : helper
                 };
             })(),
 
@@ -91,26 +103,6 @@ module.exports = function(grunt) {
                     css    : css,
                     font   : font,
                     image  : image,
-                };
-            })(),
-
-            hbs : (function(){ // we going to use handlebar.js with assemble to compile html
-                var
-                    path    = '_/hbs',
-                    data    = path + '/data',
-                    layout  = path + '/layout',
-                    page    = path + '/page',
-                    partial = path + '/partial',
-                    helper  = path + '/helper';
-
-                return {
-                     // key : value
-                    path    : path,
-                    data    : data,
-                    layout  : layout,
-                    page    : page,
-                    partial : partial,
-                    helper  : helper
                 };
             })(),
 

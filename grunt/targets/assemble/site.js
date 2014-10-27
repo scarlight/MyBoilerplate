@@ -10,7 +10,7 @@ module.exports = function (grunt, options) {
                 expand: true,
                 nonull: true,
                 flatten: true,
-                cwd: options.hbs.page + '/',
+                cwd: options.src.hbs.page + '/',
                 src: [ '**/*.hbs', '!less/*.hbs' ],
                 dest: options.src.html
             }

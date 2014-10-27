@@ -129,7 +129,7 @@ module.exports = function (grunt, options) {
         },
 
         assembleLessConfig: {
-            files: [ options.hbs.page + '/less/lessConfig.hbs' ],
+            files: [ options.src.hbs.page + '/less/lessConfig.hbs' ],
             tasks: [
                 'newer:assemble:less' // compile out a less configuration from settings.yaml
             ]
@@ -141,7 +141,7 @@ module.exports = function (grunt, options) {
         ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 
         assembleHtml: {
-            files: [ options.hbs.path + '/**/*', '!' + options.hbs.page + '/lessConfig/less.hbs' ],
+            files: [ options.src.hbs + '/**/*', '!' + options.src.hbs.page + '/lessConfig/less.hbs' ],
             tasks: [
                 'newer:assemble:site' // compile into html
             ]

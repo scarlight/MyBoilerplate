@@ -57,29 +57,26 @@ p.linespace { margin-bottom:0; }
 html, body { height:100%; color: @template-base-color; }
 
 #browser-wrapper{
-    &:extend(.reset);
+    &:extend(.reset, .center);
     width          : @full-browser-width;
     min-width      : @full-browser-width;
     height         : @full-browser-height;
     min-height     : @full-browser-height;
-    &:extend(.center);
 }
 #main-wrapper{
-    &:extend(.reset);
+    .oilpaper("index.png");
+    &:extend(.reset, .center);
     width          : @full-browser-width;
     min-width      : @full-browser-width;
     height         : auto !important;
     height         : @full-browser-height;
     min-height     : @full-browser-height;
     overflow       : hidden; // be aware just incase need to remove this to give room for custom scroller
-    &:extend(.center);
-    .oilpaper("index.png");
 }
 #viewport-wrapper{
-    &:extend(.reset);
+    &:extend(.reset, .center);
     width          : @viewport-width;
     height         : auto;
-    &:extend(.center);
     padding-bottom : 60px; //modify - optional if you need fixed footer (must match the footer height)
 
     // for wordpress content to ensure image don't flow out of the content
@@ -97,20 +94,19 @@ html, body { height:100%; color: @template-base-color; }
 
 
 /*********************************************************************************************************
-* COMPANY LOGO.
+* @{company-name} LOGO.
 *********************************************************************************************************/
-#COMPANYNAME-company-logo
+#@{prefix}-company-logo
 {
     // setting here
     @logo-width:64px;
     @logo-height:63px;
     @logo-background:transparent url(../images/logo.png) no-repeat center center scroll;
 
-    &:extend(.reset);
+    &:extend(.reset, .floatl);
     width:@logo-width;
     height:@logo-height;
     line-height:0;
-    &:extend(.floatl);
 
     .bg(18, 'blue');
 
@@ -138,45 +134,41 @@ html, body { height:100%; color: @template-base-color; }
 
 
 /*********************************************************************************************************
-* START COMPANYNAME BODY STRUCTURE.
+* START @{company-name} BODY STRUCTURE.
 *********************************************************************************************************/
-#COMPANYNAME-header-wrp
+#@{prefix}-header-wrp
 {
-    &:extend(.reset);
+    &:extend(.reset, .center);
     width:100%;
     height:auto;
-    &:extend(.center);
 
     .bg(4, 'green');
 }
 
-#COMPANYNAME-header
+#@{prefix}-header
 {
-    &:extend(.reset);
+    &:extend(.reset, .center);
     width:@working-width;
     height: auto; //modify - optional
-    &:extend(.center);
 
     .bg(10, 'purple');
 }
 
-#COMPANYNAME-body-wrp
+#@{prefix}-body-wrp
 {
-    &:extend(.reset);
+    &:extend(.reset, .center);
     width:100%;
     height:auto;
-    &:extend(.center);
 }
 
-#COMPANYNAME-body
+#@{prefix}-body
 {
-    &:extend(.reset);
+    &:extend(.reset, .center);
     width:@working-width;
     height:auto; //modify - optional
-    &:extend(.center);
 }
 
-#COMPANYNAME-footer-wrp
+#@{prefix}-footer-wrp
 {
     &:extend(.reset);
     position:absolute;
@@ -187,21 +179,20 @@ html, body { height:100%; color: @template-base-color; }
     .bg(20, 'red');
 }
 
-#COMPANYNAME-footer
+#@{prefix}-footer
 {
-    &:extend(.reset);
+    &:extend(.reset, .center);
     width:@working-width;
     height:30px;//modify - optional
-    &:extend(.center);
 
     .bg(30, 'aqua');
 }
 
 
 /*********************************************************************************************************
-* COMPANYNAME 404 SECTION.
+* @{company-name} 404 SECTION.
 *********************************************************************************************************/
-.COMPANYNAME-404
+.@{prefix}-404
 {
     &:extend(.reset);
     margin-top:20px;
