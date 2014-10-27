@@ -28,9 +28,88 @@ module.exports = function (grunt, options) {
                 });
             }
         },
-        site: require('./targets/assemble/site.js')(grunt, options),
-        less: require('./targets/assemble/less.js')(grunt, options)
+        lessConfig: require('./targets/assemble/lessConfig.js')(grunt, options),
+        // more target to be added. See below.
     };
+
+    /*                          WORKAROUND : REFER https://github.com/assemble/assemble/issues/451
+       ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+       | # Currently grunt-newer is not working as intended and all the pages are assembling when only one page is modified. |
+
+       | # So Im going to create A TARGET FOR EACH PAGE to be watched by 'watch plugin', therefore 'newer plugin' is not     |
+       |   needed for assemble anymore. EACH TARGET will be prefixed according site type. EG: mainSiteWhatPage               |
+
+       | # For partials, layout, helpers or data that has been changed, use sitePrefixAll to recompile everything.           |
+       ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+
+
+    (function(){
+        /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+           | mainSite All - (data, layout, partial, helper) excluding page & less |
+           ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+        var sitePrefix = 'mainSite';
+        var all = {
+            files: [
+                {
+                    expand: true,
+                    nonull: true,
+                    flatten: true,
+                    cwd: options.src.hbs.page + '/', // compile only page/**/*.hbs therefore avoid using '**/*' meaning ANY extension.
+                    src: [ '**/*.hbs' ],
+                    dest: options.src.html
+                }
+            ]
+        };
+        // a target for all page compilation
+        assemble[sitePrefix+'All'] = all;
+        // add to Gruntfile.js later use for watch.
+        options.assemblePagesTarget[sitePrefix+'All'] = [
+                                                            options.src.hbs.path + '/**/*',
+                                                            '!' + options.src.hbs.path + '/page/**/*',
+                                                            '!' + options.src.hbs.path + '/less/**/*'
+                                                        ];
+
+        /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+           |                         mainSite - Each Page                         |
+           ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+        grunt.file.recurse(options.src.hbs.page, function(abspath, rootdir, subdir, filename){
+            // abspath  --- : _/hbs/page/about/about.hbs
+            // rootdir  --- : _/hbs/page
+            // subdir   --- : about
+            // filename --- : about.hbs
+
+            // lets make the target name a little better with camelCase style
+            var str = subdir;
+            var arr = str.split('');
+            var camelCaseTarget = '';
+            for (var i = 0; i < arr.length; i++) {
+                if( i === 0){
+                    camelCaseTarget += sitePrefix;
+                    camelCaseTarget += arr[i].toUpperCase();
+                }
+                else {
+                    camelCaseTarget += arr[i];
+                }
+            }
+
+            var targetValue = {
+                files: [
+                    {
+                        expand: true,
+                        nonull: true,
+                        flatten: true,
+                        cwd: options.src.hbs.page + '/' + subdir + '/',
+                        src: [ filename ],
+                        dest: options.src.html
+                    }
+                ]
+            };
+            // an individual target for each respective page
+            assemble[ camelCaseTarget ] = targetValue;
+            // add to Gruntfile.js later use for watch
+            options.assemblePagesTarget[ camelCaseTarget ] = options.src.hbs.page + '/' + subdir + '/' + filename;
+        });
+    })();
 
     return assemble;
 };
