@@ -23,7 +23,7 @@ module.exports = function(grunt, options){
     });
     // add additional task after 'copy' task
     vendorLibrary.push('concat');
-    vendorLibrary.push('assemble:less');
+    vendorLibrary.push('assemble:lessConfig');
 
     /*                                                      NOTE
        ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
