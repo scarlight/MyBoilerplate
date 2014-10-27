@@ -65,8 +65,8 @@ module.exports = function (grunt, options) {
         // add to Gruntfile.js later use for watch.
         options.assemblePagesTarget[sitePrefix+'All'] = [
                                                             options.src.hbs.path + '/**/*',
-                                                            '!' + options.src.hbs.path + '/page/**/*',
-                                                            '!' + options.src.hbs.path + '/less/**/*'
+                                                            '!' + options.src.hbs.page + '/**/*',
+                                                            '!' + options.src.hbs.less + '/**/*'
                                                         ];
 
         /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
