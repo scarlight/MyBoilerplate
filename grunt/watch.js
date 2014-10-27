@@ -129,9 +129,9 @@ module.exports = function (grunt, options) {
         },
 
         assembleLessConfig: {
-            files: [ options.src.hbs.page + '/less/lessConfig.hbs' ],
+            files: [ options.src.hbs.less + '/lessConfig.hbs' ],
             tasks: [
-                'newer:assemble:less' // compile out a less configuration from settings.yaml
+                'newer:assemble:lessConfig' // compile out a less configuration from settings.yaml.
             ]
         },
 
@@ -140,13 +140,37 @@ module.exports = function (grunt, options) {
         |                                                       -                                                       |
         ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 
-        assembleHtml: {
-            files: [ options.src.hbs + '/**/*', '!' + options.src.hbs.page + '/lessConfig/less.hbs' ],
-            tasks: [
-                'newer:assemble:site' // compile into html
-            ]
-        },
+        // Workaround for assemble watch to only compile newly changed file and not all at once.
+        // See the below self invoking function for this watch.
     };
+
+    // We shall create individual assemble targets for the watch then append to 'var watch' before its returned to grunt.
+    (function(){
+        for (var target in options.assemblePagesTarget) {
+            var
+                watchFile = [ options.assemblePagesTarget[target] ],
+                watchTask = [ 'assemble:'+target ],
+                watchTargetParams = {
+                    files: watchFile,
+                    tasks: watchTask
+                };
+
+                // lets make the target name a little better with camelCase style
+                var str = target;
+                var arr = str.split('');
+                var theTarget = '';
+                for (var i = 0; i < arr.length; i++) {
+                    if( i === 0){
+                        theTarget += 'assemble';
+                        theTarget += arr[i].toUpperCase();
+                    }
+                    else {
+                        theTarget += arr[i];
+                    }
+                }
+                watch[theTarget] = watchTargetParams;
+        }
+    })();
 
     return watch;
 };
