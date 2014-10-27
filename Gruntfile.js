@@ -42,13 +42,19 @@ module.exports = function(grunt) {
                     lessOwn = less + '/own',
                     include = dev  + '/include',
                     vendor  = dev  + '/vendors', // like a christmas tree, you just grab the value for use!
-                    hbs     = dev  + '/hbs';     // we going to use handlebar.js with assemble to compile html
-                    // data    = hbs  + '/data',
-                    // layout  = hbs  + '/layout',
-                    // page    = hbs  + '/page',
-                    // partial = hbs  + '/partial',
-                    // helper  = hbs  + '/helper',
-                    // less    = hbs  + '/less';
+
+                    hbs = (function(){            // we going to use handlebar.js with assemble to compile html
+                        var path = dev  + '/hbs';
+                        return {
+                            path    : path,
+                            data    : path + '/data',
+                            layout  : path + '/layout',
+                            page    : path + '/page',
+                            partial : path + '/partial',
+                            helper  : path + '/helper',
+                            less    : path + '/less'
+                        };
+                    })();
 
                 return {
                      // key : value
@@ -62,13 +68,7 @@ module.exports = function(grunt) {
                     lessOwn : lessOwn,
                     include : include,
                     vendor  : vendor,
-                    hbs     : hbs,
-                    // data    : data,
-                    // layout  : layout,
-                    // page    : page,
-                    // partial : partial,
-                    // helper  : helper,
-                    // less    : less
+                    hbs     : hbs
                 };
             })(),
 
