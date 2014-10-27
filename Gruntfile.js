@@ -130,17 +130,18 @@ module.exports = function(grunt) {
                     };
             })(),
 
+            assemblePagesTarget: {} // an assemble container for my workaround
         },
 
         /*
             can optionally pass options to load-grunt-tasks/ jit-grunt. If set false,
             it will disable auto loading tasks. (Use jit for slight performance boost)
         */
-        jitGrunt        : {
+        jitGrunt: {
             assemble: 'assemble'
         },
 
-        postProcess     : function(config) {} //can post process config object before it gets passed to grunt
+        postProcess: function(config) {} //can post process config object before it gets passed to grunt
     });
 
 };
