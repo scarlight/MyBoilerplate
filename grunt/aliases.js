@@ -25,6 +25,35 @@ module.exports = function(grunt, options){
     vendorLibrary.push('concat');
     vendorLibrary.push('assemble:lessConfig');
 
+    var bankai = (function(){
+        var taskSequence =
+        [
+            'assemble:mainSiteAll',
+            'copy:htmlToBuild',
+            'htmlmin:html',
+
+            'less:build',
+            'cssmin:productionCSS',
+
+            'jshint:jsSrc',
+            'concat',
+            'copy:jsToBuild',
+            'uglify:jsBuild',
+
+            'copy:fontToFolder',
+
+            'copy:imageToBuild',
+            'imagemin:minImages'
+        ];
+
+        if( options.wordpress.output ) {
+            taskSequence.push( 'copy:wpImage', 'copy:wpFont', 'copy:wpCSS', 'copy:wpJS' );
+            return taskSequence;
+        } else {
+            return taskSequence;
+        }
+    })();
+
     /*                                                      NOTE
        ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
        | # grunt.registerTask can be added here however by just returning                                              |
@@ -35,28 +64,6 @@ module.exports = function(grunt, options){
     return {
         'default' : 'watch',
         'prep'    : vendorLibrary, // Skip this from watch option.atBegin, since it will prep everytime I toggle the watch
-        'bankai'  : [
-                        'mainSiteAll',
-                        'copy:htmlToBuild',
-                        'htmlmin:html',
-
-                        'less:build',
-                        'cssmin:productionCSS',
-
-                        'jshint:jsSrc',
-                        'concat',
-                        'copy:jsToBuild',
-                        'uglify:jsBuild',
-
-                        'copy:fontToFolder',
-
-                        'copy:imageToBuild',
-                        'imagemin:minImages',
-
-                        'copy:wpImage',
-                        'copy:wpFont',
-                        'copy:wpCSS',
-                        'copy:wpJS',
-                    ]
+        'bankai'  : bankai
     };
 };
