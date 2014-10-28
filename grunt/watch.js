@@ -32,22 +32,22 @@ module.exports = function (grunt, options) {
             imageTask;
 
         if( options.watchForDistribution ) {
-            htmlTask = 'newer:htmlmin:html';
+            htmlTask    = 'newer:htmlmin:html';
             lessCompile = 'newer:cssmin:productionCSS';
-            jsCompile = 'newer:uglify:jsBuild';
-            imageTask = 'newer:imagemin:minImages';
+            jsCompile   = 'newer:uglify:jsBuild';
+            imageTask   = 'newer:imagemin:minImages';
         } else {
-            htmlTask = '';
+            htmlTask    = '';
             lessCompile = '';
-            jsCompile = '';
-            imageTask = '';
+            jsCompile   = '';
+            imageTask   = '';
         }
 
         return {
-            htmlTask : htmlTask,
+            htmlTask    : htmlTask,
             lessCompile : lessCompile,
-            jsCompile : jsCompile,
-            imageTask : imageTask
+            jsCompile   : jsCompile,
+            imageTask   : imageTask
         };
     })();
 
