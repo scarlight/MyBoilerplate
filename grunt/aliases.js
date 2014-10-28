@@ -33,8 +33,30 @@ module.exports = function(grunt, options){
        ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 
     return {
-        'default'                  : 'watch',
-        'prep'                     : vendorLibrary, // Skip this from watch option.atBegin, since it will prep everytime I toggle the watch
-        // 'bankai'                : [  ], use 2 concurrent target array to complete faster
+        'default' : 'watch',
+        'prep'    : vendorLibrary, // Skip this from watch option.atBegin, since it will prep everytime I toggle the watch
+        'bankai'  : [
+                        'mainSiteAll',
+                        'copy:htmlToBuild',
+                        'htmlmin:html',
+
+                        'less:build',
+                        'cssmin:productionCSS',
+
+                        'jshint:jsSrc',
+                        'concat',
+                        'copy:jsToBuild',
+                        'uglify:jsBuild',
+
+                        'copy:fontToFolder',
+
+                        'copy:imageToBuild',
+                        'imagemin:minImages',
+
+                        'copy:wpImage',
+                        'copy:wpFont',
+                        'copy:wpCSS',
+                        'copy:wpJS',
+                    ]
     };
 };

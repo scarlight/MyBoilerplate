@@ -24,6 +24,33 @@ module.exports = function (grunt, options) {
         }
     })();
 
+    var watchDest = (function(){
+        var
+            htmlTask,
+            lessCompile,
+            jsCompile,
+            imageTask;
+
+        if( options.watchForDistribution ) {
+            htmlTask = 'newer:htmlmin:html';
+            lessCompile = 'newer:cssmin:productionCSS';
+            jsCompile = 'newer:uglify:jsBuild';
+            imageTask = 'newer:imagemin:minImages';
+        } else {
+            htmlTask = '';
+            lessCompile = '';
+            jsCompile = '';
+            imageTask = '';
+        }
+
+        return {
+            htmlTask : htmlTask,
+            lessCompile : lessCompile,
+            jsCompile : jsCompile,
+            imageTask : imageTask
+        };
+    })();
+
 /*                  !!! IMPORTANT NOTE !!!
     ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
     | IN DESIGNATED LOCATIONS, WATCH ON FIRST RUN MUST HAVE |
@@ -75,17 +102,17 @@ module.exports = function (grunt, options) {
         htmlTask: {
             files: [ options.src.html + '/*.html' ],
             tasks: [
-                'newer:copy:htmlToBuild',     /* #1 [■] SOURCE MONITORING : copy html from _ to _build                                 */
-                'newer:htmlmin:html'          /* #2 [■] BUILD MONITORING  : once src html is updated, do a minified version into _dest */
+                'newer:copy:htmlToBuild',  /* #1 [■] SOURCE MONITORING : copy html from _ to _build                                 */
+                watchDest.htmlTask         /* #2 [■] BUILD MONITORING  : once src html is updated, do a minified version into _dest */
             ]
         },
 
         lessCompile: {
             files: [ options.src.less + '/**/*.less' ],
             tasks: [
-                'newer:less:build',           /* #1 [■] SOURCE MONITORING : preprocess less from _ to _build                  */
-                'newer:cssmin:productionCSS', /* #2 [■] BUILD MONITORING  : when css build files updated, cssmin to _dest/css */
-                wordpressTask.wpCSS           /* #2 [■] BUILD MONITORING  : copy the min css from dest to wordpress/css       */
+                'newer:less:build',        /* #1 [■] SOURCE MONITORING : preprocess less from _ to _build                  */
+                watchDest.lessCompile,     /* #2 [■] BUILD MONITORING  : when css build files updated, cssmin to _dest/css */
+                wordpressTask.wpCSS        /* #2 [■] BUILD MONITORING  : copy the min css from dest to wordpress/css       */
             ]
         },
 
@@ -93,18 +120,18 @@ module.exports = function (grunt, options) {
             files: [ options.src.js + '/*.js' ],
             tasks: [
                 'jshint:jsSrc',
-                'newer:copy:jsToBuild',       /* #1 [■] SOURCE MONITORING : copy js from _ to _build                       */
-                'newer:uglify:jsBuild',       /* #2 [■] BUILD MONITORING  : uglify the _build/js into _dest/js             */
-                wordpressTask.wpJS            /* #2 [■] BUILD MONITORING  : copy the uglified JS from dest to wordpress/js */
+                'newer:copy:jsToBuild',    /* #1 [■] SOURCE MONITORING : copy js from _ to _build                       */
+                watchDest.jsCompile,       /* #2 [■] BUILD MONITORING  : uglify the _build/js into _dest/js             */
+                wordpressTask.wpJS         /* #2 [■] BUILD MONITORING  : copy the uglified JS from dest to wordpress/js */
             ]
         },
 
         imageTask: {
             files: [ options.src.image + '/**/*.{png,jpg,jpeg,gif,webp,svg}' ],
             tasks: [
-                'newer:copy:imageToBuild',    /* #1 [■] SOURCE MONITORING : copy image from _ to _build              */
-                wordpressTask.wpImage,        /* #1 [■] SOURCE MONITORING : copy image from _ to wordpress/fonts     */
-                'newer:imagemin:minImages'    /* #2 [■] BUILD MONITORING  : minify the images inside _build to _dest */
+                'newer:copy:imageToBuild', /* #1 [■] SOURCE MONITORING : copy image from _ to _build              */
+                wordpressTask.wpImage,     /* #1 [■] SOURCE MONITORING : copy image from _ to wordpress/image     */
+                watchDest.imageTask        /* #2 [■] BUILD MONITORING  : minify the images inside _build to _dest */
             ]
         },
 
@@ -116,8 +143,8 @@ module.exports = function (grunt, options) {
         fontToBuild: {
             files: [ options.src.font + '/**' ],
             tasks: [
-                'newer:copy:fontToFolder',    /* #1 [■] SOURCE MONITORING : copy font from _/font to _build/fonts & _dest/fonts (no special operation needed) */
-                wordpressTask.wpFont          /* #1 [■] SOURCE MONITORING : copy font from _/font to wordpress/fonts (no special operation needed)            */
+                'newer:copy:fontToFolder', /* #1 [■] SOURCE MONITORING : copy font from _/font to _build/fonts & _dest/fonts (no special operation needed) */
+                wordpressTask.wpFont       /* #1 [■] SOURCE MONITORING : copy font from _/font to wordpress/fonts (no special operation needed)            */
             ]
         },
 
@@ -135,13 +162,17 @@ module.exports = function (grunt, options) {
             ]
         },
 
+        /*
+            # WORKAROUND: Create individual assemble targets (page) for watch to fire task individualy.
+            # SOLVED    : Page task compiles separately corresponding to its file change, whilst
+                          layout, data, helper & partial will initialize a re-compile for all the pages
+            # WHERE     : See the below self invoking function for this watch.
+        */
+
     /*                                             #2 [■] BUILD MONITORING [■]
         ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
         |                                                       -                                                       |
         ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
-
-        // Workaround for assemble watch to only compile newly changed file and not all at once.
-        // See the below self invoking function for this watch.
     };
 
     // We shall create individual assemble targets for the watch then append to 'var watch' before its returned to grunt.

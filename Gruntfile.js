@@ -16,16 +16,16 @@ module.exports = function(grunt) {
             # 'configPath' accepts a single path, we can have each task.js to require for their target from the targets folder
             # NOTE: each task.js files actually returns its target:value back to Grunt
         */
-        configPath      : path.join(process.cwd(), 'grunt'),
-        init            : true,                              // do auto grunt.initConfig
-        data            : {                                  // data passed into config.
-            bowerrc     : grunt.file.readJSON( '.bowerrc' ),
-            banner      : '/*! <%= package.name %> - v<%= package.version %> - ' +
-                          '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-                          '<%= package.homepage ? "* " + package.homepage + "\\n" : "\\n*/\\n" %>' +
-                          '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= package.author.name %>' +
-                          '<%= package.license ? "\\n* Licensed under" + package.license + "( " + package.license.url + " ) */\\n" : "\\n*/\\n" %>',
-            nodeModule  : 'node_modules',
+        configPath     : path.join(process.cwd(), 'grunt'),
+        init           : true,                              // do auto grunt.initConfig
+        data           : {                                  // data passed into config.
+            bowerrc    : grunt.file.readJSON( '.bowerrc' ),
+            banner     : '/*! <%= package.name %> - v<%= package.version %> - ' +
+                         '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+                         '<%= package.homepage ? "* " + package.homepage + "\\n" : "\\n*/\\n" %>' +
+                         '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= package.author.name %>' +
+                         '<%= package.license ? "\\n* Licensed under" + package.license + "( " + package.license.url + " ) */\\n" : "\\n*/\\n" %>',
+            nodeModule : 'node_modules',
             /*
                 # we must provide key pair value therefore we can use anonymous self invoking function to return it.
                 # (closure phenomenon - preserves local scope when otherwise with an added ability of using function)
@@ -108,7 +108,7 @@ module.exports = function(grunt) {
                 };
             })(),
 
-            wordpress   : (function(){ // we going to use the same src files for wordpress development
+            wordpress : (function(){ // we going to use the same src files for wordpress development
                 var
                     output    = false,
                     website   = 'website_name',
@@ -132,18 +132,19 @@ module.exports = function(grunt) {
                     };
             })(),
 
-            assemblePagesTarget: {} // an assemble container for my workaround
+            assemblePagesTarget : {},    // an assemble container for my workaround
+            watchForDistribution : false // watch task output to _dest or not
         },
 
         /*
             can optionally pass options to load-grunt-tasks/ jit-grunt. If set false,
             it will disable auto loading tasks. (Use jit for slight performance boost)
         */
-        jitGrunt: {
-            assemble: 'assemble'
+        jitGrunt : {
+            assemble : 'assemble'
         },
 
-        postProcess: function(config) {} //can post process config object before it gets passed to grunt
+        postProcess : function(config) {} //can post process config object before it gets passed to grunt
     });
 
 };
