@@ -1,7 +1,7 @@
-<div id="{{ settings.prefix ~}}-nav-wrp">
+<div id="{{ set.prefix ~}}-nav-wrp">
     <nav>
-        <ul class="{{ settings.prefix ~}}-mainmenu sf-menu">
-            {{#each settings.mainMenu ~}}
+        <ul class="{{ set.prefix ~}}-mainmenu sf-menu">
+            {{#each set.mainMenu ~}}
                 <li {{#if this.parent ~}}class="parent"{{/if ~}}><a {{#is ../yfm.slug this.slug ~}}class="active"{{/is ~}} href="{{this.link}}">{{this.title}}</a>
                     {{#if this.parent ~}}
                     <ul>

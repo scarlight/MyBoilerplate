@@ -327,3 +327,177 @@ div.wpcf7 img.ajax-loader
     float:left;
 }
 */
+
+/*
+// responsive sample
+
+// Mixin
+.responsive(@maxWidth; @rules) {
+    .fatush{
+        @rules();
+    }
+
+    @media only screen and (max-width: @maxWidth) {
+        @rules();
+    }
+
+    @media screen and (min-width: 1200) { @rules(); }
+    & html.lt-ie9                       { @rules(); }
+    html.lt-ie9 &                       { @rules(); }
+}
+
+// Usage
+.bacon {
+    width: 100%;
+
+    .responsive(450px,
+        {
+            float: left;
+            margin-top: 10px;
+        }
+    );
+}
+
+*/
+
+
+/*********************************************************************************************************
+* START MAIN NAVIGATION.
+*********************************************************************************************************/
+// LESS cannot call mixin or create mixin dynamically using variable interpolation
+#@{prefix}-nav-wrp
+{
+    // color setting
+    @main-color: blue;
+    @secondary-color: white;
+    @background-color1: red;
+    @background-color2: yellow;
+
+    // same font size
+    @menu-font-size: 14px;
+    @menu-font-weight: 600;
+    @menu-a-height:42px; // not using directly
+    @calculate-line-height: ( 42/14 ); // ( @menu-a-height / @menu-font-size )
+
+    &:extend(.reset);
+    width:auto; //auto wrap around the child container
+    height:auto;
+    background-color: @background-color1;
+    // add padding, margin or background as you like
+
+    // grouped settings
+    @_nav: {
+        &:extend(.reset);
+        width: auto;
+        height:auto;
+        line-height:0;
+    };
+    @_ul: {
+        &:extend(.reset);
+        display:inline-block;
+        list-style-type:none;
+        list-style-position:outside;
+        background-color:@background-color2;
+    };
+    @_ul_li: {
+        &:extend(.reset);
+        display:inline-block;
+        float:left;
+    };
+    @_cascade_hover_on_li: {
+        background-color: @background-color2;
+    };
+    @_parent_class_li_a: {
+        color: @secondary-color;
+        //prevent background-color here to have @{prefix}_cascade_hover_on_li working
+    };
+    @_nested_ul: {
+        #wrap > .vabsolute();
+        width:auto;
+        height:auto;
+        background-color: @background-color2;
+        z-index:200;
+    };
+    @_nested_ul_li: {
+        &:extend(.reset);
+        width:100%;
+        height:auto;
+    };
+    @_nested_ul_li_a: {
+        &:extend(.reset);
+        width: 100%;
+        height:auto;
+        font-size: @menu-font-size;
+        font-weight:@menu-font-weight;
+        text-align:left;
+        color: @main-color;
+        line-height:@calculate-line-height;
+        padding:0 14px;
+        #transition > .all(@duration:150ms, @ease:ease-out);
+        &:hover {
+            color: @secondary-color;
+            background-color: @background-color1;
+        }
+    };
+    @_for_a: {
+        &:extend(.reset);
+        display:inline-block;
+        width: auto;
+        height:auto;
+        font-size: @menu-font-size;
+        font-weight:@menu-font-weight;
+        text-align:left;
+        text-decoration: none;
+        color: @main-color;
+        line-height:@calculate-line-height;
+        padding:0 14px;
+        #transition > .all(@duration:150ms, @ease:ease-out);
+        &:hover {
+            text-decoration: none;
+            color: @secondary-color;
+            background-color: @background-color2;
+        }
+    };
+
+    // -----------------------------------------------------
+
+    nav
+    {
+        @_nav();
+        ul
+        {
+            @_ul();
+            li
+            {
+                @_ul_li();
+                a
+                {
+                    @_for_a();
+                }
+                ul
+                {
+                    @_nested_ul();
+                    li
+                    {
+                        @_nested_ul_li();
+                        a
+                        {
+                            @_nested_ul_li_a();
+                        }
+                    }
+                    ul{
+                        top: 0px;
+                    }
+                }
+            }
+        }
+        li.sfHover
+        {
+            @_cascade_hover_on_li();
+            > a
+            {
+                @_parent_class_li_a();
+            }
+        }
+    }
+}

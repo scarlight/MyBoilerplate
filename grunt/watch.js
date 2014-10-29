@@ -158,7 +158,7 @@ module.exports = function (grunt, options) {
         assembleLessConfig: {
             files: [ options.src.hbs.less + '/lessConfig.hbs' ],
             tasks: [
-                'newer:assemble:lessConfig' // compile out a less configuration from settings.yaml.
+                'newer:assemble:lessConfig' // compile out a less configuration from set.yaml.
             ]
         },
 

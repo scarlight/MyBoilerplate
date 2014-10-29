@@ -11,13 +11,13 @@ module.exports.register = function (Handlebars, options, parameters) {
 
         // its complicated to change string to do obj notation : http://stackoverflow.com/questions/6393943/convert-javascript-string-in-dot-notation-into-an-object-reference
         if( 'index' === this.yfm.slug ){
-            return this.settings.index.title;
+            return this.set.index.title;
         }
         else if( 'about-us' === this.yfm.slug ){
-            return this.settings.about.title;
+            return this.set.about.title;
         }
         else {
-            return this.settings.defaultTitle;
+            return this.set.defaultTitle;
         }
     });
 };

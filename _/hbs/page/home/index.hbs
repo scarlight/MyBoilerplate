@@ -17,17 +17,17 @@ yfm:
         <div id="browser-wrapper">
             <div id="main-wrapper">
                 <div id="viewport-wrapper">
-                    <div id="{{ settings.prefix ~}}-header-wrp">
-                        <div id="{{ settings.prefix ~}}-header">
-                            <div id="{{ settings.prefix ~}}-company-logo">
-                                <h1>{{ settings.companyName ~}}<a title="{{ settings.companyName ~}}" rel="home" href="index.php"><span></span></a></h1>
+                    <div id="{{ set.prefix ~}}-header-wrp">
+                        <div id="{{ set.prefix ~}}-header">
+                            <div id="{{ set.prefix ~}}-company-logo">
+                                <h1>{{ set.companyName ~}}<a title="{{ set.companyName ~}}" rel="home" href="index.php"><span></span></a></h1>
                             </div>
                             <div class="clear"></div>
                         </div>
                         {{> mainMenu this ~}}
                     </div>
-                    <div id="{{ settings.prefix ~}}-body-wrp">
-                        <div id="{{ settings.prefix ~}}-body">
+                    <div id="{{ set.prefix ~}}-body-wrp">
+                        <div id="{{ set.prefix ~}}-body">
                             {{> bodySampleContent ~}}
                         </div>
                         <div class="clear"></div>
