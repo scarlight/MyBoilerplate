@@ -43,7 +43,7 @@ module.exports = function(grunt) {
                     include = dev  + '/include',
                     vendor  = dev  + '/vendors', // like a christmas tree, you just grab the value for use!
 
-                    hbs = (function(){            // we going to use handlebar.js with assemble to compile html
+                    hbs = (function(){           // we going to use handlebar.js with assemble to compile html
                         var path = dev  + '/hbs';
                         return {
                             path    : path,
@@ -78,15 +78,17 @@ module.exports = function(grunt) {
                     js      = path + '/js',
                     css     = path + '/css',
                     font    = path + '/fonts',
-                    image   = path + '/images';
+                    image   = path + '/images',
+                    include = path + '/include';
 
                 return {
                     // key : value
-                    path   : path,
-                    js     : js,
-                    css    : css,
-                    font   : font,
-                    image  : image
+                    path    : path,
+                    js      : js,
+                    css     : css,
+                    font    : font,
+                    image   : image,
+                    include : include
                 };
             })(),
 
@@ -96,15 +98,17 @@ module.exports = function(grunt) {
                     js      = dist + '/js',
                     css     = dist + '/css',
                     font    = dist + '/fonts',
-                    image   = dist + '/images';
+                    image   = dist + '/images',
+                    include = dist + '/include';
 
                 return {
-                    // key : value
-                    dist   : dist,
-                    js     : js,
-                    css    : css,
-                    font   : font,
-                    image  : image,
+                     // key : value
+                    dist    : dist,
+                    js      : js,
+                    css     : css,
+                    font    : font,
+                    image   : image,
+                    include : include
                 };
             })(),
 
@@ -138,10 +142,13 @@ module.exports = function(grunt) {
 
         /*
             can optionally pass options to load-grunt-tasks/ jit-grunt. If set false,
-            it will disable auto loading tasks. (Use jit for slight performance boost)
+            it will disable auto loading tasks. (Use jit for slightly more performance boost)
         */
         jitGrunt : {
-            assemble : 'assemble'
+            staticMappings: {
+                assemble : 'assemble',
+                comments : 'grunt-stripcomments',
+            }
         },
 
         postProcess : function(config) {} //can post process config object before it gets passed to grunt

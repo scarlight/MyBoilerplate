@@ -29,25 +29,29 @@ module.exports = function (grunt, options) {
             htmlTask,
             lessCompile,
             jsCompile,
+            includeFolder,
             imageTask;
 
         if( options.watchForDistribution ) {
-            htmlTask    = 'newer:htmlmin:html';
-            lessCompile = 'newer:cssmin:productionCSS';
-            jsCompile   = 'newer:uglify:jsBuild';
-            imageTask   = 'newer:imagemin:minImages';
+            htmlTask      = 'newer:htmlmin:html';
+            lessCompile   = 'newer:cssmin:productionCSS';
+            jsCompile     = 'newer:uglify:jsBuild';
+            includeFolder = 'newer:copy:includeToFolder';
+            imageTask     = 'newer:imagemin:minImages';
         } else {
-            htmlTask    = '';
-            lessCompile = '';
-            jsCompile   = '';
-            imageTask   = '';
+            htmlTask      = '';
+            lessCompile   = '';
+            jsCompile     = '';
+            includeFolder = '';
+            imageTask     = '';
         }
 
         return {
-            htmlTask    : htmlTask,
-            lessCompile : lessCompile,
-            jsCompile   : jsCompile,
-            imageTask   : imageTask
+            htmlTask      : htmlTask,
+            lessCompile   : lessCompile,
+            jsCompile     : jsCompile,
+            includeFolder : includeFolder,
+            imageTask     : imageTask
         };
     })();
 
@@ -79,8 +83,8 @@ module.exports = function (grunt, options) {
                 spawn: true
             },
             files: [
-                options.build.path + '/**/*',
-                options.dest.dist + '/**/*',
+                options.build.path + '/**/*', /* 'include' & 'font' folder will livereload twice as both _build & _dest receives the new change */
+                options.dest.dist + '/**/*',  /* 'include' & 'font' folder will livereload twice as both _build & _dest receives the new change */
                 wordpressTask.wpWatch,
             ],
         },
@@ -102,17 +106,17 @@ module.exports = function (grunt, options) {
         htmlTask: {
             files: [ options.src.html + '/*.html' ],
             tasks: [
-                'newer:copy:htmlToBuild',  /* #1 [■] SOURCE MONITORING : copy html from _ to _build                                 */
-                watchDest.htmlTask         /* #2 [■] BUILD MONITORING  : once src html is updated, do a minified version into _dest */
+                'newer:copy:htmlToBuild', /* #1 [■] SOURCE MONITORING : copy html from _ to _build                                 */
+                watchDest.htmlTask        /* #2 [■] BUILD MONITORING  : once src html is updated, do a minified version into _dest */
             ]
         },
 
         lessCompile: {
             files: [ options.src.less + '/**/*.less' ],
             tasks: [
-                'newer:less:build',        /* #1 [■] SOURCE MONITORING : preprocess less from _ to _build                  */
-                watchDest.lessCompile,     /* #2 [■] BUILD MONITORING  : when css build files updated, cssmin to _dest/css */
-                wordpressTask.wpCSS        /* #2 [■] BUILD MONITORING  : copy the min css from dest to wordpress/css       */
+                'newer:less:build',    /* #1 [■] SOURCE MONITORING : preprocess less from _ to _build                  */
+                watchDest.lessCompile, /* #2 [■] BUILD MONITORING  : when css build files updated, cssmin to _dest/css */
+                wordpressTask.wpCSS    /* #2 [■] BUILD MONITORING  : copy the min css from dest to wordpress/css       */
             ]
         },
 
@@ -120,9 +124,9 @@ module.exports = function (grunt, options) {
             files: [ options.src.js + '/*.js' ],
             tasks: [
                 'jshint:jsSrc',
-                'newer:copy:jsToBuild',    /* #1 [■] SOURCE MONITORING : copy js from _ to _build                       */
-                watchDest.jsCompile,       /* #2 [■] BUILD MONITORING  : uglify the _build/js into _dest/js             */
-                wordpressTask.wpJS         /* #2 [■] BUILD MONITORING  : copy the uglified JS from dest to wordpress/js */
+                'newer:copy:jsToBuild', /* #1 [■] SOURCE MONITORING : copy js from _ to _build                       */
+                watchDest.jsCompile,    /* #2 [■] BUILD MONITORING  : uglify the _build/js into _dest/js             */
+                wordpressTask.wpJS      /* #2 [■] BUILD MONITORING  : copy the uglified JS from dest to wordpress/js */
             ]
         },
 
@@ -143,8 +147,16 @@ module.exports = function (grunt, options) {
         fontToBuild: {
             files: [ options.src.font + '/**' ],
             tasks: [
-                'newer:copy:fontToFolder', /* #1 [■] SOURCE MONITORING : copy font from _/font to _build/fonts & _dest/fonts (no special operation needed) */
-                wordpressTask.wpFont       /* #1 [■] SOURCE MONITORING : copy font from _/font to wordpress/fonts (no special operation needed)            */
+                'newer:copy:fontToFolder', /* #1 [■] SOURCE MONITORING : copy font from _/font to _build/fonts & _dest/fonts (no special operation needed, but should be split to individual copy task if there is any) */
+                wordpressTask.wpFont       /* #1 [■] SOURCE MONITORING : copy font from _/font to wordpress/fonts (no special operation needed)                                                                         */
+            ]
+        },
+
+        includeFolder: {
+            files: [ options.src.include + '/**/*', '!' + options.src.include + '/kiv/**' ],
+            tasks: [
+                'newer:copy:includeToFolder', /* #1 [■] SOURCE MONITORING : copy php/files from _/include to _build/include & _dest/include (no special operation needed, but should be split to individual copy task if there is any) */
+                'newer:comments:includePHP'   /* #2 [■] DEST MONITORING   : remove comments from php files in the include folder                                                                                                       */
             ]
         },
 
@@ -158,7 +170,7 @@ module.exports = function (grunt, options) {
         assembleLessConfig: {
             files: [ options.src.hbs.less + '/lessConfig.hbs' ],
             tasks: [
-                'newer:assemble:lessConfig' // compile out a less configuration from set.yaml.
+                'newer:assemble:lessConfig' // compile out a less configuration from set.yml.
             ]
         },
 

@@ -5,13 +5,11 @@ module.exports = function (grunt, options) {
 
     // return object
     var thisTarget = {
-        src:
-        [
-            options.src.js + '/*.js',
-      '!' + options.src.js + '/pace.min.js',
-      '!' + options.src.js + '/lib.js',
-      '!' + options.src.js + '/modernizr.js'
-        ]
+        options: {
+            singleline: true,
+            multiline: true
+        },
+        src: [ options.dest.include + '/**/*.php' ]
     };
 
     return thisTarget;
