@@ -22,6 +22,7 @@ module.exports = function(grunt, options){
         vendorLibrary.push('copy:'+targetName);
     });
     // add additional task after 'copy' task
+    vendorLibrary.push('copy:addJsModernizr');
     vendorLibrary.push('concat');
     vendorLibrary.push('assemble:lessConfig');
 

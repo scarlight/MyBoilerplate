@@ -8,7 +8,8 @@ module.exports = function (grunt, options) {
         src:
         [
             options.src.js + '/*.js',
-      '!' + options.src.js + '/lib.js'
+      '!' + options.src.js + '/lib.js',
+      '!' + options.src.js + '/modernizr.js'
         ]
     };
 

@@ -4,14 +4,12 @@
 * @import statement has a bug when used in variable interpolation
 * discussed here: http://stackoverflow.com/questions/10676628/less-css-import-path-from-variable
 *********************************************************************************************************/
-
 @import "../vendors/less-elements/elements.less"; //ver:0.8 - https://github.com/Oreolek/elements
 @import "own/lessConfig.less";
 @import "own/template-mixin.less";
 @import "own/colorcode.less";
 @import "own/extra-elements.less"; // so much better with namespace
 @import "own/bootstrap-custom.less";
-// @import (less) "../vendors/animate-css/animate.min.css"; //use it if needed https://daneden.me/animate/
 
 html[data-useragent*='MSIE 10.0'] {} //sample css to target ie10; must add the javascript part to work
 
@@ -19,6 +17,7 @@ html[data-useragent*='MSIE 10.0'] {} //sample css to target ie10; must add the j
 /*********************************************************************************************************
 * TEMPLATE GLOBAL VARIABLES.
 *********************************************************************************************************/
+@oilpaper: { /* .oilpaper("index.png"); */ };
 @full-browser-width: 100%;
 @full-browser-height: 100%;
 @viewport-width: 100%;
@@ -64,7 +63,7 @@ html, body { height:100%; color: @template-base-color; }
     min-height     : @full-browser-height;
 }
 #main-wrapper{
-    .oilpaper("index.png");
+    @oilpaper();
     &:extend(.reset, .center);
     width          : @full-browser-width;
     min-width      : @full-browser-width;
@@ -80,8 +79,7 @@ html, body { height:100%; color: @template-base-color; }
     padding-bottom : 60px; //modify - optional if you need fixed footer (must match the footer height)
 
     // for wordpress content to ensure image don't flow out of the content
-    p img, div img, li img,
-    canvas, iframe, video, svg
+    p img, div img, li img, canvas, iframe, video, svg
     {
         max-width: 100%;
     }
@@ -110,7 +108,7 @@ html, body { height:100%; color: @template-base-color; }
 
     .bg(18, 'blue');
 
-    h1{
+    div{
         &:extend(.reset);
         line-height:0;
         text-indent:-99999px;
@@ -365,6 +363,7 @@ div.wpcf7 img.ajax-loader
 * START MAIN NAVIGATION.
 *********************************************************************************************************/
 // LESS cannot call mixin or create mixin dynamically using variable interpolation
+// :extend is not working inside the detached ruleset, so no choice just use back mixin
 #@{prefix}-nav-wrp
 {
     // color setting
@@ -379,51 +378,59 @@ div.wpcf7 img.ajax-loader
     @menu-a-height:42px; // not using directly
     @calculate-line-height: ( 42/14 ); // ( @menu-a-height / @menu-font-size )
 
-    &:extend(.reset);
-    width:auto; //auto wrap around the child container
-    height:auto;
-    background-color: @background-color1;
-    // add padding, margin or background as you like
-
     // grouped settings
-    @_nav: {
+    ._nav_wrp() {
+        &:extend(.reset);
+        width:auto; //auto wrap around the child container
+        height:auto;
+        background-color: @background-color1;
+        // add padding, margin or background as you like
+    }
+    ._nav() {
         &:extend(.reset);
         width: auto;
         height:auto;
         line-height:0;
-    };
-    @_ul: {
+    }
+    ._ul() {
         &:extend(.reset);
+        #wrap > .void();                     // theme.css has some defaults for ul and it needs to be removed.
         display:inline-block;
         list-style-type:none;
         list-style-position:outside;
         background-color:@background-color2;
-    };
-    @_ul_li: {
+    }
+    ._ul_li() {
         &:extend(.reset);
+        #wrap > .void();                     // theme.css has some defaults for ul and it needs to be removed.
         display:inline-block;
         float:left;
-    };
-    @_cascade_hover_on_li: {
+
+        &:nth-child(even) {
+            background-color:black;
+        }
+    }
+    ._cascade_hover_on_li() {
         background-color: @background-color2;
-    };
-    @_parent_class_li_a: {
+    }
+    ._parent_class_li_a() {
         color: @secondary-color;
         //prevent background-color here to have @{prefix}_cascade_hover_on_li working
-    };
-    @_nested_ul: {
+    }
+    ._nested_ul() {
         #wrap > .vabsolute();
         width:auto;
         height:auto;
         background-color: @background-color2;
         z-index:200;
-    };
-    @_nested_ul_li: {
+    }
+    ._nested_ul_li() {
         &:extend(.reset);
+        #wrap > .void();                     // theme.css has some defaults for ul and it needs to be removed.
         width:100%;
         height:auto;
-    };
-    @_nested_ul_li_a: {
+    }
+    ._nested_ul_li_a() {
         &:extend(.reset);
         width: 100%;
         height:auto;
@@ -438,8 +445,8 @@ div.wpcf7 img.ajax-loader
             color: @secondary-color;
             background-color: @background-color1;
         }
-    };
-    @_for_a: {
+    }
+    ._for_a() {
         &:extend(.reset);
         display:inline-block;
         width: auto;
@@ -457,32 +464,32 @@ div.wpcf7 img.ajax-loader
             color: @secondary-color;
             background-color: @background-color2;
         }
-    };
+    }
 
     // -----------------------------------------------------
-
+    ._nav_wrp();
     nav
     {
-        @_nav();
+        ._nav();
         ul
         {
-            @_ul();
+            ._ul();
             li
             {
-                @_ul_li();
+                ._ul_li();
                 a
                 {
-                    @_for_a();
+                    ._for_a();
                 }
                 ul
                 {
-                    @_nested_ul();
+                    ._nested_ul();
                     li
                     {
-                        @_nested_ul_li();
+                        ._nested_ul_li();
                         a
                         {
-                            @_nested_ul_li_a();
+                            ._nested_ul_li_a();
                         }
                     }
                     ul{
@@ -493,10 +500,10 @@ div.wpcf7 img.ajax-loader
         }
         li.sfHover
         {
-            @_cascade_hover_on_li();
+            ._cascade_hover_on_li();
             > a
             {
-                @_parent_class_li_a();
+                ._parent_class_li_a();
             }
         }
     }

@@ -2,6 +2,7 @@
 ---
 prefix: com
 companyName: COMPANYNAME
+companyNiceName: 'Company Name Sdn Bhd'
 defaultTitle: Untitled
 minJS: true
 minCSS: true

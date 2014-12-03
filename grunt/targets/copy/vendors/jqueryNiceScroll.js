@@ -9,9 +9,9 @@ module.exports = function (grunt, options) {
             { // #1
                 expand: true,
                 nonull: true,
-                cwd: options.bowerrc.directory + '/superfish/dist/js/',
-                src: [ 'superfish.min.js', 'supersubs.js' ],
-                dest: options.src.vendor + '/superfish/'
+                cwd: options.bowerrc.directory + '/jquery.nicescroll/',
+                src: [ 'jquery.nicescroll.min.js' ],
+                dest: options.src.vendor + '/jquery.nicescroll/'
             }
         ]
     };
