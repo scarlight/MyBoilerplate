@@ -29,6 +29,9 @@ module.exports = function (grunt, options) {
         // options.src.vendor + '/pace/pace.min.js', OBVIOUSLY LOAD THIS AS THE FIRST SCRIPT IN DOM.
         // options.src.vendor + '/shufflejs/jquery.shuffle.min.js',
         // options.src.vendor + '/jquery.nicescroll/jquery.nicescroll.min.js',
+        // options.src.vendor + '/jquery-form/jquery.form.js', // for jquery.validation plugin to use the ajaxSubmit feature in this plugin
+        // options.src.vendor + '/jquery.validation/jquery.validate.min.js',
+        // options.src.vendor + '/jquery.validation/additional-methods.min.js',
         // Please add modernizr.js separately as the first script to load. It suppose to lay out what it has detected for subsequent usage.
     ];
 
