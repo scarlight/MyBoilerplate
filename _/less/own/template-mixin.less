@@ -8,10 +8,10 @@
 #wrap {
     .default(@position:relative, @display:block) {
         position:@position;
-        display:@display;
+        display:@display; // All selectors default display property, override in corresponding selectors
     }
     .void() {
-        display:block; // useful to have when elements just need a void
+        display:block;    // Useful to have when elements just need a void
         margin:0;
         padding:0;
         border:0;
@@ -33,7 +33,7 @@
 // 4) On the contrary, you can have mixins inside your DECLARED RULE (workaround)
 .relative { position: relative; #wrap > .void();     }
 .absolute { position: absolute; &:extend(.relative); }
-.reset    { :extend(.relative);                      } // DEPRECATED: fallback for older less configuration
+.reset    { &:extend(.relative);                     } // DEPRECATED: fallback for older less configuration
 .fixed    { position: fixed; &:extend(.relative);    }
 .center   { margin: 0px auto;                        }
 .clear    { clear:both;                              }

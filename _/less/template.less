@@ -1,4 +1,4 @@
-@import "own/setings.less";
+@import "own/settings.less";
 
 //sample css to target ie10; must add the javascript part to work
 html[data-useragent*='MSIE 10.0'] {}
@@ -11,7 +11,7 @@ html[data-useragent*='MSIE 10.0'] {}
 @full-browser-height: 100%;
 @viewport-width: 100%;
 @working-width: 960px;
-@template-base-color: #282828; //new
+@theme-base-color: #282828; //new
 
 .txt-white { color: #ffffff; }
 a.txt-white{
@@ -39,7 +39,7 @@ a.txt-blue{
 /*********************************************************************************************************
 * CONTAINER LAYOUT FULL OR SPECIFIED, ALSO IT CAN BE MADE FIXED FOOTER IF NEEDED.
 *********************************************************************************************************/
-html, body { height:100%; color: @template-base-color; cursor: default; }
+html, body { height:100%; color: @theme-base-color; cursor: default; }
 
 #browser-wrapper{
     &:extend(.relative, .center);
@@ -207,7 +207,7 @@ html, body { height:100%; color: @template-base-color; cursor: default; }
         {
             @arguments:0 -1px 1px #cecece;
 
-            #wrap > .vabsolute(inline-block);
+            &:extend(.absolute); display:inline-block;
             content:"\f085";
             font-family:"FontAwesome";
             font-size:235px;
@@ -266,7 +266,7 @@ div.wpcf7-response-output {
 }
 span.wpcf7-not-valid-tip
 {
-    #wrap > .vabsolute(inline-block);
+    &:extend(.absolute); display:inline-block;
     width: auto;
     height: auto;
     font-size: 13px;
@@ -310,7 +310,7 @@ span.wpcf7-list-item-label {
     margin:0;
 }
 div.wpcf7 .screen-reader-response {
-    #wrap > .vabsolute();
+    &:extend(.absolute);
     overflow: hidden;
     clip: rect(1px, 1px, 1px, 1px);
     height: 1px;
@@ -414,7 +414,7 @@ div.wpcf7 img.ajax-loader
         //prevent background-color here to have @{prefix}_cascade_hover_on_li working
     }
     ._nested_ul() {
-        #wrap > .vabsolute();
+        &:extend(.absolute);
         width:auto;
         height:auto;
         background-color: @background-color2;
