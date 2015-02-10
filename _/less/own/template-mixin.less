@@ -1,3 +1,9 @@
+// http://stackoverflow.com/questions/20541306/how-to-write-a-css-hack-for-ie-11
+// http://browserstrangeness.bitbucket.org/css_hacks.html
+// http://css-tricks.com/snippets/css/style-placeholder-text/
+// It seems over clicking will highlight the label text. Disable text selection. Refer:http://stackoverflow.com/questions/826782/css-rule-to-disable-text-selection-highlighting
+// styling placeholders refer: http://css-tricks.com/snippets/css/style-placeholder-text/
+
 // #wrap adds useful namespace that is easy to remember, and is organized
 #wrap {
     .default(@position:relative, @display:block) {
@@ -5,17 +11,11 @@
         display:@display;
     }
     .void() {
+        display:block; // useful to have when elements just need a void
         margin:0;
         padding:0;
         border:0;
-    }
-    .vrelative(@display:block) {
-        .default(relative, @display);
-        .void();
-    }
-    .vabsolute(@display:block) {
-        .default(absolute, @display);
-        .void();
+        outline:0;
     }
 }
 
@@ -27,40 +27,41 @@
 }
 
 // 1) extend can be used to reduce css file size by copying all of the properties into a selector
-// 2) you must DECLARE CSS RULE if calling directly to use in extend,
+// 2) you must DECLARE THE CSS RULE if calling directly to use in extend,
 // 3) we know a mixin function does not immediately DECLARE CSS RULE, sadly if called directly into extend it wont work
-// Reference: http://lesscss.org/features/#extend-feature-reducing-css-size;
+//    Reference: http://lesscss.org/features/#extend-feature-reducing-css-size;
 // 4) On the contrary, you can have mixins inside your DECLARED RULE (workaround)
-.reset  { #wrap > .vrelative(); }
-.center { margin: 0px auto; }
-
-.clear  { clear:both; }
-.show   { display:block !important; }
-.hide   { display:none; }
-.bg-off { background:none; }
-.floatl { float:left; }
-.floatr { float:right; }
+.relative { position: relative; #wrap > .void();     }
+.absolute { position: absolute; &:extend(.relative); }
+.reset    { :extend(.relative);                      } // DEPRECATED: fallback for older less configuration
+.fixed    { position: fixed; &:extend(.relative);    }
+.center   { margin: 0px auto;                        }
+.clear    { clear:both;                              }
+.show     { display:block !important;                }
+.hide     { display:none;                            }
+.void     { #wrap > .void();                         }
+.bg-off   { background:none;                         }
+.floatl   { float:left;                              }
+.floatr   { float:right;                             }
+.floatn   { float:none;                              }
 
 // USE BACK TEXT-"ALIGNMENT" IN BOOTSTRAP TYPE.LESS. FYI it comes without"display:block;"" property
 
-// LESS: Referencing parent selectors with &
-// use align"direction" as its common in wordpress as well
+// LESS:  Referencing parent selectors with '&'
+// USAGE: use align'direction' because its used the same in wordpress css
 img
 {
     &.alignleft
     {
-        &:extend(.show);
-        &:extend(.floatl);
+        &:extend(.show, .floatl);
     }
     &.alignright
     {
-        &:extend(.show);
-        &:extend(.floatr);
+        &:extend(.show, .floatr);
     }
     &.aligncenter
     {
-        &:extend(.show);
-        margin: 0px auto;
+        &:extend(.show, .center);
     }
 }
 
@@ -82,7 +83,7 @@ ul.plain-menu
     &:extend(ul.plain);
     li
     {
-        &:extend(.reset);
+        &:extend(.relative);
         display:inline-block;
         width:auto;
         height:auto;
@@ -90,8 +91,7 @@ ul.plain-menu
 
         &:before
         {
-            &:extend(.reset);
-            position:absolute;
+            &:extend(.absolute);
             display:inline-block;
             content:"|";
             top:2px;
@@ -123,6 +123,15 @@ ul.plain-menu
     float:none;
     text-align:left; /* reset the text-align */
     margin-right:-4px; /* inline-block space fix */
+}
+
+p.linespace { margin-bottom:0; }
+.generate-p-linespace(10); //total number of loops
+.generate-p-linespace(@n, @i: 1) when (@i =< @n) { // the loop
+    p.linespace@{i}0 {
+        margin-bottom: (@i * 100px / @n);
+    }
+    .generate-p-linespace(@n, (@i + 1)); // increment loop
 }
 
 .space
@@ -286,3 +295,28 @@ ul.plain-menu
 }
 
 //pending: form-mixin //list-mixin
+/*
+
+GOAL: we want the selectors benefit from extend feature such as rule combinator and clean code
+Concerns: Cascading may not work since selectors are grouped in an unknown stack order
+
+STEPS:
+COMMON GROUND RULE is extend .relative. (&:extend(.relative);)
+
+CONTINUE USING:
+&:extend(.center); // .center may not work if subsequent margin left or right property is specified. Margin for top and bottom will not interfere.
+&:extend(.floatl);
+&:extend(.floatr);
+display:type; use this within the corresponding selector since there is too many types available
+------------------------------------------------------------------------------------------------
+
+OLD PROBLEMS
+--------
+#wrap > .vabsolute();              // SOLVED: no more rules repeating within this selector
+#wrap > .vabsolute(inline-block);  // SOLVED: no more rules repeating within this selector even when there is variation
+#wrap > .vrelative();              // SOLVED: no more rules repeating within this selector
+#wrap > .vrelative(inline-block);  // SOLVED: no more rules repeating within this selector even when there is variation
+
+position:fixed; // Can handle also
+
+*/

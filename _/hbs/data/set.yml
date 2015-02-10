@@ -1,6 +1,7 @@
 # Don't use key name 'page' cause it can get confusing when used with helper or partials
 ---
 prefix: com
+# no space just one word
 companyName: COMPANYNAME
 companyNiceName: 'Company Name Sdn Bhd'
 companyDomain: http://www.domain.com/

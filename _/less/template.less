@@ -1,21 +1,10 @@
-/*********************************************************************************************************
-* LESS AND CSS IMPORT.
-*
-* @import statement has a bug when used in variable interpolation
-* discussed here: http://stackoverflow.com/questions/10676628/less-css-import-path-from-variable
-*********************************************************************************************************/
-@import "../vendors/less-elements/elements.less"; //ver:0.8 - https://github.com/Oreolek/elements
-@import "own/lessConfig.less";
-@import "own/template-mixin.less";
-@import "own/colorcode.less";
-@import "own/extra-elements.less"; // so much better with namespace
-@import "own/bootstrap-custom.less";
+@import "own/setings.less";
 
-html[data-useragent*='MSIE 10.0'] {} //sample css to target ie10; must add the javascript part to work
-
+//sample css to target ie10; must add the javascript part to work
+html[data-useragent*='MSIE 10.0'] {}
 
 /*********************************************************************************************************
-* TEMPLATE GLOBAL VARIABLES.
+* TEMPLATE GLOBAL VARIABLES & OTHER MISC CSS FOR THIS TEMPLATE.
 *********************************************************************************************************/
 @oilpaper: { /* .oilpaper("index.png"); */ };
 @full-browser-width: 100%;
@@ -24,10 +13,6 @@ html[data-useragent*='MSIE 10.0'] {} //sample css to target ie10; must add the j
 @working-width: 960px;
 @template-base-color: #282828; //new
 
-
-/*********************************************************************************************************
-* OTHER MISC CSS FOR THIS TEMPLATE.
-*********************************************************************************************************/
 .txt-white { color: #ffffff; }
 a.txt-white{
     .txt-white;
@@ -45,26 +30,19 @@ a.txt-blue{
         text-decoration:underline !important;
     }
 }
-.whatcolor-text { color: #888888; }
-::selection      { background: #FFC01D; color:white; text-shadow:none; -webkit-text-stroke: 0px rgba(0,0,0,0); } // Safari & Chrome
-::-moz-selection { background: #FFC01D; color:white; text-shadow:none; } // Firefox
-p.linespace { margin-bottom:0; }
-.generate-p-linespace(10); //total number of loops
-.generate-p-linespace(@n, @i: 1) when (@i =< @n) { // the loop
-    p.linespace@{i}0 {
-        margin-bottom: (@i * 100px / @n);
-    }
-    .generate-p-linespace(@n, (@i + 1)); // increment loop
-}
+
+// http://stackoverflow.com/questions/11075474/selection-background-color-and-color-rendering-in-browsers#answer-11075672
+::selection         { background-color:rgba(255, 192, 29, 0.99); color:lighten(#000000, 50); text-shadow:none; -webkit-text-stroke: 0px rgba(0,0,0,0); } // Safari & Chrome
+::-moz-selection    { background-color:rgba(255, 192, 29, 0.99); color:lighten(#000000, 50); text-shadow:none; } // Firefox
 
 
 /*********************************************************************************************************
 * CONTAINER LAYOUT FULL OR SPECIFIED, ALSO IT CAN BE MADE FIXED FOOTER IF NEEDED.
 *********************************************************************************************************/
-html, body { height:100%; color: @template-base-color; }
+html, body { height:100%; color: @template-base-color; cursor: default; }
 
 #browser-wrapper{
-    &:extend(.reset, .center);
+    &:extend(.relative, .center);
     width          : @full-browser-width;
     min-width      : @full-browser-width;
     height         : @full-browser-height;
@@ -72,7 +50,7 @@ html, body { height:100%; color: @template-base-color; }
 }
 #main-wrapper{
     @oilpaper();
-    &:extend(.reset, .center);
+    &:extend(.relative, .center);
     width          : @full-browser-width;
     min-width      : @full-browser-width;
     height         : auto !important;
@@ -81,7 +59,7 @@ html, body { height:100%; color: @template-base-color; }
     overflow       : hidden; // be aware just incase need to remove this to give room for custom scroller
 }
 #viewport-wrapper{
-    &:extend(.reset, .center);
+    &:extend(.relative, .center);
     width          : @viewport-width;
     height         : auto;
     padding-bottom : 60px; //modify - optional if you need fixed footer (must match the footer height)
@@ -95,6 +73,8 @@ html, body { height:100%; color: @template-base-color; }
     img
     {
         box-sizing: content-box;
+        ::selection         { background-color:rgba(255, 192, 29, 0.99); color:lighten(#000000, 50); text-shadow:none; -webkit-text-stroke: 0px rgba(0,0,0,0); } // Safari & Chrome
+        ::-moz-selection    { background-color:rgba(255, 192, 29, 0.99); color:lighten(#000000, 50); text-shadow:none; } // Firefox
     }
 }
 
@@ -109,7 +89,7 @@ html, body { height:100%; color: @template-base-color; }
     @logo-height:63px;
     @logo-background:transparent url(../images/logo.png) no-repeat center center scroll;
 
-    &:extend(.reset, .floatl);
+    &:extend(.relative, .floatl);
     width:@logo-width;
     height:@logo-height;
     line-height:0;
@@ -117,18 +97,18 @@ html, body { height:100%; color: @template-base-color; }
     .bg(18, 'blue');
 
     div{
-        &:extend(.reset);
+        &:extend(.relative);
         line-height:0;
         text-indent:-99999px;
         a
         {
-            &:extend(.reset);
+            &:extend(.relative);
             line-height:0;
             font-size:1.2em;
             text-indent:0;
             span
             {
-                &:extend(.reset);
+                &:extend(.relative);
                 width:@logo-width;
                 height:@logo-height;
                 text-indent:0;
@@ -144,7 +124,7 @@ html, body { height:100%; color: @template-base-color; }
 *********************************************************************************************************/
 #@{prefix}-header-wrp
 {
-    &:extend(.reset, .center);
+    &:extend(.relative, .center);
     width:100%;
     height:auto;
 
@@ -153,7 +133,7 @@ html, body { height:100%; color: @template-base-color; }
 
 #@{prefix}-header
 {
-    &:extend(.reset, .center);
+    &:extend(.relative, .center);
     width:@working-width;
     height: auto; //modify - optional
 
@@ -162,21 +142,21 @@ html, body { height:100%; color: @template-base-color; }
 
 #@{prefix}-body-wrp
 {
-    &:extend(.reset, .center);
+    &:extend(.relative, .center);
     width:100%;
     height:auto;
 }
 
 #@{prefix}-body
 {
-    &:extend(.reset, .center);
+    &:extend(.relative, .center);
     width:@working-width;
     height:auto; //modify - optional
 }
 
 #@{prefix}-footer-wrp
 {
-    &:extend(.reset);
+    &:extend(.relative);
     position:absolute;
     width:100%;
     height:auto;
@@ -187,7 +167,7 @@ html, body { height:100%; color: @template-base-color; }
 
 #@{prefix}-footer
 {
-    &:extend(.reset, .center);
+    &:extend(.relative, .center);
     width:@working-width;
     height:30px;//modify - optional
 
@@ -200,13 +180,13 @@ html, body { height:100%; color: @template-base-color; }
 *********************************************************************************************************/
 .@{prefix}-404
 {
-    &:extend(.reset);
+    &:extend(.relative);
     margin-top:20px;
     padding-left:300px;
 
     .notice, .desc
     {
-        &:extend(.reset);
+        &:extend(.relative);
     }
     .notice
     {
@@ -250,8 +230,16 @@ html, body { height:100%; color: @template-base-color; }
 * START COPYRIGHT INFO.
 *********************************************************************************************************/
 .copyright{
-    &:extend(.reset);
+    &:extend(.relative);
     font-size:12px;
+    color: @brand-primary;
+    #transition > .all(@duration:150ms, @ease:ease);
+
+    &:hover
+    {
+        color: lighten(@brand-primary, 15);
+    }
+
     a.developed
     {
 
@@ -388,20 +376,20 @@ div.wpcf7 img.ajax-loader
 
     // grouped settings
     ._nav_wrp() {
-        &:extend(.reset);
+        &:extend(.relative);
         width:auto; //auto wrap around the child container
         height:auto;
         background-color: @background-color1;
         // add padding, margin or background as you like
     }
     ._nav() {
-        &:extend(.reset);
+        &:extend(.relative);
         width: auto;
         height:auto;
         line-height:0;
     }
     ._ul() {
-        &:extend(.reset);
+        &:extend(.relative);
         #wrap > .void();                     // theme.css has some defaults for ul and it needs to be removed.
         display:inline-block;
         list-style-type:none;
@@ -409,7 +397,7 @@ div.wpcf7 img.ajax-loader
         background-color:@background-color2;
     }
     ._ul_li() {
-        &:extend(.reset);
+        &:extend(.relative);
         #wrap > .void();                     // theme.css has some defaults for ul and it needs to be removed.
         display:inline-block;
         float:left;
@@ -433,13 +421,13 @@ div.wpcf7 img.ajax-loader
         z-index:200;
     }
     ._nested_ul_li() {
-        &:extend(.reset);
+        &:extend(.relative);
         #wrap > .void();                     // theme.css has some defaults for ul and it needs to be removed.
         width:100%;
         height:auto;
     }
     ._nested_ul_li_a() {
-        &:extend(.reset);
+        &:extend(.relative);
         width: 100%;
         height:auto;
         font-size: @menu-font-size;
@@ -455,7 +443,7 @@ div.wpcf7 img.ajax-loader
         }
     }
     ._for_a() {
-        &:extend(.reset);
+        &:extend(.relative);
         display:inline-block;
         width: auto;
         height:auto;
