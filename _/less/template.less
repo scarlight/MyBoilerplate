@@ -28,13 +28,21 @@ html[data-useragent*='MSIE 10.0'] {} //sample css to target ie10; must add the j
 /*********************************************************************************************************
 * OTHER MISC CSS FOR THIS TEMPLATE.
 *********************************************************************************************************/
-.white-text { color: #ffffff; }
-a.white-text{
-    color:#ffffff;
+.txt-white { color: #ffffff; }
+a.txt-white{
+    .txt-white;
     &:hover
     {
-        color: inherit;
-        text-decoration:underline;
+        text-decoration:underline !important;
+    }
+}
+
+.txt-blue { color: @brand-success; }
+a.txt-blue{
+    .txt-blue;
+    &:hover
+    {
+        text-decoration:underline !important;
     }
 }
 .whatcolor-text { color: #888888; }
