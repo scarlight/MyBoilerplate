@@ -3,7 +3,9 @@
 prefix: com
 companyName: COMPANYNAME
 companyNiceName: 'Company Name Sdn Bhd'
+companyDomain: http://www.domain.com/
 defaultTitle: Untitled
+# if minJS and minCSS is true, then Gruntfile.js watchForDistribution must also become true
 minJS: true
 minCSS: true
 metaTag: false
