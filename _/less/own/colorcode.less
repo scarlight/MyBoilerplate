@@ -18,8 +18,8 @@
 @gray    : #aaaaaa; // 0° 0% 67%
 @silver  : #dddddd; // 0° 0% 87%
 
-.bg( @shade, @color ){
-
+.bg( @shade, @color )
+{
     @loop:100; // total times to loop
 
     .generate-bgc( @loop, @shade, @color, 1 ); // call the loop mixin
@@ -34,7 +34,4 @@
 
     .generate-bgc( @loop, @shade, @color, ( @i + 3 ) ); // increment by 3 shades of lightness
     }
-
 }
-
-.tc(@color) {color:@@color;}

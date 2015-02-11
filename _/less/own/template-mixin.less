@@ -4,6 +4,8 @@
 // It seems over clicking will highlight the label text. Disable text selection. Refer:http://stackoverflow.com/questions/826782/css-rule-to-disable-text-selection-highlighting
 // styling placeholders refer: http://css-tricks.com/snippets/css/style-placeholder-text/
 
+
+/**********************************************************************************************************/
 // #wrap adds useful namespace that is easy to remember, and is organized
 #wrap {
     .default(@position:relative, @display:block) {
@@ -19,6 +21,7 @@
     }
 }
 
+/**********************************************************************************************************/
 .oilpaper(@filename:"index.png") {
     @path:"../_/project-psd-source/oilpaper/";
     @file:@filename;
@@ -26,14 +29,15 @@
     background: transparent url(@url) no-repeat center 0 scroll;
 }
 
-// 1) extend can be used to reduce css file size by copying all of the properties into a selector
-// 2) you must DECLARE THE CSS RULE if calling directly to use in extend,
+/**********************************************************************************************************/
+// 1) ' &:extend ' can be used to reduce css file size by copying all of the properties into a selector
+// 2) you must DECLARE THE CSS RULE if calling directly to use in ' &:extend '
 // 3) we know a mixin function does not immediately DECLARE CSS RULE, sadly if called directly into extend it wont work
 //    Reference: http://lesscss.org/features/#extend-feature-reducing-css-size;
 // 4) On the contrary, you can have mixins inside your DECLARED RULE (workaround)
 .relative { position: relative; #wrap > .void();     }
 .absolute { position: absolute; &:extend(.relative); }
-.reset    { &:extend(.relative);                     } // DEPRECATED: fallback for older less configuration
+.reset    { &:extend(.relative);                     } // DEPRECATED: fallback for my older configuration
 .fixed    { position: fixed; &:extend(.relative);    }
 .center   { margin: 0px auto;                        }
 .clear    { clear:both;                              }
@@ -47,93 +51,79 @@
 
 // USE BACK TEXT-"ALIGNMENT" IN BOOTSTRAP TYPE.LESS. FYI it comes without"display:block;"" property
 
+/**********************************************************************************************************/
 // LESS:  Referencing parent selectors with '&'
 // USAGE: use align'direction' because its used the same in wordpress css
-img
+img.align
 {
-    &.alignleft
-    {
-        &:extend(.show, .floatl);
-    }
-    &.alignright
-    {
-        &:extend(.show, .floatr);
-    }
-    &.aligncenter
-    {
-        &:extend(.show, .center);
-    }
+    &left   { &:extend(.show, .floatl); }
+    &right  { &:extend(.show, .floatr); }
+    &center { &:extend(.show, .center); }
 }
 
+/**********************************************************************************************************/
 // Changing selector order
 // Reference: http://lesscss.org/features/#parent-selectors-feature-changing-selector-order
 .plain {
-    ul&
-    {
-        list-style:none;
-        #wrap > .void();
-    }
     ol&
     {
         &:extend(ul.plain); // Extending nested Selectors - http://lesscss.org/features/#extend-feature-extending-nested-selectors
     }
-}
-ul.plain-menu
-{
-    &:extend(ul.plain);
-    li
+    ul&
     {
-        &:extend(.relative);
-        display:inline-block;
-        width:auto;
-        height:auto;
-        padding:3px 10px;
+        list-style:none;
+        list-style-position: outside;
+        #wrap > .void();
 
-        &:before
+        &-menu // .plain-menu
         {
-            &:extend(.absolute);
-            display:inline-block;
-            content:"|";
-            top:2px;
-            right:-5px;
-        }
+            &:extend(ul.plain);
+            li
+            {
+                &:extend(.relative);
+                display:inline-block;
+                width:auto;
+                height:auto;
+                padding:3px 10px;
 
-        *
-        {
-            font-size:inherit;
+                &:before
+                {
+                    &:extend(.absolute);
+                    display:inline-block;
+                    content:"|";
+                    top:2px;
+                    right:-5px;
+                }
+
+                * { font-size:inherit; }
+            }
+            li:last-child
+            {
+                &:before { display:none; }
+            }
         }
     }
-    li:last-child
-    {
-        &:before
-        {
-            display:none;
-        }
-    }
 }
 
+/**********************************************************************************************************/
 // http://www.minimit.com/articles/solutions-tutorials/bootstrap-3-responsive-centered-columns
-
-/* centered columns styles */
-.row-centered {
-    text-align:center;
-}
-.col-centered {
-    display:inline-block; /* divs work like text when displayed as inline-block */
-    float:none;
-    text-align:left; /* reset the text-align */
-    margin-right:-4px; /* inline-block space fix */
-}
-
-p.linespace { margin-bottom:0; }
-.generate-p-linespace(10); //total number of loops
-.generate-p-linespace(@n, @i: 1) when (@i =< @n) { // the loop
-    p.linespace@{i}0 {
-        margin-bottom: (@i * 100px / @n);
+// centered columns styles
+centered
+{
+    .row-&
+    {
+        text-align:center;
     }
-    .generate-p-linespace(@n, (@i + 1)); // increment loop
+    .col-&
+    {
+        display:inline-block; /* divs work like text when displayed as inline-block */
+        float:none;
+        text-align:left; /* reset the text-align */
+        margin-right:-4px; /* inline-block space fix */
+    }
 }
 
+/**********************************************************************************************************/
 .space
 {
     &-top    { margin-top:20px !important; }
@@ -142,156 +132,42 @@ p.linespace { margin-bottom:0; }
     &-left   { margin-left:20px !important; }
 }
 
-.padding
+/**********************************************************************************************************/
+@totalMP: ( 9-1 );    // 8
+.loop-mp( @totalMP ); // call the mixin with total number of loops
+.loop-mp( @n, @i: 0 ) when ( @i =< @n ) { // the loop
+
+    @j:( @i * 5 );
+
+    .margin
+    {
+        &-@{j}        { margin        : ( @i * 5px ) !important; }
+        &-top-@{j}    { margin-top    : ( @i * 5px ) !important; }
+        &-right-@{j}  { margin-right  : ( @i * 5px ) !important; }
+        &-bottom-@{j} { margin-bottom : ( @i * 5px ) !important; }
+        &-left-@{j}   { margin-left   : ( @i * 5px ) !important; }
+    }
+
+    .padding
+    {
+        &-@{j}        { padding        : ( @i * 5px ) !important; }
+        &-top-@{j}    { padding-top    : ( @i * 5px ) !important; }
+        &-right-@{j}  { padding-right  : ( @i * 5px ) !important; }
+        &-bottom-@{j} { padding-bottom : ( @i * 5px ) !important; }
+        &-left-@{j}   { padding-left   : ( @i * 5px ) !important; }
+    }
+
+.loop-mp( @n, ( @i + 1 )); // increment loop
+}
+
+/**********************************************************************************************************/
+.font
 {
-    &-0  { padding:0 !important;    }
-    &-5  { padding:5px !important;  }
-    &-10 { padding:10px !important; }
-    &-15 { padding:15px !important; }
-    &-20 { padding:20px !important; }
-    &-25 { padding:25px !important; }
-    &-30 { padding:30px !important; }
-    &-35 { padding:35px !important; }
-    &-40 { padding:40px !important; }
-}
-
-
-.padding-left
-{
-    &-0  { padding-left:0 !important;    }
-    &-5  { padding-left:5px !important;  }
-    &-10 { padding-left:10px !important; }
-    &-15 { padding-left:15px !important; }
-    &-20 { padding-left:20px !important; }
-    &-25 { padding-left:25px !important; }
-    &-30 { padding-left:30px !important; }
-    &-35 { padding-left:35px !important; }
-    &-40 { padding-left:40px !important; }
-}
-
-.padding-right
-{
-    &-0  { padding-right:0 !important;    }
-    &-5  { padding-right:5px !important;  }
-    &-10 { padding-right:10px !important; }
-    &-15 { padding-right:15px !important; }
-    &-20 { padding-right:20px !important; }
-    &-25 { padding-right:25px !important; }
-    &-30 { padding-right:30px !important; }
-    &-35 { padding-right:35px !important; }
-    &-40 { padding-right:40px !important; }
-}
-
-.padding-top
-{
-    &-0  { padding-top:0 !important;    }
-    &-5  { padding-top:5px !important;  }
-    &-10 { padding-top:10px !important; }
-    &-15 { padding-top:15px !important; }
-    &-20 { padding-top:20px !important; }
-    &-25 { padding-top:25px !important; }
-    &-30 { padding-top:30px !important; }
-    &-35 { padding-top:35px !important; }
-    &-40 { padding-top:40px !important; }
-}
-
-.padding-bottom
-{
-    &-0  { padding-bottom:0 !important;    }
-    &-5  { padding-bottom:5px !important;  }
-    &-10 { padding-bottom:10px !important; }
-    &-15 { padding-bottom:15px !important; }
-    &-20 { padding-bottom:20px !important; }
-    &-25 { padding-bottom:25px !important; }
-    &-30 { padding-bottom:30px !important; }
-    &-35 { padding-bottom:35px !important; }
-    &-40 { padding-bottom:40px !important; }
-}
-
-
-.margin
-{
-    &-0  { margin:0 !important;    }
-    &-5  { margin:5px !important;  }
-    &-10 { margin:10px !important; }
-    &-15 { margin:15px !important; }
-    &-20 { margin:20px !important; }
-    &-25 { margin:25px !important; }
-    &-30 { margin:30px !important; }
-    &-35 { margin:35px !important; }
-    &-40 { margin:40px !important; }
-}
-
-.margin-left
-{
-    &-0  { margin-left:0 !important;    }
-    &-5  { margin-left:5px !important;  }
-    &-10 { margin-left:10px !important; }
-    &-15 { margin-left:15px !important; }
-    &-20 { margin-left:20px !important; }
-    &-25 { margin-left:25px !important; }
-    &-30 { margin-left:30px !important; }
-    &-35 { margin-left:35px !important; }
-    &-40 { margin-left:40px !important; }
-}
-
-.margin-right
-{
-    &-0  { margin-right:0 !important;    }
-    &-5  { margin-right:5px !important;  }
-    &-10 { margin-right:10px !important; }
-    &-15 { margin-right:15px !important; }
-    &-20 { margin-right:20px !important; }
-    &-25 { margin-right:25px !important; }
-    &-30 { margin-right:30px !important; }
-    &-35 { margin-right:35px !important; }
-    &-40 { margin-right:40px !important; }
-}
-
-.margin-top
-{
-    &-0  { margin-top:0 !important;    }
-    &-5  { margin-top:5px !important;  }
-    &-10 { margin-top:10px !important; }
-    &-15 { margin-top:15px !important; }
-    &-20 { margin-top:20px !important; }
-    &-25 { margin-top:25px !important; }
-    &-30 { margin-top:30px !important; }
-    &-35 { margin-top:35px !important; }
-    &-40 { margin-top:40px !important; }
-}
-
-.margin-bottom
-{
-    &-0  { margin-bottom:0 !important;    }
-    &-5  { margin-bottom:5px !important;  }
-    &-10 { margin-bottom:10px !important; }
-    &-15 { margin-bottom:15px !important; }
-    &-20 { margin-bottom:20px !important; }
-    &-25 { margin-bottom:25px !important; }
-    &-30 { margin-bottom:30px !important; }
-    &-35 { margin-bottom:35px !important; }
-    &-40 { margin-bottom:40px !important; }
-}
-
-.font-xs {
-    font-size: 85% !important;
-}
-
-.font-sm {
-    font-size: 95% !important;
-}
-
-.font-md {
-    font-size: 130% !important;
-}
-
-.font-lg {
-    font-size: 160% !important;
-}
-
-.font-xl {
-    font-size: 200% !important;
+    &-xs { font-size: 85% !important; }
+    &-sm { font-size: 95% !important; }
+    &-md { font-size: 130% !important; }
+    &-lg { font-size: 160% !important; }
+    &-xl { font-size: 200% !important; }
 }
 
 //pending: form-mixin //list-mixin

@@ -12,24 +12,14 @@ html[data-useragent*='MSIE 10.0'] {}
 @viewport-width: 100%;
 @working-width: 960px;
 @theme-base-color: #282828; //new
+@theme-white: #ffffff;
 
-.txt-white { color: #ffffff; }
-a.txt-white{
-    .txt-white;
-    &:hover
-    {
-        text-decoration:underline !important;
-    }
-}
-
-.txt-blue { color: @brand-success; }
-a.txt-blue{
-    .txt-blue;
-    &:hover
-    {
-        text-decoration:underline !important;
-    }
-}
+// `:extend` to extend dynamically generated classes?
+// https://github.com/less/less.js/issues/1325
+.txt-white  { color: @theme-white; }
+a.txt-white { .txt-white; &:hover { text-decoration:underline !important; } }
+.txt-blue   { color: @brand-success; }
+a.txt-blue  { .txt-blue; &:hover { text-decoration:underline !important; } }
 
 // http://stackoverflow.com/questions/11075474/selection-background-color-and-color-rendering-in-browsers#answer-11075672
 ::selection         { background-color:rgba(255, 192, 29, 0.99); color:lighten(#000000, 50); text-shadow:none; -webkit-text-stroke: 0px rgba(0,0,0,0); } // Safari & Chrome
@@ -65,11 +55,7 @@ html, body { height:100%; color: @theme-base-color; cursor: default; }
     padding-bottom : 60px; //modify - optional if you need fixed footer (must match the footer height)
 
     // for wordpress content to ensure image don't flow out of the content
-    p img, div img, li img, canvas, iframe, video, svg
-    {
-        max-width: 100%;
-    }
-
+    p img, div img, li img, canvas, iframe, video, svg { max-width: 100%; }
     img
     {
         box-sizing: content-box;

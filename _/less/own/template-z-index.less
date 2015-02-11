@@ -2,6 +2,7 @@
 // .z-index(0,2); // z-index: 2;
 // .z-index(1,2); // z-index: 102;
 
+// This is a call per use mixin, therefore the loop is heavily conditionalized due to the number of possibilities
 .z-index( @level, @subLevel:0 )
 {
     @loop:6; // Total Amount of Levels Available!
