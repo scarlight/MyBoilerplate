@@ -16,10 +16,11 @@ html[data-useragent*='MSIE 10.0'] {}
 
 // `:extend` to extend dynamically generated classes?
 // https://github.com/less/less.js/issues/1325
+// I need to extend dynamically assigned colors but cant, though variable interpolation still works
 .txt-white  { color: @theme-white; }
-a.txt-white { .txt-white; &:hover { text-decoration:underline !important; } }
+a.txt-white { &:extend(.txt-white); &:hover { text-decoration:underline !important; } }
 .txt-blue   { color: @brand-success; }
-a.txt-blue  { .txt-blue; &:hover { text-decoration:underline !important; } }
+a.txt-blue  { &:extend(.txt-blue); &:hover { text-decoration:underline !important; } }
 
 // http://stackoverflow.com/questions/11075474/selection-background-color-and-color-rendering-in-browsers#answer-11075672
 ::selection         { background-color:rgba(255, 192, 29, 0.99); color:lighten(#000000, 50); text-shadow:none; -webkit-text-stroke: 0px rgba(0,0,0,0); } // Safari & Chrome
