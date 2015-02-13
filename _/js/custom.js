@@ -22,28 +22,54 @@
 }());
 
 var cs = jQuery.noConflict();
+cs(document).ready(function() {
+    var thisSite = {
+        config: {
+            theWindow: cs(window),
+            mainNav: cs('#COMPANYNAME-nav-wrp .sf-menu'),
+        },
 
-cs(document).ready(function(){
+        documentAgent: function()  {
+            var doc = document.documentElement;
+            doc.setAttribute('data-useragent', navigator.userAgent);
+        },
 
-    var doc = document.documentElement;
-    doc.setAttribute('data-useragent', navigator.userAgent);
-    // code goes here when document is ready
+        mainNav: function(){
+            var im = this;
+            im.config.mainNav.superfish({
+                delay:         600,
+                animation:     {height:'show'},
+                speed:         'fast',
+                cssArrows:     false
+            }).supersubs({
+                minWidth        : 10,
+                maxWidth        : 25,
+                extraWidth      : 1
+            });
+        },
 
-    cs('#COMPANYNAME-nav-wrp .sf-menu').superfish({
-        delay:         600,
-        animation:     {height:'show'},
-        speed:         'fast',
-        cssArrows:     false
-    }).supersubs({
-        minWidth        : 10,
-        maxWidth        : 25,
-        extraWidth      : 1
-    });
+        windowResize: function(){
+            var im = this;
+            im.config.theWindow.bind('resize', function() {
 
-    cs(window).load(function(){
+            });
+        },
 
-        // code goes here when window has finish loading
+        windowOnLoad: function(){
+            var im = this;
+            im.config.theWindow.load(function(){
 
-    });
+            });
+        },
 
+        init: function(){
+            var im = this;
+            this.documentAgent();
+            this.mainNav();
+            this.windowResize();
+            this.windowOnLoad();
+        },
+    };
+
+    thisSite.init();
 });
