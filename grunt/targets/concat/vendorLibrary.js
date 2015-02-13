@@ -32,6 +32,12 @@ module.exports = function (grunt, options) {
         // options.src.vendor + '/jquery-form/jquery.form.js', // for jquery.validation plugin to use the ajaxSubmit feature in this plugin
         // options.src.vendor + '/jquery.validation/jquery.validate.min.js',
         // options.src.vendor + '/jquery.validation/additional-methods.min.js',
+        // options.src.vendor + '/google-code-prettify/run_prettify.js',
+        // options.src.vendor + '/google-code-prettify/lang-css.js',
+        // options.src.vendor + '/google-code-prettify/lang-basic.js',
+        // options.src.vendor + '/google-code-prettify/lang-sql.js',
+        // options.src.vendor + '/google-code-prettify/lang-wiki.js',
+        // options.src.vendor + '/google-code-prettify/lang-yaml.js',
         // Please add modernizr.js separately as the first script to load. It suppose to lay out what it has detected for subsequent usage.
     ];
 
