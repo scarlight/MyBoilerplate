@@ -64,10 +64,15 @@ cs(document).ready(function() {
 
         init: function(){
             var im = this;
-            this.documentAgent();
-            this.mainNav();
-            this.windowResize();
-            this.windowOnLoad();
+            try{
+                this.documentAgent();
+                this.mainNav();
+                this.windowResize();
+                this.windowOnLoad();
+            }
+            catch(err) {
+                console.log(err);
+            }
         },
     };
 
