@@ -10,7 +10,7 @@ module.exports = function (grunt, options) {
                 expand: true,
                 nonull: true,
                 cwd: options.bowerrc.directory + '/google-code-prettify/src/',
-                src: [ '*.js', '!run_prettify.js' ],
+                src: [ '*.js' ],
                 dest: options.src.vendor + '/google-code-prettify/'
             }
         ]
