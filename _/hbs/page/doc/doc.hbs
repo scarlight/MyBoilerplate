@@ -1,0 +1,27 @@
+---
+#Doing prefix via object to avoid naming collision
+published: false
+yfm:
+    slug: documentation
+---
+<!doctype html>
+<html lang="en">
+    <head>
+    <title>{{ doc.title }}</title>
+    {{> docHeadMeta ~}}
+    {{> docHeadLink ~}}
+    {{> docHeadScript ~}}
+    </head>
+    <body>
+        {{> docIEBrowserWarning ~}}
+        <div id="doc-browser-wrp">
+            <div id="doc-main-wrp">
+                <div id="doc-view-wrp">
+                    {{> docLeftColumn ~}}
+                    {{> docRightColumn ~}}
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </body>
+</html>
