@@ -1,0 +1,17 @@
+<div class="group">
+    {{{ shortcodeOverview name multiEnclosed desc }}}
+
+    {{#each shortcode ~}}
+    <h4>shortcode</h4>
+    {{#showAnatomy}}{{ this.structure }}{{/showAnatomy}}
+
+    <h4>parameter</h4>
+    {{{ showParameter this.parameter }}}
+    {{/each ~}}
+
+    <h4>sample</h4>
+    {{#showAnatomy}}{{ sample }}{{/showAnatomy}}
+</div>
+<br>
+<br>
+<br>

@@ -1,0 +1,27 @@
+<div id="doc-sidebar-wrp">
+
+    <div id="doc-header-wrp">
+        <div id="doc-header">
+            <div id="doc-company-logo">
+                <h1>{{ doc.by ~}}<a title="{{ doc.by ~}}" rel="home" href="{{ doc.slug ~}}"><span></span></a></h1>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+    <div id="doc-nav-wrp">
+        <ul class="plain">
+            {{#each doc.sections}}
+            <li><a href="#{{ this.anchorID }}" title="{{ this.menuName }}">{{ this.menuName }}</a></li>
+            {{/each}}
+        </ul>
+    </div>
+
+    <div id="doc-footer-wrp">
+        <div id="doc-footer">
+            <p class="txt-white doc-copyright">{{{ footnoteCopyright }}}</p>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+</div>

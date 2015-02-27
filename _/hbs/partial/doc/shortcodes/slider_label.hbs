@@ -1,0 +1,21 @@
+---
+yfm:
+    name: Main Slider Pretty Label
+    multiEnclosed: false
+    desc: This shortcode helps to set the main slider image label with custom font.
+    shortcode:
+    -
+        structure: '[pb_slider_label pretty="Lorem" plain="ipsum"]'
+        parameter:
+        -
+            attr: pretty
+            value: text
+            desc: "Accepts a text value. Adds the custom font for the supplied text"
+        -
+            attr: plain
+            value: text
+            desc: "Accepts a text value."
+    sample: refer to above shortcode structure
+---
+
+{{> shortcode_info slider_label.yfm ~}} {{!-- partials can accept a second parameter, but thats about it --}}

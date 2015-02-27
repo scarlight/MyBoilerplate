@@ -1,0 +1,17 @@
+---
+yfm:
+    name: Email link protection
+    multiEnclosed: false
+    desc: This shortcode provide resistance against email crawling spambot.
+    shortcode:
+    -
+        structure: '[pb_email_protect email="email@domain.com"]'
+        parameter:
+        -
+            attr: email
+            value: a valid email
+            desc: "Accepts a single valid email address to be randomised with html entities."
+    sample: refer to above shortcode structure
+---
+
+{{> shortcode_info email_protect.yfm ~}} {{!-- partials can accept a second parameter, but thats about it --}}

@@ -1,0 +1,17 @@
+---
+yfm:
+    name: Content Line Spacing
+    multiEnclosed: false
+    desc: This shortcode provides a line spacing between adjacent contents.
+    shortcode:
+    -
+        structure: '[pb_spacer]'
+        parameter:
+        -
+            attr: space
+            value: 1-100
+            desc: "Accepts a numeric value from a given range. If not set, it will default to 20 automatically."
+    sample: '[pacs_spacer] or [pacs_spacer space="10"]'
+---
+
+{{> shortcode_info line_spacing.yfm ~}} {{!-- partials can accept a second parameter, but thats about it --}}

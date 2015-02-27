@@ -1,0 +1,27 @@
+<section id="documentation_cover">
+    <div class="page-header">
+        <h1>{{ doc.title ~}}</h1>
+        <h2>{{ doc.tag ~}}</h2>
+        <hr>
+    </div>
+    <table>
+        <tr>
+            <td style="width:95px; text-align:right; padding-right:15px;">created</td>
+            <td>{{ doc.created ~}}</td></tr>
+        <tr>
+            <td style="width:95px; text-align:right; padding-right:15px;">update latest</td>
+            <td>{{ now doc.updated ~}}</td></tr>
+        <tr>
+            <td style="width:95px; text-align:right; padding-right:15px;">by</td>
+            <td><a href="{{ doc.webLink ~}}">{{ doc.by ~}}</a></td></tr>
+        <tr>
+            <td style="width:95px; text-align:right; padding-right:15px;">email</td>
+            <td><a href="mailto:{{ doc.emailTo ~}}">{{ doc.emailTo ~}}</a></td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <p>
+        {{{ doc.footnote.startPage }}}
+    </p>
+</section>

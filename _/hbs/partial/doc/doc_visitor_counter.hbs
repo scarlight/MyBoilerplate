@@ -1,0 +1,36 @@
+<section id="documentation_visitor_counter">
+    <div class="page-header">
+        <h2>Visitor Counter</h2>
+        <hr>
+    </div>
+    <div>
+        <p>The visitor counter installed runs automatically in the background with no supervision needed. It uses a 24 hours elapsed system to consider any visit to the website as a unique visit. Please refer the table below.</p>
+        <p></p>
+        <table class="table">
+            <tr>
+                <th>Condition</th>
+                <th>Checking</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td>New IP detected on page load</td>
+                <td>New Visit</td>
+                <td>Counter increments</td>
+            </tr>
+            <tr>
+                <td>On page load, IP is found in DB</td>
+                <td>When last visit is more than or equals to 24 hours</td>
+                <td>Counter increments</td>
+            </tr>
+            <tr>
+                <td>On page load, IP is found in DB</td>
+                <td>Page is refereshed by the same IP less than 24 hour</td>
+                <td>Counter remains</td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <div>
+
+    </div>
+</section>

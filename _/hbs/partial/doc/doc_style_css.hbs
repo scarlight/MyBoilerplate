@@ -1,0 +1,74 @@
+---
+yfm:
+    slug  : css
+    title : CSS - Cascading Style Sheet
+    desc  : |
+        We have also provided a set of styling code called CSS (Cascading Style Sheet) that can be used when crafting pages, contents and layouts.
+    styles:
+    -
+        previewDark: false
+        element: <h1 class="head-title-lg">Large Heading</h1>
+        desc:
+        parameter:
+        -
+            attr: class
+            value: head-title-lg
+            desc: 'will display 49px font size regardless the type of heading tag used. EG: h1,h2,h3,h4,h5,h6'
+
+    advanceCSS:
+        sample: |
+            <img class="floatl" src="images/sample-gray.gif" width="200" height="100" alt="" style="margin-top:0px; margin-left:20px; margin-bottom:20px; margin-right:20px;">
+                This example shows the left image is being floated on the left with this content.
+                This content is now wrapping towards the left floated image. To stop further float from happening, a clear must be applied. EG: &lt;div class="clear"&gt;&lt;/div&gt;
+            <div class="clear"></div>
+        floatingProperty:
+            parameter:
+            -
+                attr: class
+                value: floatl
+                desc: 'This will float the current element to the left and all subsequent element will wrap towards left.'
+            -
+                attr: class
+                value: floatr
+                desc: 'This will float the current element to the right and all subsequent element will wrap towards right.'
+        stoppingFloat:
+            element: <div class="clear"></div>
+
+---
+<section id="documentation_style_css">
+    {{{ sectionHeading doc_style_css.yfm.title doc_style_css.yfm.desc }}}
+
+    <div class="alert alert-info">Besides the supplied CSS codes, users with advance CSS knowledge can further extend or override the supplied code.</div>
+    <br>
+    <div>
+        {{#each doc_style_css.yfm.styles }}
+        {{> style_info this ~}}
+        {{/each}}
+
+        <div class="group">
+            <h4>Advance CSS</h4>
+            <div class="css-preview-box">
+                <blockquote>With CSS float, an element can be pushed to the left or right, allowing other elements to wrap around it. Float is very often used for images, but it is also useful when working with layouts.</blockquote>
+                <i class="floatr">cited from: CSS Float - W3Schools</i>
+                <div class="clear"></div>
+            </div>
+            <br>
+
+            <div class="css-preview-box">
+                <img class="floatl" src="images/sample-gray.gif" width="200" height="100" alt="" style="margin-top:0px; margin-left:20px; margin-bottom:20px; margin-right:20px;">
+                This example shows the left image is being floated on the left with this content. This content is now wrapping towards the left floated image. To stop further float from happening, a clear must be applied. <br>EG: {{ doc_style_css.yfm.advanceCSS.stoppingFloat.element }}
+                <div class="clear"></div>
+            </div>
+            {{#showAnatomy}}{{ doc_style_css.yfm.advanceCSS.sample }}{{/showAnatomy}}
+            <br>
+
+            <h4>Float are used in layouts in two ways:</h4>
+            {{{showParameter doc_style_css.yfm.advanceCSS.floatingProperty.parameter }}}
+            <br>
+
+            <h4>Stopping float</h4>
+            {{#showAnatomy}}{{ doc_style_css.yfm.advanceCSS.stoppingFloat.element }}{{/showAnatomy}}
+            <p>The clear property when used after the floated element will stop further elements from floating.</p>
+        </div>
+    </div>
+</section>

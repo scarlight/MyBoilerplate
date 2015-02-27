@@ -1,0 +1,57 @@
+<div class="group">
+    <table class="doc-table-shortcode">
+        <tr>
+            <td rowspan="2"><h3>PACS Download Catalogue</h3></td>
+            <td><span>Type</span></td>
+            <td><span>Description</span></td>
+        </tr>
+        <tr>
+            <td><em>Multi Enclosed Content</em></td>
+            <td><em>This shortcode builds the download catalogue component.</em></td>
+        </tr>
+    </table>
+    <br>
+    <h4>shortcode</h4>
+    <pre class="prettyprint linenums">[pacs_catalogue] ... [/pacs_catalogue]</pre>
+    <h4>parameters</h4>
+    <table class="table doc-table-parameter">
+        <tr>
+            <th class="attribute"><span>Attribute</span></th>
+            <th class="value"><span>Value</span></th>
+            <th class="description"><span>Description</span></th>
+        </tr>
+        <tr>
+            <td class="attribute"><span>-</span></td>
+            <td class="value"><span>-</span></td>
+            <td class="description">This is a base component (must have to work properly)</td>
+        </tr>
+    </table>
+    <h4>shortcode</h4>
+    <pre class="prettyprint linenums">[pacs_catalogue_item id="" title="" link=""]</pre>
+    <h4>Parameters</h4>
+    <table class="table doc-table-parameter">
+        <tr>
+            <th class="attribute"><span>Attribute</span></th>
+            <th class="value"><span>Value</span></th>
+            <th class="description"><span>Description</span></th>
+        </tr>
+        <tr>
+            <td class="attribute"><span>id</span></td>
+            <td class="value"><span>image id</span></td>
+            <td class="description">Accepts the image ID to display a thumbnail. The image will be resized automatically to 115x150. Recommend to use an exact size image to avoid hard cropping around image corners.</td>
+        </tr>
+        <tr>
+            <td class="attribute"><span>title</span></td>
+            <td class="value"><span>text</span></td>
+            <td class="description">Add the catalogue title. Recommend to use up to 17 characters including spaces to maintain overall style/ layout position.</td>
+        </tr>
+        <tr>
+            <td class="attribute"><span>link</span></td>
+            <td class="value"><span>URL</span></td>
+            <td class="description">Add the download URL to the PDF. This URL can be found in the Media menu.</td>
+        </tr>
+    </table>
+    <h4>sample</h4>
+    <pre class="prettyprint linenums">[pacs_catalogue]<br>[pacs_catalogue_item id="82" title="Catalogue 1" link="http://www.pacs.com/wp-content/uploads/2014/09/pacs.pdf"]<br>[pacs_catalogue_item id="82" title="Catalogue 2" link="http://www.pacs.com/wp-content/uploads/2014/09/pacs.pdf"]<br>[pacs_catalogue_item id="82" title="Catalogue 3" link="http://www.pacs.com/wp-content/uploads/2014/09/pacs.pdf"]<br>[/pacs_catalogue]</pre>
+    <hr><br>
+</div>

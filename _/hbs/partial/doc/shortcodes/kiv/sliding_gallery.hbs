@@ -1,0 +1,67 @@
+<div class="group">
+    <table class="doc-table-shortcode">
+        <tr>
+            <td rowspan="2"><h3>PACS Sliding Gallery</h3></td>
+            <td><span>Type</span></td>
+            <td><span>Description</span></td>
+        </tr>
+        <tr>
+            <td><em>Multi Enclosed Content</em></td>
+            <td><em>This shortcode builds a custom gallery with date, event and carousel(slider).</em></td>
+        </tr>
+    </table>
+    <br>
+    <h4>shortcode</h4>
+    <pre class="prettyprint linenums">[pacs_slider_gallery] ... [/pacs_slider_gallery]</pre>
+    <h4>parameters</h4>
+    <table class="table doc-table-parameter">
+        <tr>
+            <th class="attribute"><span>Attribute</span></th>
+            <th class="value"><span>Value</span></th>
+            <th class="description"><span>Description</span></th>
+        </tr>
+        <tr>
+            <td class="attribute"><span>-</span></td>
+            <td class="value"><span>-</span></td>
+            <td class="description">This is a base component (must have to work properly)</td>
+        </tr>
+    </table>
+    <h4>shortcode</h4>
+    <pre class="prettyprint linenums">[pacs_slider_gallery_item date="" event=""] ... [/pacs_slider_gallery_item]</pre>
+    <h4>parameters</h4>
+    <table class="table doc-table-parameter">
+        <tr>
+            <th class="attribute"><span>Attribute</span></th>
+            <th class="value"><span>Value</span></th>
+            <th class="description"><span>Description</span></th>
+        </tr>
+        <tr>
+            <td class="attribute"><span>date</span></td>
+            <td class="value"><span>text</span></td>
+            <td class="description">Add the event date</td>
+        </tr>
+        <tr>
+            <td class="attribute"><span>event</span></td>
+            <td class="value"><span>text</span></td>
+            <td class="description">Add the event title</td>
+        </tr>
+    </table>
+    <h4>shortcode</h4>
+    <pre class="prettyprint linenums">[caroufredsel id="123"]</pre>
+    <h4>parameters</h4>
+    <table class="table doc-table-parameter">
+        <tr>
+            <th class="attribute"><span>Attribute</span></th>
+            <th class="value"><span>Value</span></th>
+            <th class="description"><span>Description</span></th>
+        </tr>
+        <tr>
+            <td class="attribute"><span>id</span></td>
+            <td class="value"><span>number</span></td>
+            <td class="description">Add the carousel id created from Caroufredsel menu</td>
+        </tr>
+    </table>
+    <h4>sample</h4>
+    <pre class="prettyprint linenums">[pacs_slider_gallery]<br>[pacs_slider_gallery_item date="1 December 2013" event="Annual Dinner"][caroufredsel id="123"][/pacs_slider_gallery_item]<br>[pacs_slider_gallery_item date="1 December 2014" event="Annual Dinner"][caroufredsel id="456"][/pacs_slider_gallery_item]<br>[/pacs_slider_gallery]</pre>
+    <hr><br>
+</div>
