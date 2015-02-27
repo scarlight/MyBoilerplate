@@ -32,12 +32,17 @@ module.exports = function (grunt, options) {
         // options.src.vendor + '/jquery-form/jquery.form.js', // for jquery.validation plugin to use the ajaxSubmit feature in this plugin
         // options.src.vendor + '/jquery.validation/jquery.validate.min.js',
         // options.src.vendor + '/jquery.validation/additional-methods.min.js',
-        // options.src.vendor + '/google-code-prettify/run_prettify.js',
+        // options.src.vendor + '/google-code-prettify/prettify.js',
         // options.src.vendor + '/google-code-prettify/lang-css.js',
         // options.src.vendor + '/google-code-prettify/lang-basic.js',
         // options.src.vendor + '/google-code-prettify/lang-sql.js',
         // options.src.vendor + '/google-code-prettify/lang-wiki.js',
         // options.src.vendor + '/google-code-prettify/lang-yaml.js',
+        // options.src.vendor + '/prism/prism.js',
+        // options.src.vendor + '/prism/plugins/highlight-keywords/prism-highlight-keywords.min.js',
+        // options.src.vendor + '/prism/plugins/line-highlight/prism-line-highlight.min.js', // prism-line-highlight.css
+        // options.src.vendor + '/prism/plugins/line-numbers/prism-line-numbers.min.js', // get the css prism-line-numbers.css
+        // options.src.vendor + '/prism/plugins/...more',
         // Please add modernizr.js separately as the first script to load. It suppose to lay out what it has detected for subsequent usage.
     ];
 

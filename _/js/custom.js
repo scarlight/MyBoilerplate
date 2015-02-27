@@ -58,7 +58,7 @@ cs(document).ready(function() {
         windowOnLoad: function(){
             var im = this;
             im.config.theWindow.load(function(){
-
+                prettyPrint();
             });
         },
 
