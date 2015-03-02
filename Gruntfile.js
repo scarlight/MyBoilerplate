@@ -3,7 +3,6 @@ module.exports = function(grunt) {
     'use strict';
     grunt.util.linefeed = '\n';       // Force use of Unix newlines. Copied unashamedly from Bootstrap Gruntfile.js
 
-    // + add grunt include for html building
     // -> find a way using grunt to remove all php & html comment block when pushed as production code (wordpress)
 
     require( 'time-grunt' )( grunt ); // measures the time each task takes
@@ -26,10 +25,10 @@ module.exports = function(grunt) {
                          '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= package.author.name %>' +
                          '<%= package.license ? "\\n* Licensed under" + package.license + "( " + package.license.url + " ) */\\n" : "\\n*/\\n" %>',
             nodeModule : 'node_modules',
-            /*
-                # we must provide key pair value therefore we can use anonymous self invoking function to return it.
-                # (closure phenomenon - preserves local scope when otherwise with an added ability of using function)
-            */
+            /**
+             * we must provide key pair value therefore we can use anonymous self invoking function to return it.
+             * (closure phenomenon - preserves local scope when otherwise with an added ability of using function)
+             */
             src : (function(){ // this paths are also suitable for source control.
                 var
                     grunt   = 'grunt',
@@ -140,10 +139,10 @@ module.exports = function(grunt) {
             watchForDistribution : false // watch task output to _dest or not
         },
 
-        /*
-            can optionally pass options to load-grunt-tasks/ jit-grunt. If set false,
-            it will disable auto loading tasks. (Use jit for slightly more performance boost)
-        */
+        /**
+         * can optionally pass options to load-grunt-tasks/ jit-grunt. If set false,
+         * it will disable auto loading tasks. (Use jit for slightly more performance boost)
+         */
         jitGrunt : {
             staticMappings: {
                 assemble : 'assemble',
