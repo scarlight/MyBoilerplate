@@ -414,7 +414,7 @@ html, body { height:100%; line-height: @doc-line-height; }
 *********************************************************************************************************/
 .css-preview-box, .css-preview-box-dark
 {
-    padding:20px;
+    padding:30px 20px;
     background-color:#ffffff;
     border: solid 1px transparent;
     #border > .rounded(@radius: 3px);
@@ -425,7 +425,7 @@ html, body { height:100%; line-height: @doc-line-height; }
     {
         &:extend(.absolute);
         content: "preview";
-        margin-top: -19px;
+        margin-top: -30px;
         margin-left: -15px;
         color: #E4DEDE;
         font-size:11px;
@@ -599,3 +599,6 @@ html, body { height:100%; line-height: @doc-line-height; }
 /*********************************************************************************************************
 * ALL THE STYLES USER CAN USE IN THE CMS.
 *********************************************************************************************************/
+div[class^="css-preview-box"] {
+
+}
