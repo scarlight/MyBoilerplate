@@ -10,11 +10,11 @@ module.exports = function(grunt) {
     var path = require('path');
 
     require('load-grunt-config')( grunt, {
-        /*
-            # path to task.js files, defaults to grunt dir.
-            # 'configPath' accepts a single path, we can have each task.js to require for their target from the targets folder
-            # NOTE: each task.js files actually returns its target:value back to Grunt
-        */
+        /**
+         * path to task.js files, defaults to grunt dir.
+         * 'configPath' accepts a single path, we can have each task.js to require for their target from the targets folder
+         * NOTE: each task.js files actually returns its target:value back to Grunt
+         */
         configPath     : path.join(process.cwd(), 'grunt'),
         init           : true,                              // do auto grunt.initConfig
         data           : {                                  // data passed into config.
