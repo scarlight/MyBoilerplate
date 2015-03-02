@@ -1,16 +1,32 @@
 <div class="group">
-    {{{ shortcodeOverview name multiEnclosed desc }}}
+    {{#if header}}
+    <h3>{{{ header }}}</h3>
+    {{/if}}
 
-    {{#each shortcode ~}}
-    <h4>shortcode</h4>
-    {{#showAnatomy}}{{ this.structure }}{{/showAnatomy}}
+    {{#if desc}}
+    <p>{{{ desc }}}</p>
+    {{/if}}
+
+    <h4>element</h4>
+    {{#showAnatomy}}{{ element }}{{/showAnatomy}}
 
     <h4>parameter</h4>
-    {{{ showParameter this.parameter }}}
-    {{/each ~}}
+    {{{ showParameter parameter }}}
 
-    <h4>sample</h4>
-    {{#showAnatomy}}{{ sample }}{{/showAnatomy}}
+    {{#if previewDark}}
+    <div class="css-preview-box-dark">
+        {{{ preview }}}
+    </div>
+    {{else}}
+    <div class="css-preview-box">
+        {{{ preview }}}
+    </div>
+    {{/if}}
+
+    {{#if remark}}
+    <hr>
+    <h5 style="display:inline-block;">Remark:</h5>&nbsp;{{{ remark }}}
+    {{/if}}
 </div>
 <br>
 <br>
