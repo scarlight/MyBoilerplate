@@ -15,7 +15,7 @@ module.exports = function (grunt, options) {
             path:
             [
                 options.src.less + '/bootstrap/less',
-                options.src.lessOwn
+                options.src.lessImport
             ],
             strictMath: true,
             dumpLineNumbers: 'comments'
