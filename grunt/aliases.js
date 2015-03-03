@@ -23,12 +23,13 @@ module.exports = function(grunt, options){
     });
     // add additional task after 'copy' task
     vendorLibrary.push('copy:addJsModernizr');
-    vendorLibrary.push('concat');
+    vendorLibrary.push('concat:vendorLibrary');
     vendorLibrary.push('assemble:lessConfig');
 
     var bankai = (function(){
         var taskSequence =
         [
+            'assemble:lessConfig',
             'assemble:mainSiteAll',
             'copy:htmlToBuild',
             'htmlmin:html',
@@ -37,7 +38,7 @@ module.exports = function(grunt, options){
             'cssmin:productionCSS',
 
             'jshint:jsSrc',
-            'concat',
+            'concat:vendorLibrary',
             'copy:jsToBuild',
             'uglify:jsBuild',
 
