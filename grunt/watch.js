@@ -55,14 +55,12 @@ module.exports = function (grunt, options) {
         };
     })();
 
-/*                  !!! IMPORTANT NOTE !!!
-    ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-    | IN DESIGNATED LOCATIONS, WATCH ON FIRST RUN MUST HAVE |
-    | AT LEAST 1 FILE TO WATCH ELSE ANY CHANGES WILL NOT    |
-    | TRIGGER THE WATCH. IDEAL CHOICE OF FILE: index.html   |
-    ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-*/
-    var watch = {
+/*                                           !!! IMPORTANT NOTE !!!
+    ┌────────────────────────────────────────■■■■■■■■■■■■■■■■■■■■■■─────────────────────────────────────────────────┐
+    │   IN DESIGNATED LOCATIONS, WATCH ON FIRST RUN MUST HAVE AT LEAST 1 FILE TO WATCH ELSE ANY CHANGES WILL NOT    │
+    │   TRIGGER THE WATCH. CURRENT IDEAL CHOICE OF FILE: index.html                                                 │
+    └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/  var watch = {
 
         livereload: {
             /*
@@ -97,26 +95,25 @@ module.exports = function (grunt, options) {
             tasks: [ 'jshint:gruntFiles' ]
         },
 
-    /*                                             #0 [■] TASK IN SEQUENCE [■]
-        ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-        | refer: https://github.com/gruntjs/grunt-contrib-watch/issues/25                                               |
-        | Due to the refered problem, add task sequentially in the array. Name the target a bit more collective         |
-        ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
-
-        htmlTask: {
+    /*                                             #0 TASK IN SEQUENCE
+        ┌──────────────────────────────────────────■■■■■■■■■■■■■■■■■■■──────────────────────────────────────────────────┐
+        │   refer: https://github.com/gruntjs/grunt-contrib-watch/issues/25                                             │
+        │   Due to the refered problem, add task sequentially in the array. Name the target a bit more collective       │
+        └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+    */  htmlTask: {
             files: [ options.src.html + '/*.html' ],
             tasks: [
-                'newer:copy:htmlToBuild', /* #1 [■] SOURCE MONITORING : copy html from _ to _build                                 */
-                watchDest.htmlTask        /* #2 [■] BUILD MONITORING  : once src html is updated, do a minified version into _dest */
+                'newer:copy:htmlToBuild', /* [#1] SOURCE MONITORING : copy html from _ to _build                                 */
+                watchDest.htmlTask        /* [#2] BUILD MONITORING  : once src html is updated, do a minified version into _dest */
             ]
         },
 
         lessCompile: {
             files: [ options.src.less + '/**/*.less' ],
             tasks: [
-                'newer:less:build',    /* #1 [■] SOURCE MONITORING : preprocess less from _ to _build                  */
-                watchDest.lessCompile, /* #2 [■] BUILD MONITORING  : when css build files updated, cssmin to _dest/css */
-                wordpressTask.wpCSS    /* #2 [■] BUILD MONITORING  : copy the min css from dest to wordpress/css       */
+                'newer:less:build',    /* [#1] SOURCE MONITORING : preprocess less from _ to _build                  */
+                watchDest.lessCompile, /* [#2] BUILD MONITORING  : when css build files updated, cssmin to _dest/css */
+                wordpressTask.wpCSS    /* [#2] BUILD MONITORING  : copy the min css from dest to wordpress/css       */
             ]
         },
 
@@ -124,39 +121,38 @@ module.exports = function (grunt, options) {
             files: [ options.src.js + '/*.js' ],
             tasks: [
                 'jshint:jsSrc',
-                'newer:copy:jsToBuild', /* #1 [■] SOURCE MONITORING : copy js from _ to _build                       */
-                watchDest.jsCompile,    /* #2 [■] BUILD MONITORING  : uglify the _build/js into _dest/js             */
-                wordpressTask.wpJS      /* #2 [■] BUILD MONITORING  : copy the uglified JS from dest to wordpress/js */
+                'newer:copy:jsToBuild', /* [#1] SOURCE MONITORING : copy js from _ to _build                       */
+                watchDest.jsCompile,    /* [#2] BUILD MONITORING  : uglify the _build/js into _dest/js             */
+                wordpressTask.wpJS      /* [#2] BUILD MONITORING  : copy the uglified JS from dest to wordpress/js */
             ]
         },
 
         imageTask: {
             files: [ options.src.image + '/**/*.{png,jpg,jpeg,gif,webp,svg}' ],
             tasks: [
-                'newer:copy:imageToBuild', /* #1 [■] SOURCE MONITORING : copy image from _ to _build              */
-                wordpressTask.wpImage,     /* #1 [■] SOURCE MONITORING : copy image from _ to wordpress/image     */
-                watchDest.imageTask        /* #2 [■] BUILD MONITORING  : minify the images inside _build to _dest */
+                'newer:copy:imageToBuild', /* [#1] SOURCE MONITORING : copy image from _ to _build              */
+                wordpressTask.wpImage,     /* [#1] SOURCE MONITORING : copy image from _ to wordpress/image     */
+                watchDest.imageTask        /* [#2] BUILD MONITORING  : minify the images inside _build to _dest */
             ]
         },
 
-    /*                                             #1 [■] SOURCE MONITORING [■]
-        ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-        |                                                       -                                                       |
-        ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
-
-        fontToBuild: {
+    /*                                                [#1] SOURCE MONITORING
+        ┌─────────────────────────────────────────────■■■■■■■■■■■■■■■■■■■■■■────────────────────────────────────────────┐
+        │                                                       -                                                       │
+        └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+    */  fontToBuild: {
             files: [ options.src.font + '/**' ],
             tasks: [
-                'newer:copy:fontToFolder', /* #1 [■] SOURCE MONITORING : copy font from _/font to _build/fonts & _dest/fonts (no special operation needed, but should be split to individual copy task if there is any) */
-                wordpressTask.wpFont       /* #1 [■] SOURCE MONITORING : copy font from _/font to wordpress/fonts (no special operation needed)                                                                         */
+                'newer:copy:fontToFolder', /* [#1] SOURCE MONITORING : copy font from _/font to _build/fonts & _dest/fonts (no special operation needed, but should be split to individual copy task if there is any) */
+                wordpressTask.wpFont       /* [#1] SOURCE MONITORING : copy font from _/font to wordpress/fonts (no special operation needed)                                                                         */
             ]
         },
 
         includeFolder: {
             files: [ options.src.include + '/**/*', '!' + options.src.include + '/kiv/**' ],
             tasks: [
-                'newer:copy:includeToFolder', /* #1 [■] SOURCE MONITORING : copy php/files from _/include to _build/include & _dest/include (no special operation needed, but should be split to individual copy task if there is any) */
-                'newer:comments:includePHP'   /* #2 [■] DEST MONITORING   : remove comments from php files in the include folder                                                                                                       */
+                'newer:copy:includeToFolder', /* [#1] SOURCE MONITORING : copy php/files from _/include to _build/include & _dest/include (no special operation needed, but should be split to individual copy task if there is any) */
+                'newer:comments:includePHP'   /* [#2] DEST MONITORING   : remove comments from php files in the include folder                                                                                                       */
             ]
         },
 
@@ -174,20 +170,21 @@ module.exports = function (grunt, options) {
             ]
         },
 
-        /*
-            # WORKAROUND: Create individual assemble targets (page) for watch to fire task individualy.
-            # SOLVED    : Page task compiles separately corresponding to its file change, whilst
-                          layout, data, helper & partial will initialize a re-compile for all the pages
-            # WHERE     : See the below self invoking function for this watch.
-        */
-
-    /*                                             #2 [■] BUILD MONITORING [■]
-        ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-        |                                                       -                                                       |
-        ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+    /*                                                [#2] BUILD MONITORING
+        ┌─────────────────────────────────────────────■■■■■■■■■■■■■■■■■■■■■─────────────────────────────────────────────┐
+        │                                                       -                                                       │
+        └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+    */
     };
 
-    // We shall create individual assemble targets for the watch then append to 'var watch' before its returned to grunt.
+/*
+    ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+    │   ASSEMBLE TASK : Create individual assemble targets for (page) so that watch could fire task individualy.    │
+    │   SOLVED        : Page task compiles separately corresponding to its file change, whilst                      │
+    │                   layout, data, helper & partial will initialize a re-compile for all the pages               │
+    │   WHERE         : See the below self invoking function for this watch.                                        │
+    └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+    We shall create individual assemble targets for the watch then append to 'var watch' before its returned to grunt.    */
     (function(){
         for (var target in options.assemblePagesTarget) {
             var
