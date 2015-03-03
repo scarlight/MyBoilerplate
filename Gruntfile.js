@@ -31,16 +31,16 @@ module.exports = function(grunt) {
              */
             src : (function(){ // this paths are also suitable for source control.
                 var
-                    grunt   = 'grunt',
-                    dev     = '_',
-                    html    = dev  + '/html',
-                    font    = dev  + '/font',
-                    image   = dev  + '/image',
-                    js      = dev  + '/js',
-                    less    = dev  + '/less',
-                    lessOwn = less + '/own',
-                    include = dev  + '/include',
-                    vendor  = dev  + '/vendors', // like a christmas tree, you just grab the value for use!
+                    grunt      = 'grunt',
+                    dev        = '_',
+                    html       = dev  + '/html',
+                    font       = dev  + '/font',
+                    image      = dev  + '/image',
+                    js         = dev  + '/js',
+                    less       = dev  + '/less',
+                    lessImport = less + '/include',
+                    include    = dev  + '/include',
+                    vendor     = dev  + '/vendors', // like a christmas tree, you just grab the value for use!
 
                     hbs = (function(){           // we going to use handlebar.js with assemble to compile html
                         var path = dev  + '/hbs';
@@ -56,18 +56,18 @@ module.exports = function(grunt) {
                     })();
 
                 return {
-                     // key : value
-                    grunt   : grunt,
-                    dev     : dev,
-                    html    : html,
-                    font    : font,
-                    image   : image,
-                    js      : js,
-                    less    : less,
-                    lessOwn : lessOwn,
-                    include : include,
-                    vendor  : vendor,
-                    hbs     : hbs
+                    // key     : value
+                    grunt      : grunt,
+                    dev        : dev,
+                    html       : html,
+                    font       : font,
+                    image      : image,
+                    js         : js,
+                    less       : less,
+                    lessImport : lessImport,
+                    include    : include,
+                    vendor     : vendor,
+                    hbs        : hbs
                 };
             })(),
 
