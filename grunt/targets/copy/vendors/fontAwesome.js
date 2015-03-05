@@ -39,7 +39,7 @@ module.exports = function (grunt, options) {
                 nonull: true,
                 cwd: options.bowerrc.directory + '/font-awesome/fonts/',
                 src: [ '*' ],
-                dest: options.dest.font
+                dest: options.dist.font
             }
         ]
     };

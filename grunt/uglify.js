@@ -5,7 +5,7 @@ module.exports = function (grunt, options) {
 
     var uglify = {
 
-        jsBuild: require('./targets/uglify/jsBuild.js')(grunt, options)  //send to dest folder
+        jsBuild: require('./targets/uglify/jsBuild.js')(grunt, options)  //send to dist folder
 
     };
 

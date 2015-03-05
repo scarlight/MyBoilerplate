@@ -16,18 +16,18 @@ module.exports = function ( grunt ) {
         output    = false,
         website   = 'website_name',
         themename = 'theme_folder_name',
-        path      = '../../../sites2/wordpress_area51/' + website + '/wp-content/themes/' + themename,
-        js        = path + '/js',
-        css       = path + '/css',
-        font      = path + '/fonts',
-        image     = path + '/images';
+        wordpress = '../../../sites2/wordpress_area51/' + website + '/wp-content/themes/' + themename,
+        js        = wordpress + '/js',
+        css       = wordpress + '/css',
+        font      = wordpress + '/fonts',
+        image     = wordpress + '/images';
 
         return {
-               // key : value
+            // key    : value
             output    : output,
             website   : website,
             themename : themename,
-            path      : path,
+            path      : wordpress,
             js        : js,
             css       : css,
             font      : font,

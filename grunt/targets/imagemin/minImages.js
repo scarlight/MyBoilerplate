@@ -10,7 +10,7 @@ module.exports = function (grunt, options) {
                 expand: true,
                 flatten: true,
                 src: options.build.image + '/**/*.{png,jpg,jpeg,gif,webp,svg}',
-                dest: options.dest.image
+                dest: options.dist.image
             }
         ]
     };

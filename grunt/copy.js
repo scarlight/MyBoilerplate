@@ -15,7 +15,7 @@ module.exports = function (grunt, options) {
             { // copy fonts to wordpress font folder
                 expand: true,
                 nonull: true,
-                flatten: false, // do not flatten else all subdirectory files get spit out to the top level dest directory
+                flatten: false, // do not flatten else all subdirectory files get spit out to the top level dist directory
                 cwd: 'fonts/',
                 src: [ '**' ],
                 dest: options.worpdress.path + '/fonts/'
@@ -23,7 +23,7 @@ module.exports = function (grunt, options) {
             { // copy images to wordpress images folder
                 expand: true,
                 nonull: true,
-                flatten: false, // do not flatten else all subdirectory files get spit out to the top level dest directory
+                flatten: false, // do not flatten else all subdirectory files get spit out to the top level dist directory
                 cwd: 'images/',
                 src: [ '**' ],
                 dest: options.worpdress.path + '/images/'
@@ -31,7 +31,7 @@ module.exports = function (grunt, options) {
             { // copy css to wordpress css folder
                 expand: true,
                 nonull: true,
-                flatten: false, // do not flatten else all subdirectory files get spit out to the top level dest directory
+                flatten: false, // do not flatten else all subdirectory files get spit out to the top level dist directory
                 cwd: 'css/',
                 src: [ '**' ],
                 dest: options.worpdress.path + '/css/'
@@ -39,7 +39,7 @@ module.exports = function (grunt, options) {
             { // copy js to wordpress js folder
                 expand: true,
                 nonull: true,
-                flatten: false, // do not flatten else all subdirectory files get spit out to the top level dest directory
+                flatten: false, // do not flatten else all subdirectory files get spit out to the top level dist directory
                 cwd: 'js/',
                 src: [ '**' ],
                 dest: options.worpdress.path + '/js/'

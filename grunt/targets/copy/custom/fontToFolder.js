@@ -17,7 +17,7 @@ module.exports = function (grunt, options) {
                 nonull: true,
                 cwd: options.src.font + '/',
                 src: [ '*' ],
-                dest: options.dest.font
+                dest: options.dist.font
             },
         ]
     };

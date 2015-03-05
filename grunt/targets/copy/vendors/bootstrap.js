@@ -21,8 +21,8 @@ module.exports = function (grunt, options) {
                 nonull: true,
                 cwd: options.bowerrc.directory + '/bootstrap/dist/js/',
                 /*
-                    keep 'src' to files & folder match as any path in 'src' will auto expand in 'dest',
-                    but declaring directly in 'dest' is clearer & gives alternative path structure
+                    keep 'src' to files & folder match as any path in 'src' will auto expand in 'dist',
+                    but declaring directly in 'dist' is clearer & gives alternative path structure
                 */
                 src: [ '*.min.js' ],
                 dest: options.src.vendor + '/bootstrap/js/'
@@ -53,7 +53,7 @@ module.exports = function (grunt, options) {
                 nonull: true,
                 cwd: options.bowerrc.directory + '/bootstrap/dist/fonts/',
                 src: [ '*' ],
-                dest: options.dest.font
+                dest: options.dist.font
             }
         ]
     };

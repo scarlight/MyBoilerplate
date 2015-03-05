@@ -8,7 +8,7 @@ module.exports = function (grunt, options) {
             {
                 expand: true,
                 nonull: true,
-                cwd: options.dest.css + '/',
+                cwd: options.dist.css + '/',
                 src: [ '*.css' ],
                 dest: options.wordpress.css
             }

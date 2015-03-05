@@ -42,11 +42,11 @@ module.exports = function(grunt) {
             // for debug and build processing for distribution folder.
             build : require('./grunt/include/path-build.js')( grunt ),
             // for distribution a.k.a production files.
-            dest : require('./grunt/include/path-dest.js')( grunt ),
+            dist : require('./grunt/include/path-dist.js')( grunt ),
             // we going to use the same src files for wordpress development,
             wordpress : require('./grunt/include/path-wordpress.js')( grunt ),
             assemblePagesTarget : {},   // an assemble container for my workaround
-            watchForDistribution : true, // watch task output to _dest or not
+            watchForDistribution : true, // watch task output to _dist or not
         },
 
     /*

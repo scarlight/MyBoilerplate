@@ -17,7 +17,7 @@ module.exports = function (grunt, options) {
                 nonull: true,
                 cwd: options.src.include + '/',
                 src: [ '**/*', '!kiv/**' ],
-                dest: options.dest.include
+                dest: options.dist.include
             },
         ]
     };

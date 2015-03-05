@@ -12,7 +12,7 @@ module.exports = function (grunt, options) {
         files: {
             src:
             [
-                options.dest.css + '/*.css'
+                options.dist.css + '/*.css'
             ]
         }
     };

@@ -13,7 +13,7 @@ module.exports = function ( grunt ) {
     */
 
     var
-        build    = '_build',
+        build   = '_build',
         js      = build + '/js',
         css     = build + '/css',
         font    = build + '/fonts',

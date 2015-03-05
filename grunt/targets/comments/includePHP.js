@@ -9,7 +9,7 @@ module.exports = function (grunt, options) {
             singleline: true,
             multiline: true
         },
-        src: [ options.dest.include + '/**/*.php' ]
+        src: [ options.dist.include + '/**/*.php' ]
     };
 
     return thisTarget;

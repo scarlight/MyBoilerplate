@@ -5,7 +5,7 @@ module.exports = function (grunt, options) {
 
     var imagemin = {
 
-        minImages: require('./targets/imagemin/minImages.js')(grunt, options)  //send to dest folder
+        minImages: require('./targets/imagemin/minImages.js')(grunt, options)  //send to dist folder
 
     };
 

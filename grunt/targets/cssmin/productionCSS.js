@@ -24,7 +24,7 @@ module.exports = function (grunt, options) {
                 [
                     options.build.css + '/*.css'
                 ],
-                dest: options.dest.css
+                dest: options.dist.css
             }
         ]
     };

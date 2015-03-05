@@ -1,0 +1,26 @@
+# TAKEN FROM http://www.stumiller.me/what-should-be-excluded-in-a-wordpress-gitignore-file/
+
+# .DS_Store
+# .svn
+# *.swp
+# Thumbs.db
+
+wp-content/devs/node_modules
+
+wp-content/devs/_/project-file/
+wp-content/devs/_build/
+wp-content/devs/_dist/
+wp-content/devs/backup/
+
+# wp-content/advanced-cache.php
+# wp-content/wp-cache-config.php
+wp-content/cache/*
+wp-content/cache/supercache/*
+wp-content/cache/
+wp-content/backups/
+
+wp-config.php
+
+*.log
+sitemap.xml
+sitemap.xml.gz

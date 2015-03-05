@@ -5,7 +5,7 @@ module.exports = function (grunt, options) {
 
     var cssmin = {
 
-        productionCSS: require('./targets/cssmin/productionCSS.js')(grunt, options)
+        productionCss: require('./targets/cssmin/productionCss.js')(grunt, options)
 
     };
 

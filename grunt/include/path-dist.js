@@ -13,7 +13,7 @@ module.exports = function ( grunt ) {
     */
 
     var
-        dist    = '_dest',
+        dist    = '_dist',
         js      = dist + '/js',
         css     = dist + '/css',
         font    = dist + '/fonts',
@@ -22,7 +22,7 @@ module.exports = function ( grunt ) {
 
     return {
         // key  : value
-        dist    : dist,
+        path    : dist,
         js      : js,
         css     : css,
         font    : font,

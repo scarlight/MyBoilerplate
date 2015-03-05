@@ -19,7 +19,7 @@ module.exports = function (grunt, options) {
                 extDot: 'first',
                 flatten: true,
                 src: options.build.js + '/*.js',
-                dest: options.dest.js
+                dest: options.dist.js
             }
         ]
     };

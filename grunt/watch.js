@@ -3,58 +3,121 @@ module.exports = function (grunt, options) {
     'use strict';
     grunt.util.linefeed = '\n'; // Force use of Unix newlines. Copied unashamedly from Bootstrap Gruntfile.js
 
-    var wordpressTask = (function(){
-        if( options.wordpress.output ) {
+    var buildTask = (function(){
+        var buildOutput = true; // to build folder actually, not a build routine/ sub routine
+        if( buildOutput ) {
             return {
-                wpWatch : options.wordpress.path + '/**/*',
-                wpImage : 'newer:copy:wpImage',
-                wpFont  : 'newer:copy:wpFont',
-                wpCSS   : 'newer:copy:wpCSS',
-                wpJS    : 'newer:copy:wpJS',
+                copyHtml           : 'newer:copy:htmlToBuild',
+                copyJs             : 'newer:copy:jsToBuild',
+                copyImage          : 'newer:copy:imageToBuild',
+                copyFont           : 'newer:copy:fontToFolder',
+                copyIncludes       : 'newer:copy:includeToFolder',
+                lessPreprocess     : 'newer:less:build',
+                hintJs             : 'jshint:jsSrc',
+                commentPhp         : 'newer:comments:includePHP',
+                cleanHtml          : 'clean:buildHtml',
+                cleanCss           : 'clean:buildCss',
+                cleanJs            : 'clean:buildJs',
+                cleanImage         : 'clean:buildImage',
+                cleanFont          : 'clean:buildFont',
+                cleanIncludeFolder : 'clean:buildIncludes',
+            };
+        } else {
+            return {
+                copyHtml           : '',
+                copyJs             : '',
+                copyImage          : '',
+                copyFont           : '',
+                copyIncludes       : '',
+                lessPreprocess     : '',
+                hintJs             : '',
+                commentPhp         : '',
+                cleanHtml          : '',
+                cleanCss           : '',
+                cleanJs            : '',
+                cleanIncludeFolder : '',
+                cleanImage         : ''
+            };
+        }
+    })();
+
+    var distTask = (function(){
+        var distOutput = options.watchForDistribution;
+        if( distOutput ) {
+            return {
+                minHtml            : 'newer:htmlmin:html',
+                minCss             : 'newer:cssmin:productionCss',
+                minImage           : 'newer:imagemin:minImages',
+                uglifyJs           : 'newer:uglify:jsBuild',
+                copyIncludes       : 'newer:copy:includeToFolder',
+                cleanHtml          : 'clean:distHtml',
+                cleanCss           : 'clean:distCss',
+                cleanJs            : 'clean:distJs',
+                cleanImage         : 'clean:distImage',
+                cleanFont          : 'clean:distFont',
+                cleanIncludeFolder : 'clean:distIncludeFolder'
+            };
+        } else {
+            return {
+                minHtml            : '',
+                minCss             : '',
+                minImage           : '',
+                uglifyJs           : '',
+                copyIncludes       : '',
+                cleanHtml          : '',
+                cleanCss           : '',
+                cleanJs            : '',
+                cleanIncludeFolder : '',
+                cleanImage         : '',
+                cleanFont          : ''
+            };
+        }
+    })();
+
+    var wpTask = (function(){
+        var wpOutput = options.wordpress.output;
+        if( wpOutput ) {
+            return {
+                wpFiles    : options.wordpress.path + '/**/*',
+                copyImage  : 'newer:copy:wpImage',
+                copyFont   : 'newer:copy:wpFont',
+                copyCss    : 'newer:copy:wpCss',
+                copyJs     : 'newer:copy:wpJs',
+                cleanImage : 'clean:wpImage',
+                cleanFont  : 'clean:wpFont',
+                cleanCss   : 'clean:wpCss',
+                cleanJs    : 'clean:wpJs',
             };
         }
         else {
             return {
-                wpWatch : options.dest.dist + '/**/*', // cannot return empty path for livereload, just add a double to make it work
-                wpImage : '',
-                wpFont  : '',
-                wpCSS   : '',
-                wpJS    : '',
+                wpFiles    : options.dist.path + '/**/*', // cannot return empty path for livereload, just add a double to make it work
+                copyImage  : '',
+                copyFont   : '',
+                copyCss    : '',
+                copyJs     : '',
+                cleanImage : '',
+                cleanFont  : '',
+                cleanCss   : '',
+                cleanJs    : '',
             };
         }
     })();
 
-    var watchDest = (function(){
-        var
-            htmlTask,
-            lessCompile,
-            jsCompile,
-            includeFolder,
-            imageTask;
-
-        if( options.watchForDistribution ) {
-            htmlTask      = 'newer:htmlmin:html';
-            lessCompile   = 'newer:cssmin:productionCSS';
-            jsCompile     = 'newer:uglify:jsBuild';
-            includeFolder = 'newer:copy:includeToFolder';
-            imageTask     = 'newer:imagemin:minImages';
+    var additionalTask = (function(){
+        var additionalOutput = true;
+        if( additionalOutput ){
+            return {
+                concatLibJs : 'concat:vendorLibrary',
+                assembleLessConfig : 'newer:assemble:lessConfig',
+            };
         } else {
-            htmlTask      = '';
-            lessCompile   = '';
-            jsCompile     = '';
-            includeFolder = '';
-            imageTask     = '';
+            return {
+                concatLibJs : '',
+                assembleLessConfig : '',
+            };
         }
-
-        return {
-            htmlTask      : htmlTask,
-            lessCompile   : lessCompile,
-            jsCompile     : jsCompile,
-            includeFolder : includeFolder,
-            imageTask     : imageTask
-        };
     })();
-
 /*                                           !!! IMPORTANT NOTE !!!
     ┌────────────────────────────────────────■■■■■■■■■■■■■■■■■■■■■■─────────────────────────────────────────────────┐
     │   IN DESIGNATED LOCATIONS, WATCH ON FIRST RUN MUST HAVE AT LEAST 1 FILE TO WATCH ELSE ANY CHANGES WILL NOT    │
@@ -81,9 +144,9 @@ module.exports = function (grunt, options) {
                 spawn: true
             },
             files: [
-                options.build.path + '/**/*', /* 'include' & 'font' folder will livereload twice as both _build & _dest receives the new change */
-                options.dest.dist + '/**/*',  /* 'include' & 'font' folder will livereload twice as both _build & _dest receives the new change */
-                wordpressTask.wpWatch,
+                options.build.path + '/**/*', /* 'include' & 'font' folder will livereload twice as both _build & _dist receives the new change */
+                options.dist.path + '/**/*',  /* 'include' & 'font' folder will livereload twice as both _build & _dist receives the new change */
+                wpTask.wpFiles,
             ],
         },
 
@@ -100,39 +163,49 @@ module.exports = function (grunt, options) {
         │   refer: https://github.com/gruntjs/grunt-contrib-watch/issues/25                                             │
         │   Due to the refered problem, add task sequentially in the array. Name the target a bit more collective       │
         └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-    */  htmlTask: {
+    */  html: {
             files: [ options.src.html + '/*.html' ],
             tasks: [
-                'newer:copy:htmlToBuild', /* [#1] SOURCE MONITORING : copy html from _ to _build                                 */
-                watchDest.htmlTask        /* [#2] BUILD MONITORING  : once src html is updated, do a minified version into _dest */
+                buildTask.cleanHtml,
+                buildTask.copyHtml,           /* [#1] SOURCE MONITORING : copy html from _ to _build                                 */
+                distTask.cleanHtml,
+                distTask.minHtml              /* [#2] BUILD MONITORING  : once src html is updated, do a minified version into _dist */
             ]
         },
 
-        lessCompile: {
+        css: {
             files: [ options.src.less + '/**/*.less' ],
             tasks: [
-                'newer:less:build',    /* [#1] SOURCE MONITORING : preprocess less from _ to _build                  */
-                watchDest.lessCompile, /* [#2] BUILD MONITORING  : when css build files updated, cssmin to _dest/css */
-                wordpressTask.wpCSS    /* [#2] BUILD MONITORING  : copy the min css from dest to wordpress/css       */
+                buildTask.cleanCss,
+                buildTask.lessPreprocess,     /* [#1] SOURCE MONITORING : preprocess less from _ to _build                  */
+                distTask.cleanCss,
+                distTask.minCss,              /* [#2] BUILD MONITORING  : when css build files updated, cssmin to _dist/css */
+                wpTask.copyCss                /* [#2] BUILD MONITORING  : copy the min css from dist to wordpress/css       */
             ]
         },
 
-        jsCompile: {
+        js: {
             files: [ options.src.js + '/*.js' ],
             tasks: [
-                'jshint:jsSrc',
-                'newer:copy:jsToBuild', /* [#1] SOURCE MONITORING : copy js from _ to _build                       */
-                watchDest.jsCompile,    /* [#2] BUILD MONITORING  : uglify the _build/js into _dest/js             */
-                wordpressTask.wpJS      /* [#2] BUILD MONITORING  : copy the uglified JS from dest to wordpress/js */
+                buildTask.hintJs,
+                buildTask.cleanJs,            /* [#1] SOURCE MONITORING : copy js from _ to _build                       */
+                buildTask.copyJs,             /* [#1] SOURCE MONITORING : copy js from _ to _build                       */
+                distTask.cleanJs,
+                distTask.uglifyJs,            /* [#2] BUILD MONITORING  : uglify the _build/js into _dist/js             */
+                wpTask.cleanJs,
+                wpTask.copyJs                 /* [#2] BUILD MONITORING  : copy the uglified JS from dist to wordpress/js */
             ]
         },
 
-        imageTask: {
+        image: {
             files: [ options.src.image + '/**/*.{png,jpg,jpeg,gif,webp,svg}' ],
             tasks: [
-                'newer:copy:imageToBuild', /* [#1] SOURCE MONITORING : copy image from _ to _build              */
-                wordpressTask.wpImage,     /* [#1] SOURCE MONITORING : copy image from _ to wordpress/image     */
-                watchDest.imageTask        /* [#2] BUILD MONITORING  : minify the images inside _build to _dest */
+                buildTask.cleanImage,
+                buildTask.copyImage,          /* [#1] SOURCE MONITORING : copy image from _ to _build              */
+                wpTask.cleanImage,
+                wpTask.copyImage,             /* [#1] SOURCE MONITORING : copy image from _ to wordpress/image     */
+                distTask.cleanImage,
+                distTask.minImage             /* [#2] BUILD MONITORING  : minify the images inside _build to _dist */
             ]
         },
 
@@ -140,33 +213,37 @@ module.exports = function (grunt, options) {
         ┌─────────────────────────────────────────────■■■■■■■■■■■■■■■■■■■■■■────────────────────────────────────────────┐
         │                                                       -                                                       │
         └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-    */  fontToBuild: {
+    */  font: {
             files: [ options.src.font + '/**' ],
             tasks: [
-                'newer:copy:fontToFolder', /* [#1] SOURCE MONITORING : copy font from _/font to _build/fonts & _dest/fonts (no special operation needed, but should be split to individual copy task if there is any) */
-                wordpressTask.wpFont       /* [#1] SOURCE MONITORING : copy font from _/font to wordpress/fonts (no special operation needed)                                                                         */
+                buildTask.cleanFont,
+                distTask.cleanFont,
+                buildTask.copyFont,           /* [#1] SOURCE MONITORING : copy font from _/font to _build/fonts & _dist/fonts (no special operation needed, but should be split to individual copy task if there is any) */
+                wpTask.cleanFont,
+                wpTask.copyFont               /* [#1] SOURCE MONITORING : copy font from _/font to wordpress/fonts (no special operation needed)                                                                         */
             ]
         },
 
         includeFolder: {
             files: [ options.src.include + '/**/*', '!' + options.src.include + '/kiv/**' ],
             tasks: [
-                'newer:copy:includeToFolder', /* [#1] SOURCE MONITORING : copy php/files from _/include to _build/include & _dest/include (no special operation needed, but should be split to individual copy task if there is any) */
-                'newer:comments:includePHP'   /* [#2] DEST MONITORING   : remove comments from php files in the include folder                                                                                                       */
+                buildTask.cleanIncludeFolder,
+                buildTask.copyIncludes,       /* [#1] SOURCE MONITORING : copy php/files from _/include to _build/include & _dist/include (no special operation needed, but should be split to individual copy task if there is any) */
+                buildTask.commentPhp          /* [#2] DIST MONITORING   : remove comments from php files in the include folder                                                                                                       */
             ]
         },
 
-        vendorLibToSrc: {
+        vendorLib: {
             files: [ options.src.grunt + '/targets/concat/*.js' ],
             tasks: [
-                'concat' // when changed, concat a new file to src. Don't need jsHint as its being concatenated unrecognizable
+                additionalTask.concatLibJs // when changed, concat a new file to src. Don't need jsHint as its being concatenated unrecognizable
             ]
         },
 
-        assembleLessConfig: {
+        lessConfig: {
             files: [ options.src.hbs.less + '/lessConfig.hbs' ],
             tasks: [
-                'newer:assemble:lessConfig' // compile out a less configuration from set.yml.
+                additionalTask.assembleLessConfig // compile out a less configuration from set.yml.
             ]
         },
 
