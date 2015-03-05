@@ -32,22 +32,19 @@ module.exports = function (grunt, options) {
         // more target to be added. See below.
     };
 
-    /*                          WORKAROUND : REFER https://github.com/assemble/assemble/issues/451
-       ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-       | # Currently grunt-newer is not working as intended and all the pages are assembling when only one page is modified. |
-
-       | # So Im going to create A TARGET FOR EACH PAGE to be watched by 'watch plugin', therefore 'newer plugin' is not     |
-       |   needed for assemble anymore. EACH TARGET will be prefixed according site type. EG: mainSiteWhatPage               |
-
-       | # For partials, layout, helpers or data that has been changed, use sitePrefixAll to recompile everything.           |
-       ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
-
-
-    (function(){
-        /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-           | mainSite All - (data, layout, partial, helper) excluding page & less |
-           ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
-        var sitePrefix = 'mainSite';
+/* ┌─────────────────────── WORKAROUND : REFER https://github.com/assemble/assemble/issues/451 ───────────────────────┐
+   ├───┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+   │   └─ Currently grunt-newer is not working as intended & all the pages are assembling when just one is modified.  │
+   │   ┌─ So Im going to create A TARGET FOR EACH PAGE to be watched by 'watch plugin', therefore 'newer plugin' is   │
+   │   └─ not needed for assemble anymore. EACH TARGET will be prefixed according site type. EG: mainSiteWhatPage     │
+   │    ─ For partials, layout, helpers or data that has been changed, use sitePrefixAll to recompile everything.     │
+   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/ (function(){
+    /*
+        ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+        │   mainSite All - (data, layout, partial, helper) excluding page & less                                      │
+        └─────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+    */  var sitePrefix = 'mainSite';
         var all = {
             files: [
                 {
@@ -69,10 +66,11 @@ module.exports = function (grunt, options) {
                                                             '!' + options.src.hbs.less + '/**/*'
                                                         ];
 
-        /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-           |                         mainSite - Each Page                         |
-           ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
-        grunt.file.recurse(options.src.hbs.page, function(abspath, rootdir, subdir, filename){
+    /*
+        ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+        │   mainSite - Each Page                                                                                      │
+        └─────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+    */  grunt.file.recurse(options.src.hbs.page, function(abspath, rootdir, subdir, filename){
             // abspath  --- : _/hbs/page/about/about.hbs
             // rootdir  --- : _/hbs/page
             // subdir   --- : about
