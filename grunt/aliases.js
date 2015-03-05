@@ -6,13 +6,13 @@ module.exports = function(grunt, options){
     var chalk = require('chalk');
     var wordpressOutput = false;
 
-    /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-       | # We shall auto generate a list of all the vendor targets for copy plugin, thus                               |
-       |   minimizing labour, risk of typo & being human forgetting to add any new vendors.                            |
-       | # Target name is the file name of the target ( recycling as much as possible )                                |
-       ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
-
-    // return as task array
+/*
+    ┌───┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+    │   ├─ We shall auto generate a list of all the vendor targets for copy plugin, thus minimizing labour, risk of    │
+    │   └─ typo & being human forgetting to add any new vendors.                                                       │
+    │    ─ Target name is the file name of the target ( recycling as much as possible )                                │
+    └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/  // return as task array
     var vendorLibrary = [
         // 'exec:gruntVersion',
         // 'exec:checkBowerPackages',
@@ -35,7 +35,7 @@ module.exports = function(grunt, options){
             'htmlmin:html',
 
             'less:build',
-            'cssmin:productionCSS',
+            'cssmin:productionCss',
 
             'jshint:jsSrc',
             'concat:vendorLibrary',
@@ -49,21 +49,20 @@ module.exports = function(grunt, options){
         ];
 
         if( options.wordpress.output ) {
-            taskSequence.push( 'copy:wpImage', 'copy:wpFont', 'copy:wpCSS', 'copy:wpJS' );
+            taskSequence.push( 'copy:wpImage', 'copy:wpFont', 'copy:wpCss', 'copy:wpJs' );
             return taskSequence;
         } else {
             return taskSequence;
         }
     })();
 
-    /*                                                      NOTE
-       ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-       | # grunt.registerTask can be added here however by just returning                                              |
-       |   key:value object, load-grunt-config will do it for us automatically.                                        |
-       | # Unless you need something custom and not auto-generated                                                     |
-       ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
-
-    return {
+/*
+    ┌───┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+    │   ├─ grunt.registerTask can be added here however by just returning key:value object, load-grunt-config will     │
+    │   └─ do it for us automatically.                                                                                 │
+    │    ─ Unless you need something custom and not auto-generated                                                     │
+    └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/  return {
         'default' : 'watch',
         'prep'    : vendorLibrary, // Skip this from watch option.atBegin, since it will prep everytime I toggle the watch
         'bankai'  : bankai
