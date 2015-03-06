@@ -5,11 +5,16 @@
 # *.swp
 # Thumbs.db
 
-wp-content/devs/node_modules
+wp-content/devs/node_modules/
+html/node_modules/
 
 wp-content/devs/_/project-file/
 wp-content/devs/_build/
+html/_build/
+_build/
 wp-content/devs/_dist/
+html/_dist/
+_dist/
 wp-content/devs/backup/
 
 # wp-content/advanced-cache.php
@@ -21,6 +26,7 @@ wp-content/backups/
 
 wp-config.php
 
+html/file.txt
 *.log
 sitemap.xml
 sitemap.xml.gz
