@@ -28,7 +28,7 @@ module.exports = function (grunt, options) {
                 });
             }
         },
-        lessConfig: require('./targets/assemble/lessConfig.js')(grunt, options),
+        lessConfig: require('./targets/assemble/template-lessConfig.js')(grunt, options),
         // more target to be added. See below.
     };
 

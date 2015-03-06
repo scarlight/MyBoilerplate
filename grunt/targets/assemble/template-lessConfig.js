@@ -22,7 +22,7 @@ module.exports = function (grunt, options) {
                 nonull: true,
                 flatten: true,
                 cwd: options.src.hbs.less + '/',
-                src: [ 'lessConfig.hbs' ],
+                src: [ 'template-lessConfig.hbs' ],
                 dest: options.src.lessImport
             }
         ]
