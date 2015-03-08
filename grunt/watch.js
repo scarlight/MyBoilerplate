@@ -15,12 +15,12 @@ module.exports = function (grunt, options) {
                 lessPreprocess     : 'newer:less:build',
                 hintJs             : 'jshint:jsSrc',
                 commentPhp         : 'newer:comments:includePHP',
-                cleanHtml          : 'clean:buildHtml',
-                cleanCss           : 'clean:buildCss',
-                cleanJs            : 'clean:buildJs',
-                cleanImage         : 'clean:buildImage',
-                cleanFont          : 'clean:buildFont',
-                cleanIncludeFolder : 'clean:buildIncludes',
+                cleanHtml          : options.needCleanTask ? 'clean:buildHtml'     : '',
+                cleanCss           : options.needCleanTask ? 'clean:buildCss'      : '',
+                cleanJs            : options.needCleanTask ? 'clean:buildJs'       : '',
+                cleanImage         : options.needCleanTask ? 'clean:buildImage'    : '',
+                cleanFont          : options.needCleanTask ? 'clean:buildFont'     : '',
+                cleanIncludeFolder : options.needCleanTask ? 'clean:buildIncludes' : '',
             };
         } else {
             return {
@@ -50,12 +50,12 @@ module.exports = function (grunt, options) {
                 minImage           : 'newer:imagemin:minImages',
                 uglifyJs           : 'newer:uglify:jsBuild',
                 copyIncludes       : 'newer:copy:includeToFolder',
-                cleanHtml          : 'clean:distHtml',
-                cleanCss           : 'clean:distCss',
-                cleanJs            : 'clean:distJs',
-                cleanImage         : 'clean:distImage',
-                cleanFont          : 'clean:distFont',
-                cleanIncludeFolder : 'clean:distIncludeFolder'
+                cleanHtml          : options.needCleanTask ? 'clean:distHtml'          : '',
+                cleanCss           : options.needCleanTask ? 'clean:distCss'           : '',
+                cleanJs            : options.needCleanTask ? 'clean:distJs'            : '',
+                cleanImage         : options.needCleanTask ? 'clean:distImage'         : '',
+                cleanFont          : options.needCleanTask ? 'clean:distFont'          : '',
+                cleanIncludeFolder : options.needCleanTask ? 'clean:distIncludeFolder' : '',
             };
         } else {
             return {
@@ -83,10 +83,10 @@ module.exports = function (grunt, options) {
                 copyFont   : 'newer:copy:wpFont',
                 copyCss    : 'newer:copy:wpCss',
                 copyJs     : 'newer:copy:wpJs',
-                cleanImage : 'clean:wpImage',
-                cleanFont  : 'clean:wpFont',
-                cleanCss   : 'clean:wpCss',
-                cleanJs    : 'clean:wpJs',
+                cleanImage : options.needCleanTask ? 'clean:wpImage' : '',
+                cleanFont  : options.needCleanTask ? 'clean:wpFont'  : '',
+                cleanCss   : options.needCleanTask ? 'clean:wpCss'   : '',
+                cleanJs    : options.needCleanTask ? 'clean:wpJs'    : '',
             };
         }
         else {

@@ -37,16 +37,14 @@ module.exports = function(grunt) {
                          '<%= package.license ? "\\n* Licensed under" + package.license + "( " + package.license.url + " ) */\\n" : "\\n*/\\n" %>',
             nodeModule : 'node_modules',
 
-            // this paths are also suitable for source control.
-            src : require('./grunt/include/path-src.js')( grunt ),
-            // for debug and build processing for distribution folder.
-            build : require('./grunt/include/path-build.js')( grunt ),
-            // for distribution a.k.a production files.
-            dist : require('./grunt/include/path-dist.js')( grunt ),
-            // we going to use the same src files for wordpress development,
-            wordpress : require('./grunt/include/path-wordpress.js')( grunt ),
-            assemblePagesTarget : {},   // an assemble container for my workaround
-            watchForDistribution : true, // watch task output to _dist or not
+
+            src       : require('./grunt/include/path-src.js')( grunt ),       // this paths are also suitable for source control.
+            build     : require('./grunt/include/path-build.js')( grunt ),     // for debug and build processing for distribution folder.
+            dist      : require('./grunt/include/path-dist.js')( grunt ),      // for distribution a.k.a production files.
+            wordpress : require('./grunt/include/path-wordpress.js')( grunt ), // we use the same src files for wordpress development,
+            assemblePagesTarget  : {},    // an assemble container for my workaround
+            watchForDistribution : true,  // watch task output to _dist or not
+            needCleanTask        : false, // when on, grunt-newer kicks in every time EG: uglify "lib.js" & less "theme.less"
         },
 
     /*
