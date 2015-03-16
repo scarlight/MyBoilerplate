@@ -43,6 +43,7 @@ module.exports = function(grunt, options){
             'uglify:jsBuild',
 
             'copy:fontToFolder',
+            'copy:includeToFolder',
 
             'copy:imageToBuild',
             'imagemin:minImages'

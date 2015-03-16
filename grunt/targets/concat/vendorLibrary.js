@@ -43,6 +43,7 @@ module.exports = function (grunt, options) {
         // options.src.vendor + '/prism/plugins/line-highlight/prism-line-highlight.min.js', // prism-line-highlight.css
         // options.src.vendor + '/prism/plugins/line-numbers/prism-line-numbers.min.js', // get the css prism-line-numbers.css
         // options.src.vendor + '/prism/plugins/...more',
+        // options.src.vendor + '/website-smoothscroll/credit.js',
         // Please add modernizr.js separately as the first script to load. It suppose to lay out what it has detected for subsequent usage.
     ];
 

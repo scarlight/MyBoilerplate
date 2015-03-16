@@ -6,7 +6,7 @@ module.exports = function (grunt, options) {
     // return object
     var thisTarget = {
         options: {
-            preserveComments: false,
+            preserveComments: 'all',
             mangle: false,
             compress: true,
             beautify: false,
