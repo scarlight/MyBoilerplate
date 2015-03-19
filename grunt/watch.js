@@ -12,7 +12,9 @@ module.exports = function (grunt, options) {
                 copyImage          : 'newer:copy:imageToBuild',
                 copyFont           : 'newer:copy:fontToFolder',
                 copyIncludes       : 'newer:copy:includeToFolder',
-                lessPreprocess     : 'newer:less:build',
+                lessTemplate       : 'less:template', // no need 'newer' as its already has fine grained control
+                lessTheme          : 'less:theme',    // no need 'newer' as its already has fine grained control
+                lessDoc            : 'less:doc',      // no need 'newer' as its already has fine grained control
                 hintJs             : 'jshint:jsSrc',
                 commentPhp         : 'newer:comments:includePHP',
                 cleanHtml          : options.needCleanTask ? 'clean:buildHtml'     : '',
@@ -29,7 +31,9 @@ module.exports = function (grunt, options) {
                 copyImage          : '',
                 copyFont           : '',
                 copyIncludes       : '',
-                lessPreprocess     : '',
+                lessTemplate       : '',
+                lessTheme          : '',
+                lessDoc            : '',
                 hintJs             : '',
                 commentPhp         : '',
                 cleanHtml          : '',
@@ -173,12 +177,34 @@ module.exports = function (grunt, options) {
             ]
         },
 
-        css: {
-            files: [ options.src.less + '/**/*.less' ],
+        lessTemplate: {
+            files: [ options.src.less + '/template.less', options.src.lessImport + '/**/*.less', '!' + options.src.lessImport + '/custom-bootstrap.less', '!' + options.src.lessImport + '/doc-includes.less' ],
             tasks: [
-                buildTask.cleanCss,
-                buildTask.lessPreprocess,     /* [#1] SOURCE MONITORING : preprocess less from _ to _build                  */
-                distTask.cleanCss,
+                // buildTask.cleanCss,           // need to fine grain template.css only
+                buildTask.lessTemplate,       /* [#1] SOURCE MONITORING : preprocess template.less from _ to _build         */
+                // distTask.cleanCss,            // need to fine grain template.css only
+                distTask.minCss,              /* [#2] BUILD MONITORING  : when css build files updated, cssmin to _dist/css */
+                wpTask.copyCss                /* [#2] BUILD MONITORING  : copy the min css from dist to wordpress/css       */
+            ]
+        },
+
+        lessTheme: {
+            files: [ options.src.less + '/theme.less', options.src.lessImport + '/custom-bootstrap.less', options.src.vendor + '/bootstrap/less/**/*.less' ],
+            tasks: [
+                // buildTask.cleanCss,           // need to fine grain theme.css only
+                buildTask.lessTheme,          /* [#1] SOURCE MONITORING : preprocess theme.less from _ to _build            */
+                // distTask.cleanCss,            // need to fine grain theme.css only
+                distTask.minCss,              /* [#2] BUILD MONITORING  : when css build files updated, cssmin to _dist/css */
+                wpTask.copyCss                /* [#2] BUILD MONITORING  : copy the min css from dist to wordpress/css       */
+            ]
+        },
+
+        lessDoc: {
+            files: [ options.src.less + '/doc.less', options.src.lessImport + '/doc-includes.less' ],
+            tasks: [
+                // buildTask.cleanCss,           // need to fine grain doc.css only
+                buildTask.lessDoc,            /* [#1] SOURCE MONITORING : preprocess doc.less from _ to _build              */
+                // distTask.cleanCss,            // need to fine grain doc.css only
                 distTask.minCss,              /* [#2] BUILD MONITORING  : when css build files updated, cssmin to _dist/css */
                 wpTask.copyCss                /* [#2] BUILD MONITORING  : copy the min css from dist to wordpress/css       */
             ]

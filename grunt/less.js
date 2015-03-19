@@ -10,7 +10,9 @@ module.exports = function (grunt, options) {
    └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */  var less = {
 
-        build: require('./targets/less/build.js')(grunt, options),
+        template: require('./targets/less/template.js')(grunt, options),
+        theme   : require('./targets/less/theme.js')(grunt, options),
+        doc     : require('./targets/less/doc.js')(grunt, options),
 
     };
 

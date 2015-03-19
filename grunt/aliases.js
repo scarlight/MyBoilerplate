@@ -34,7 +34,9 @@ module.exports = function(grunt, options){
             'copy:htmlToBuild',
             'htmlmin:html',
 
-            'less:build',
+            'less:template',
+            'less:theme',
+            'less:doc',
             'cssmin:productionCss',
 
             'jshint:jsSrc',

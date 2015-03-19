@@ -1,0 +1,54 @@
+/*********************************************************************************************************
+* START @{company-name} BODY STRUCTURE.
+*********************************************************************************************************/
+#@{prefix}-header-wrp
+{
+    &:extend(.relative, .center);
+    width:100%;
+    height:auto;
+
+    .bg(4, 'green');
+}
+
+#@{prefix}-header
+{
+    &:extend(.relative, .center);
+    width:@working-width;
+    height: auto; //modify - optional
+
+    .bg(10, 'purple');
+}
+
+#@{prefix}-body-wrp
+{
+    &:extend(.relative, .center);
+    width:100%;
+    height:auto;
+}
+
+#@{prefix}-body
+{
+    &:extend(.relative, .center);
+    width:@working-width;
+    height:auto; //modify - optional
+}
+
+#@{prefix}-footer-wrp
+{
+    &:extend(.relative);
+    position:absolute;
+    width:100%;
+    height:auto;
+    bottom:0;
+
+    .bg(20, 'red');
+}
+
+#@{prefix}-footer
+{
+    &:extend(.relative, .center);
+    width:@working-width;
+    height:30px;//modify - optional
+
+    .bg(30, 'aqua');
+}

@@ -1,0 +1,149 @@
+/*********************************************************************************************************
+* START MAIN NAVIGATION.
+*********************************************************************************************************/
+// LESS cannot call mixin or create mixin dynamically using variable interpolation
+// :extend is not working inside the detached ruleset, so no choice just use back mixin
+#@{prefix}-nav-wrp
+{
+    // color setting
+    @main-color: blue;
+    @secondary-color: white;
+    @background-color1: red;
+    @background-color2: yellow;
+
+    // same font size
+    @menu-font-size: 14px;
+    @menu-font-weight: 600;
+    @menu-a-height:42px; // not using directly
+    @calculate-line-height: ( 42/14 ); // ( @menu-a-height / @menu-font-size )
+
+    // grouped settings
+    ._nav_wrp() {
+        &:extend(.relative);
+        width:auto; //auto wrap around the child container
+        height:auto;
+        background-color: @background-color1;
+        // add padding, margin or background as you like
+    }
+    ._nav() {
+        &:extend(.relative);
+        width: auto;
+        height:auto;
+        line-height:0;
+    }
+    ._ul() {
+        &:extend(.relative);
+        #wrap > .void();                     // theme.css has some defaults for ul and it needs to be removed.
+        display:inline-block;
+        list-style-type:none;
+        list-style-position:outside;
+        background-color:@background-color2;
+    }
+    ._ul_li() {
+        &:extend(.relative);
+        #wrap > .void();                     // theme.css has some defaults for ul and it needs to be removed.
+        display:inline-block;
+        float:left;
+
+        &:nth-child(even) {
+            background-color:black;
+        }
+    }
+    ._cascade_hover_on_li() {
+        background-color: @background-color2;
+    }
+    ._parent_class_li_a() {
+        color: @secondary-color;
+        //prevent background-color here to have @{prefix}_cascade_hover_on_li working
+    }
+    ._nested_ul() {
+        &:extend(.absolute);
+        width:auto;
+        height:auto;
+        background-color: @background-color2;
+        z-index:200;
+    }
+    ._nested_ul_li() {
+        &:extend(.relative);
+        #wrap > .void();                     // theme.css has some defaults for ul and it needs to be removed.
+        width:100%;
+        height:auto;
+    }
+    ._nested_ul_li_a() {
+        &:extend(.relative);
+        width: 100%;
+        height:auto;
+        font-size: @menu-font-size;
+        font-weight:@menu-font-weight;
+        text-align:left;
+        color: @main-color;
+        line-height:@calculate-line-height;
+        padding:0 14px;
+        #transition > .all(@duration:150ms, @ease:ease-out);
+        &:hover {
+            color: @secondary-color;
+            background-color: @background-color1;
+        }
+    }
+    ._for_a() {
+        &:extend(.relative);
+        display:inline-block;
+        width: auto;
+        height:auto;
+        font-size: @menu-font-size;
+        font-weight:@menu-font-weight;
+        text-align:left;
+        text-decoration: none;
+        color: @main-color;
+        line-height:@calculate-line-height;
+        padding:0 14px;
+        #transition > .all(@duration:150ms, @ease:ease-out);
+        &:hover {
+            text-decoration: none;
+            color: @secondary-color;
+            background-color: @background-color2;
+        }
+    }
+
+    // -----------------------------------------------------
+    ._nav_wrp();
+    nav
+    {
+        ._nav();
+        ul
+        {
+            ._ul();
+            li
+            {
+                ._ul_li();
+                a
+                {
+                    ._for_a();
+                }
+                ul
+                {
+                    ._nested_ul();
+                    li
+                    {
+                        ._nested_ul_li();
+                        a
+                        {
+                            ._nested_ul_li_a();
+                        }
+                    }
+                    ul{
+                        top: 0px;
+                    }
+                }
+            }
+        }
+        li.sfHover
+        {
+            ._cascade_hover_on_li();
+            > a
+            {
+                ._parent_class_li_a();
+            }
+        }
+    }
+}
