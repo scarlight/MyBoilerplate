@@ -211,7 +211,7 @@ module.exports = function (grunt, options) {
         },
 
         js: {
-            files: [ options.src.js + '/*.js' ],
+            files: [ options.src.js + '/**/*.js' ],
             tasks: [
                 buildTask.hintJs,
                 buildTask.cleanJs,            /* [#1] SOURCE MONITORING : copy js from _ to _build                       */

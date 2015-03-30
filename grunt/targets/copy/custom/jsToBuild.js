@@ -9,7 +9,7 @@ module.exports = function (grunt, options) {
                 expand: true,
                 nonull: true,
                 cwd: options.src.js + '/',
-                src: [ '*.js' ],
+                src: [ '**/*.js', '**/*.js.map', '!_kiv/**' ],
                 dest: options.build.js
             },
         ]

@@ -9,7 +9,7 @@ module.exports = function (grunt, options) {
                 expand: true,
                 nonull: true,
                 cwd: options.src.image + '/',
-                src: [ '*' ],
+                src: [ '**/*' ],
                 dest: options.build.image
             },
         ]

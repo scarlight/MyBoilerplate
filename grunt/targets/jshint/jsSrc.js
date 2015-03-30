@@ -7,7 +7,7 @@ module.exports = function (grunt, options) {
     var thisTarget = {
         src:
         [
-            options.src.js + '/*.js',
+            options.src.js + '/**/*.js',
       '!' + options.src.js + '/pace.min.js',
       '!' + options.src.js + '/lib.js',
       '!' + options.src.js + '/modernizr.js'
