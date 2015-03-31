@@ -1,0 +1,43 @@
+# Don't use key name 'page' cause it can get confusing when used with helper or partials
+# this variables are prefixed via this file nam, therefore is unique
+---
+slug: doc.html
+minJS: false #can set to true
+minCSS: false #can set to true
+metaTag: true #can set to true
+showSource: false #can set to true
+developerLink: '<a class="developed" href="http://www.richcodesign.com/">Documentation by Rich Codesign. Competent to all your design & developement.</a>'
+title     : 'COMPANYNAME Custom CMS'
+tag       : 'Proudly made with Wordpress'
+created   : 01/01/2015
+updated   : "%m/%d/%Y"
+by        : 'Rich Codesign'
+emailTo   : developer@richcodesign.com
+webLink   : http://www.richcodesign.com/
+introDesc : ''
+footnote  :
+    startPage : |
+            Thank you for choosing Rich Codesign. <br>
+            If you have any questions that are beyond the scope of this help file, please feel free to use the above email to contact us.
+    credits : |
+            Once again, thank you for choosing <a href="http:///www.richcodesign.com/" target="_blank">Rich Codesign</a>. <br>
+            If you have any questions that are beyond the scope of this help file,
+            please feel free to use the above email to contact us.
+    copyright : #refer to handlebar helper-doc-foonote-copyright, http://assemble.io/docs/Templates-Overview.html#templating-basics
+sections  :
+-
+    menuName: Welcome
+    anchorID: documentation_cover
+    # sectionPartial: doc_documentation_cover
+-
+    menuName: Shortcode
+    anchorID: documentation_shortcode
+    # sectionPartial: doc_shortcodes
+-
+    menuName: Stylesheet
+    anchorID: documentation_style_css
+    # sectionPartial: doc_style_css
+-
+    menuName: Source and Credits
+    anchorID: documentation_source_and_credits
+    # sectionPartial: doc_source_and_credit

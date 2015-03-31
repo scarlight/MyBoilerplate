@@ -1,0 +1,25 @@
+<div class="group">
+    {{#if previewDark}}
+    <div class="css-preview-box-dark">
+        {{{ element }}}
+    </div>
+    {{else}}
+    <div class="css-preview-box">
+        {{{ element }}}
+    </div>
+    {{/if}}
+
+    <h4>element</h4>
+    {{#showAnatomy}}{{ element }}{{/showAnatomy}}
+
+    <h4>parameter</h4>
+    {{{ showParameter parameter }}}
+
+    {{#if desc}}
+    <hr>
+    <h5 style="display:inline-block;">Remark:</h5>&nbsp;{{{ desc }}}
+    {{/if}}
+</div>
+<br>
+<br>
+<br>

@@ -1,0 +1,156 @@
+/*********************************************************************************************************
+* @{company-name} 404 SECTION.
+*********************************************************************************************************/
+.@{prefix}-404
+{
+    &:extend(.relative);
+    margin-top:20px;
+    padding-left:300px;
+
+    .notice, .desc
+    {
+        &:extend(.relative);
+    }
+    .notice
+    {
+        @arguments:0 -1px 1px #ffffff;
+
+        font-size:49px;
+        font-weight: 900;
+        color:lighten(#000000, 85);
+        line-height:1.1;
+        letter-spacing: -1px;
+        padding-top:30px;
+        padding-bottom:15px;
+        border-bottom:solid 5px #f8f8f8;
+        #shadow > .text(@arguments);
+        -webkit-font-smoothing: antialiased; -webkit-text-stroke: 1px rgba(0,0,0,0);
+
+        &:before
+        {
+            @arguments:0 -1px 1px #cecece;
+
+            &:extend(.absolute); display:inline-block;
+            content:"\f085";
+            font-family:"FontAwesome";
+            font-size:235px;
+            color:#eeeeee;
+            left:-300px;
+            z-index:-1;
+            #shadow > .text(@arguments);
+            -webkit-font-smoothing: antialiased; -webkit-text-stroke: 0px rgba(0,0,0,0);
+        }
+    }
+    .desc, ul
+    {
+        font-size:15px;
+        margin-top:10px;
+    }
+}
+
+
+/*********************************************************************************************************
+* CONTACT FORM 7.
+*********************************************************************************************************/
+/*
+@wpcf7-text-error: #ffffff;
+@wpcf7-text-ok: #000000;
+
+@wpcf7-bg-error: #001B66;
+@error-bg: hsla( hue( @wpcf7-bg-error ), saturation( @wpcf7-bg-error ), lightness(  @wpcf7-bg-error ), 1 );
+
+@wpcf7-bg-ok: #A8DE00;
+@ok-bg   : hsla( hue( @wpcf7-bg-ok ), saturation( @wpcf7-bg-ok ), lightness(  @wpcf7-bg-ok ), 1 );
+
+div.wpcf7-response-output {
+    margin: 0px 5px 10px;
+    padding: 5px 10px;
+}
+span.wpcf7-not-valid-tip
+{
+    &:extend(.absolute); display:inline-block;
+    width: auto;
+    height: auto;
+    font-size: 13px;
+    color: @wpcf7-text-error;
+    text-align:center;
+    padding: 5px 10px;
+    top: -7px;
+    right: 0%;
+    left:0%;
+    background-color: @error-bg;
+    border: solid 1px @error-bg;
+    #border > .rounded(3px);
+    #shadow > .drop(0, 0, 5px, 1, lighten(@error-bg, 15));
+    z-index: 99;
+}
+div.wpcf7-validation-errors
+{
+    color:@wpcf7-text-error;
+    text-align:center;
+    background:darken(@error-bg, 15%);
+    border:none;
+    #border > .rounded(3px);
+    #shadow > .drop(0, 0, 8px, 1, lighten(@error-bg, 15));
+}
+div.wpcf7-mail-sent-ok
+{
+    color:@wpcf7-text-ok;
+    border:none;
+    background:@ok-bg;
+    #shadow > .drop(0, 0, 5px, 1, lighten(@ok-bg, 10));
+}
+span.wpcf7-list-item
+{
+    margin:0;
+}
+span.wpcf7-list-item-label {
+    color: #606060;
+    font-size:13px;
+    font-style:normal;
+    font-weight:600;
+    margin:0;
+}
+div.wpcf7 .screen-reader-response {
+    &:extend(.absolute);
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    width: 1px;
+}
+div.wpcf7 img.ajax-loader
+{
+    float:left;
+}
+*/
+
+/*
+// responsive sample
+
+// Mixin
+.responsive(@maxWidth; @rules) {
+    .fatush{
+        @rules();
+    }
+
+    @media only screen and (max-width: @maxWidth) {
+        @rules();
+    }
+
+    @media screen and (min-width: 1200) { @rules(); }
+    & html.lt-ie9                       { @rules(); }
+    html.lt-ie9 &                       { @rules(); }
+}
+
+// Usage
+.bacon {
+    width: 100%;
+
+    .responsive(450px,
+        {
+            float: left;
+            margin-top: 10px;
+        }
+    );
+}
+*/

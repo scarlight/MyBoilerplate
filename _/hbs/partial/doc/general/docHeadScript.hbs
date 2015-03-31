@@ -1,0 +1,9 @@
+{{#if doc.minJS ~}}
+    {{! <script type="text/javascript" src="js/modernizr.js"></script> ~}}
+    <script type="text/javascript" src="js/lib.min.js"></script>
+    <script type="text/javascript" src="js/doc.min.js"></script>
+{{else ~}}
+    {{! <script type="text/javascript" src="js/modernizr.js"></script> ~}}
+    <script type="text/javascript" src="js/lib.js"></script>
+    <script type="text/javascript" src="js/doc.js"></script>
+{{/if ~}}

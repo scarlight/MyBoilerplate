@@ -1,0 +1,43 @@
+---
+#layout: default.hbs
+#Doing prefix via object to avoid naming collision
+published: true
+yfm:
+    slug: about-us
+---
+<!doctype html>
+<html lang="en">
+    <head>
+    <title>{{ title }}</title>
+    {{> headMeta ~}}
+    {{> headLink ~}}
+    {{> headScript ~}}
+    </head>
+    <body>
+        {{> bodyIEBrowserWarning ~}}
+        <div id="browser-wrapper">
+            <div id="main-wrapper">
+                <div id="viewport-wrapper">
+                    <div id="{{ set.prefix ~}}-header-wrp">
+                        <div id="{{ set.prefix ~}}-header">
+                            <div id="{{ set.prefix ~}}-company-logo">
+                                <div>{{ set.companyName ~}}<a title="{{ set.companyName ~}}" rel="home" href="index.php"><span></span></a></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        {{> mainMenu this ~}}
+                    </div>
+                    <div id="{{ set.prefix ~}}-body-wrp">
+                        <div id="{{ set.prefix ~}}-body">
+                            {{> bodySampleContent ~}}
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <!-- *remove comment -> Place footer inside or outside of viewport -->
+                {{> bodyFooter ~}}
+            </div>
+        </div>
+        {{> googleAnalytics ~}}
+    </body>
+</html>

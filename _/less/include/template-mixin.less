@@ -1,0 +1,198 @@
+// http://stackoverflow.com/questions/20541306/how-to-write-a-css-hack-for-ie-11
+// http://browserstrangeness.bitbucket.org/css_hacks.html
+// http://css-tricks.com/snippets/css/style-placeholder-text/
+// It seems over clicking will highlight the label text. Disable text selection. Refer:http://stackoverflow.com/questions/826782/css-rule-to-disable-text-selection-highlighting
+// styling placeholders refer: http://css-tricks.com/snippets/css/style-placeholder-text/
+
+
+/**********************************************************************************************************/
+// #wrap adds useful namespace that is easy to remember, and is organized
+#wrap {
+    .default(@position:relative, @display:block) {
+        position:@position;
+        display:@display; // All selectors default display property, override in corresponding selectors
+    }
+    .void() {
+        display:block;    // Useful to have when elements just need a void
+        margin:0;
+        padding:0;
+        border:0;
+        outline:0;
+    }
+}
+
+/**********************************************************************************************************/
+.oilpaper(@filename:"index.png") {
+    @path:"../_/project-psd-source/oilpaper/";
+    @file:@filename;
+    @url:"@{path}@{file}";
+    background: transparent url(@url) no-repeat center 0 scroll;
+}
+
+/**********************************************************************************************************/
+// 1) ' &:extend ' can be used to reduce css file size by copying all of the properties into a selector
+// 2) you must DECLARE THE CSS RULE if calling directly to use in ' &:extend '
+// 3) we know a mixin function does not immediately DECLARE CSS RULE, sadly if called directly into extend it wont work
+//    Reference: http://lesscss.org/features/#extend-feature-reducing-css-size;
+// 4) On the contrary, you can have mixins inside your DECLARED RULE (workaround)
+.relative { position: relative; #wrap > .void();     }
+.absolute { position: absolute; &:extend(.relative); }
+.reset    { &:extend(.relative);                     } // DEPRECATED: fallback for my older configuration
+.fixed    { position: fixed; &:extend(.relative);    }
+.center   { margin: 0px auto;                        }
+.clear    { clear:both;                              }
+.show     { display:block !important;                }
+.hide     { display:none;                            }
+.void     { #wrap > .void();                         }
+.bg-off   { background:none;                         }
+.floatl   { float:left;                              }
+.floatr   { float:right;                             }
+.floatn   { float:none;                              }
+
+// USE BACK TEXT-"ALIGNMENT" IN BOOTSTRAP TYPE.LESS. FYI it comes without"display:block;"" property
+
+/**********************************************************************************************************/
+// LESS:  Referencing parent selectors with '&'
+// USAGE: use align'direction' because its used the same in wordpress css
+img.align
+{
+    &left   { &:extend(.show, .floatl); }
+    &right  { &:extend(.show, .floatr); }
+    &center { &:extend(.show, .center); }
+}
+
+/**********************************************************************************************************/
+// Changing selector order
+// Reference: http://lesscss.org/features/#parent-selectors-feature-changing-selector-order
+.plain {
+    ol&
+    {
+        &:extend(ul.plain); // Extending nested Selectors - http://lesscss.org/features/#extend-feature-extending-nested-selectors
+    }
+    ul&
+    {
+        list-style:none;
+        list-style-position: outside;
+        #wrap > .void();
+
+        &-menu // .plain-menu
+        {
+            &:extend(ul.plain);
+            li
+            {
+                &:extend(.relative);
+                display:inline-block;
+                width:auto;
+                height:auto;
+                padding:3px 10px;
+
+                &:before
+                {
+                    &:extend(.absolute);
+                    display:inline-block;
+                    content:"|";
+                    top:2px;
+                    right:-5px;
+                }
+
+                * { font-size:inherit; }
+            }
+            li:last-child
+            {
+                &:before { display:none; }
+            }
+        }
+    }
+}
+
+/**********************************************************************************************************/
+// http://www.minimit.com/articles/solutions-tutorials/bootstrap-3-responsive-centered-columns
+// centered columns styles
+centered
+{
+    .row-&
+    {
+        text-align:center;
+    }
+    .col-&
+    {
+        display:inline-block; /* divs work like text when displayed as inline-block */
+        float:none;
+        text-align:left; /* reset the text-align */
+        margin-right:-4px; /* inline-block space fix */
+    }
+}
+
+/**********************************************************************************************************/
+.space
+{
+    &-top    { margin-top:20px !important; }
+    &-right  { margin-right:20px !important; }
+    &-bottom { margin-bottom:20px !important; }
+    &-left   { margin-left:20px !important; }
+}
+
+/**********************************************************************************************************/
+@totalMP: ( 9-1 );    // 8
+.loop-mp( @totalMP ); // call the mixin with total number of loops
+.loop-mp( @n, @i: 0 ) when ( @i =< @n ) { // the loop
+
+    @j:( @i * 5 );
+
+    .margin
+    {
+        &-@{j}        { margin        : ( @i * 5px ) !important; }
+        &-top-@{j}    { margin-top    : ( @i * 5px ) !important; }
+        &-right-@{j}  { margin-right  : ( @i * 5px ) !important; }
+        &-bottom-@{j} { margin-bottom : ( @i * 5px ) !important; }
+        &-left-@{j}   { margin-left   : ( @i * 5px ) !important; }
+    }
+
+    .padding
+    {
+        &-@{j}        { padding        : ( @i * 5px ) !important; }
+        &-top-@{j}    { padding-top    : ( @i * 5px ) !important; }
+        &-right-@{j}  { padding-right  : ( @i * 5px ) !important; }
+        &-bottom-@{j} { padding-bottom : ( @i * 5px ) !important; }
+        &-left-@{j}   { padding-left   : ( @i * 5px ) !important; }
+    }
+
+.loop-mp( @n, ( @i + 1 )); // increment loop
+}
+
+/**********************************************************************************************************/
+.font
+{
+    &-xs { font-size: 85% !important; }
+    &-sm { font-size: 95% !important; }
+    &-md { font-size: 130% !important; }
+    &-lg { font-size: 160% !important; }
+    &-xl { font-size: 200% !important; }
+}
+
+//pending: form-mixin //list-mixin
+/*
+
+GOAL: we want the selectors benefit from extend feature such as rule combinator and clean code
+Concerns: Cascading may not work since selectors are grouped in an unknown stack order
+
+STEPS:
+COMMON GROUND RULE is extend .relative. (&:extend(.relative);)
+
+CONTINUE USING:
+&:extend(.center); // .center may not work if subsequent margin left or right property is specified. Margin for top and bottom will not interfere.
+&:extend(.floatl);
+&:extend(.floatr);
+display:type; use this within the corresponding selector since there is too many types available
+------------------------------------------------------------------------------------------------
+
+OLD PROBLEMS
+--------
+#wrap > .vabsolute();              // SOLVED: no more rules repeating within this selector
+#wrap > .vabsolute(inline-block);  // SOLVED: no more rules repeating within this selector even when there is variation
+#wrap > .vrelative();              // SOLVED: no more rules repeating within this selector
+#wrap > .vrelative(inline-block);  // SOLVED: no more rules repeating within this selector even when there is variation
+
+position:fixed; // Can handle also
+
+*/

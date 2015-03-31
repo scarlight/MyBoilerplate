@@ -1,0 +1,52 @@
+<div class="group">
+    <table class="doc-table-shortcode">
+        <tr>
+            <td rowspan="2"><h3>PACS Product List (Vertical List Image)</h3></td>
+            <td><span>Type</span></td>
+            <td><span>Description</span></td>
+        </tr>
+        <tr>
+            <td><em>Multi Enclosed Content</em></td>
+            <td><em>This shortcode builds the vertical product list of images.</em></td>
+        </tr>
+    </table>
+    <br>
+    <h4>shortcode</h4>
+    <pre class="prettyprint linenums">[pacs_product_list] ... [/pacs_product_list]</pre>
+    <h4>parameters</h4>
+    <table class="table doc-table-parameter">
+        <tr>
+            <th class="attribute"><span>Attribute</span></th>
+            <th class="value"><span>Value</span></th>
+            <th class="description"><span>Description</span></th>
+        </tr>
+        <tr>
+            <td class="attribute"><span>-</span></td>
+            <td class="value"><span>-</span></td>
+            <td class="description">This is a base component (must have to work properly)</td>
+        </tr>
+    </table>
+    <h4>shortcode</h4>
+    <pre class="prettyprint linenums">[pacs_product_list_item title=""] content [/pacs_product_list_item]</pre>
+    <h4>parameters</h4>
+    <table class="table doc-table-parameter">
+        <tr>
+            <th class="attribute"><span>Attribute</span></th>
+            <th class="value"><span>Value</span></th>
+            <th class="description"><span>Description</span></th>
+        </tr>
+        <tr>
+            <td class="attribute"><span>title</span></td>
+            <td class="value"><span>text</span></td>
+            <td class="description">Add the product title to be shown with the image.</td>
+        </tr>
+        <tr>
+            <td class="attribute"><span>content</span></td>
+            <td class="value"><span>img tag</span></td>
+            <td class="description">Add the image tag from the Visual Editor or using the Add Media button</td>
+        </tr>
+    </table>
+    <h4>sample</h4>
+    <pre class="prettyprint linenums">[pacs_product_list]<br><br>[pacs_product_list_item title="Booties"]<br>&lt;img class="alignnone size-full wp-image-194" src="http://www.pacs.com/wp-content/uploads/2014/09/booties.jpg" alt="booties" width="274" height="170" /&gt;<br>[/pacs_product_list_item]<br><br>[pacs_product_list_item title="Booties shoe"]<br>&lt;a href="http://www.pacs.com/wp-content/uploads/2014/09/booties-shoe.jpg">&lt;img class="alignnone size-full wp-image-195" src="http://www.pacs.com/wp-content/uploads/2014/09/booties-shoe.jpg" alt="booties-shoe" width="278" height="274" /&gt;&lt;/a&gt;<br>[/pacs_product_list_item]<br><br>[pacs_product_list_item title="Safety shoe"]<br>&lt;img class="alignnone wp-image-193 size-full" src="http://www.pacs.com/wp-content/uploads/2014/09/safety-shoe.jpg" alt="safety-shoe" width="234" height="162" /&gt;<br>[/pacs_product_list_item]<br><br>[/pacs_product_list]<br></pre>
+    <hr><br>
+</div>

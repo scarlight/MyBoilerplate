@@ -1,0 +1,62 @@
+# Don't use key name 'page' cause it can get confusing when used with helper or partials
+---
+prefix: com
+# no space just one word
+companyName: COMPANYNAME
+companyNiceName: 'Company Name Sdn Bhd'
+companyDomain: http://www.domain.com/
+defaultTitle: Untitled
+# if minJS and minCSS is true, then Gruntfile.js watchForDistribution must also become true
+minJS: true
+minCSS: true
+metaTag: false
+developerLink: '<a class="developed" href="http://www.richcodesign.com/">Developed by Rich Codesign</a>'
+googleAnalytics: false
+mainMenu:
+-
+    title: Home
+    slug:  index
+    link: '#'
+-
+    title: About Us
+    slug:  about-us
+    link: '#'
+    parent:
+    -
+        title: Home
+        slug:  index
+        link: '#'
+    -
+        title: About Us
+        slug:  aboutUs
+        link: '#'
+    -
+        title: Product
+        slug:  product
+        link: '#'
+    -
+        title: Services
+        slug:  services
+        link: '#'
+    -
+        title: Contact Us
+        slug:  contact-us
+        link: '#'
+-
+    title: Product
+    slug:  product
+    link: '#'
+-
+    title: Services
+    slug:  services
+    link: '#'
+-
+    title: Contact Us
+    slug:  contactUs
+    link: '#'
+index:
+    description: Lorem ipsum dolor sit amet.
+    title: Welcome
+about:
+    description: Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.
+    title: About Us

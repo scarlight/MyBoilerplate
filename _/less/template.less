@@ -1,0 +1,36 @@
+@import "include/template-includes.less";
+
+//sample css to target ie10; must add the javascript part to work
+html[data-useragent*='MSIE 10.0'] {}
+
+/*********************************************************************************************************
+* TEMPLATE GLOBAL VARIABLES & OTHER MISC CSS FOR THIS TEMPLATE.
+*********************************************************************************************************/
+@oilpaper            : { /* .oilpaper("index.png"); */ };
+@full-browser-width  : 100%;
+@full-browser-height : 100%;
+@viewport-width      : 100%;
+@working-width       : 960px;
+@theme-base-color    : #282828; //new
+@theme-white         : #ffffff;
+
+// `:extend` to extend dynamically generated classes?
+// https://github.com/less/less.js/issues/1325
+// I need to extend dynamically assigned colors but cant, though variable interpolation still works
+.txt-white  { color: @theme-white; }
+a.txt-white { &:extend(.txt-white); &:hover { text-decoration:underline !important; } }
+.txt-blue   { color: @brand-success; }
+a.txt-blue  { &:extend(.txt-blue); &:hover { text-decoration:underline !important; } }
+
+// http://stackoverflow.com/questions/11075474/selection-background-color-and-color-rendering-in-browsers#answer-11075672
+::selection         { background-color:rgba(255, 192, 29, 0.99); color:lighten(#000000, 50); text-shadow:none; -webkit-text-stroke: 0px rgba(0,0,0,0); } // Safari & Chrome
+::-moz-selection    { background-color:rgba(255, 192, 29, 0.99); color:lighten(#000000, 50); text-shadow:none; } // Firefox
+
+// VERY IMPORTANT PARTS - START
+@import "include/part/template-base.less";
+@import "include/part/company-logo.less";
+@import "include/part/body-structure.less";
+// VERY IMPORTANT PARTS - END
+
+@import "include/part/main-navigation.less";
+@import "include/part/copyright-info.less";

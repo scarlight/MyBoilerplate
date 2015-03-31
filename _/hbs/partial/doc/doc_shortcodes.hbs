@@ -1,0 +1,30 @@
+---
+# Partials YFM is different from Page YFM, correct context to access it is via the partial filename
+# Obscure reference: https://github.com/assemble/assemble/issues/98#issuecomment-32064297
+# Cheatsheet: https://gentlenode.com/journal/handlebars-1-cheatsheet/21
+yfm:
+    slug  : shortcodes
+    title : Shortcodes
+    desc  : |
+        Shortcodes are bits of text you can use in the content area to invoke some kind of function that can be simple or advance to accomplish certain tasks without the need of a programmer.
+---
+<section id="documentation_shortcode">
+    {{{ sectionHeading doc_shortcodes.yfm.title doc_shortcodes.yfm.desc }}}
+
+    {{> year ~}}
+    {{> title ~}}
+    {{> site_url ~}}
+    {{> site_tag_line ~}}
+    {{> line_spacing ~}}
+    {{> slider_label ~}}
+    {{> email_protect ~}}
+    {{!--{{> shortcode_img_border ~}}
+    {{> shortcode_horz_line ~}}
+    {{> shortcode_sliding_gallery ~}}
+    {{> shortcode_accordion ~}}
+    {{> shortcode_timeline ~}}
+    {{> shortcode_catalogue ~}}
+    {{> shortcode_tab_navigation ~}}
+    {{> shortcode_specs_table ~}}
+    {{> shortcode_product_list ~}} --}}
+</section>

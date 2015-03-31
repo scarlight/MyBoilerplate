@@ -1,0 +1,57 @@
+<div class="group">
+    <table class="doc-table-shortcode">
+        <tr>
+            <td rowspan="2"><h3>PACS Timeline/ History</h3></td>
+            <td><span>Type</span></td>
+            <td><span>Description</span></td>
+        </tr>
+        <tr>
+            <td><em>Multi Enclosed Content</em></td>
+            <td><em>This shortcode builds the timeline component.</em></td>
+        </tr>
+    </table>
+    <br>
+    <h4>shortcode</h4>
+    <pre class="prettyprint linenums">[pacs_timeline] ... [/pacs_timeline]</pre>
+    <h4>parameters</h4>
+    <table class="table doc-table-parameter">
+        <tr>
+            <th class="attribute"><span>Attribute</span></th>
+            <th class="value"><span>Value</span></th>
+            <th class="description"><span>Description</span></th>
+        </tr>
+        <tr>
+            <td class="attribute"><span>-</span></td>
+            <td class="value"><span>-</span></td>
+            <td class="description">This is a base component (must have to work properly)</td>
+        </tr>
+    </table>
+    <h4>shortcode</h4>
+    <pre class="prettyprint linenums">[pacs_timeline_item year="" spacing=""] content [/pacs_timeline_item]</pre>
+    <h4>parameters</h4>
+    <table class="table doc-table-parameter">
+        <tr>
+            <th class="attribute"><span>Attribute</span></th>
+            <th class="value"><span>Value</span></th>
+            <th class="description"><span>Description</span></th>
+        </tr>
+        <tr>
+            <td class="attribute"><span>year</span></td>
+            <td class="value"><span>number</span></td>
+            <td class="description">Add the year</td>
+        </tr>
+        <tr>
+            <td class="attribute"><span>spacing</span></td>
+            <td class="value"><span>1-100</span></td>
+            <td class="description">Accepts a numeric value from a given range. If not set, it will default to 50 automatically. Specifies the amount of distance you wish to have between the current year and the following year.</td>
+        </tr>
+        <tr>
+            <td class="attribute"><span>content</span></td>
+            <td class="value"><span>text</span></td>
+            <td class="description">Add full text description or information.</td>
+        </tr>
+    </table>
+    <h4>sample</h4>
+    <pre class="prettyprint linenums">[pacs_timeline]<br><br>[pacs_timeline_item year="1994" spacing=68]<br>&lt;img src="http://www.pacs.com/wp-content/upload/09/2014/untitled.png" alt="" /&gt;<br>PACS began operations, supplying laundry service for the cleanroom garments to the Malaysian Cleanroom market. First company in Southeast Asia to rent cleanroom garments and first to operate a Class 10 Cleanroom Laundry facility.<br>[/pacs_timeline_item]<br><br>[pacs_timeline_item year="1999" spacing=16]<br>&lt;img src="http://www.pacs.com/wp-content/upload/09/2014/untitled.png" alt="" /&gt;<br>PACS achieved ISO 9002:1994 certification and was once again the first Cleanroom Laundry company to obtain ISO certification and hence set the standards for the cleanroom laundry industry.<br>[/pacs_timeline_item]<br><br>[pacs_timeline_item year="2001" spacing=50]<br>&lt;img src="http://www.pacs.com/wp-content/upload/09/2014/untitled.png" alt="" /&gt;<br>to complement its pioneering activities of the cleanroom laundry business, PACS diversified in to the supply of cleanroom consumable materials like gloves, face masks, etc. Since then PACS has been representing and distributing various international brands of cleanroom consumable products like Shield Medicare, a manufacturer of sterile cleanroom disinfectants, Contec, a manufacturer of Cleanroom Cleaning products, Kimberly Clarke/Safeskin gloves and many other manufacturers.<br>[/pacs_timeline_item]<br><br>[pacs_timeline_item year="2006" spacing=30]<br>&lt;img src="http://www.pacs.com/wp-content/upload/09/2014/untitled.png" alt="" /&gt;<br>PACS also included Electro Static Control products into its expanding line of cleanroom consumable products. PACS has been appointed the distributor of Ptec Ionizers and NRD static eliminators.[pacs_spacer]Currently, PACS provides one stop supply solutions to its customers from Penang in the north to the Klang Valley and south to Singapore. PACS is also able to provide on site personnel to cater to day to day needs of our customers and to provide improved round the clock service to our customers.<br>[/pacs_timeline_item]<br><br>[/pacs_timeline]</pre>
+    <hr><br>
+</div>

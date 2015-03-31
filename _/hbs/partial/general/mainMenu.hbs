@@ -1,0 +1,18 @@
+<div id="{{ set.prefix ~}}-nav-wrp">
+    <nav>
+        <ul class="{{ set.prefix ~}}-mainmenu sf-menu">
+            {{#each set.mainMenu ~}}
+                <li {{#if this.parent ~}}class="parent"{{/if ~}}><a {{#is ../yfm.slug this.slug ~}}class="active"{{/is ~}} href="{{this.link}}">{{this.title}}</a>
+                    {{#if this.parent ~}}
+                    <ul>
+                        {{#each this.parent ~}}
+                        <li {{#if this.parent ~}}class="parent"{{/if ~}}><a href="{{this.link}}">{{this.title}}</a>
+                        </li>
+                        {{/each ~}}
+                    </ul>
+                    {{/if ~}}
+                </li>
+            {{/each ~}}
+        </ul>
+    </nav>
+</div>

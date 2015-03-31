@@ -1,0 +1,38 @@
+/*********************************************************************************************************
+* @{company-name} LOGO.
+*********************************************************************************************************/
+#@{prefix}-company-logo
+{
+    // setting here
+    @logo-width:64px;
+    @logo-height:63px;
+    @logo-background:transparent url(../images/logo.png) no-repeat center center scroll;
+
+    &:extend(.relative, .floatl);
+    width:@logo-width;
+    height:@logo-height;
+    line-height:0;
+
+    .bg(18, 'blue');
+
+    div{
+        &:extend(.relative);
+        line-height:0;
+        text-indent:-99999px;
+        a
+        {
+            &:extend(.relative);
+            line-height:0;
+            font-size:1.2em;
+            text-indent:0;
+            span
+            {
+                &:extend(.relative);
+                width:@logo-width;
+                height:@logo-height;
+                text-indent:0;
+                background:@logo-background;
+            }
+        }
+    }
+}

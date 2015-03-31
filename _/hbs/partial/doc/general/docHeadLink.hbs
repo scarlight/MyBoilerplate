@@ -1,0 +1,11 @@
+{{! Place favicon.ico and apple-touch-icon(s) in the root directory or according to the folder structure ~}}
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css'>
+{{#if doc.minCSS ~}}
+    <link rel="stylesheet" href="css/theme.min.css">
+    <link rel="stylesheet" href="css/doc.min.css">
+{{else ~}}
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/doc.css">
+{{/if ~}}

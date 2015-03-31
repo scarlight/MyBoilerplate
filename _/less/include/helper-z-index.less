@@ -1,0 +1,34 @@
+// must read -> http://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+// EG:
+// .z-index(0,2); // z-index: 2;
+// .z-index(1,2); // z-index: 102;
+
+// This is a call per use mixin, therefore the loop is heavily conditionalized due to the number of possibilities
+.z-index( @level, @subLevel:0 )
+{
+    @loop:6; // Total Amount of Levels Available!
+    @z-index-base: 100;
+    @z-index-level-n: -1;
+
+    // Call this recursive loop. Remember to pass in the loop variable.
+    .z-index-level( @loop, 0 );
+
+    .z-index-level( @loop, @i:0 ) when ( @i < @loop ) and ( @level >= @loop )
+    {
+        // do nothing
+    }
+    .z-index-level( @loop, @i:0 ) when ( @i < @loop ) and ( @level = @z-index-level-n )
+    {
+        html & { z-index: @z-index-level-n; }
+    }
+    .z-index-level( @loop, @i:0 ) when ( @i < @loop ) and ( @level >= 0 ) and ( @level < @loop )
+    {
+        & when ( @level = @i )
+        {
+            html & {
+                z-index: ((@z-index-base * @level) + @subLevel);
+            }
+        }
+        .z-index-level( @loop, (@i + 1) ); // continue the loop
+    }
+}

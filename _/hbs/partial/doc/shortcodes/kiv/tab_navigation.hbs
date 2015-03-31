@@ -1,0 +1,52 @@
+<div class="group">
+    <table class="doc-table-shortcode">
+        <tr>
+            <td rowspan="2"><h3>PACS Tabbed Navigation</h3></td>
+            <td><span>Type</span></td>
+            <td><span>Description</span></td>
+        </tr>
+        <tr>
+            <td><em>Multi Enclosed Content</em></td>
+            <td><em>This shortcode builds the tab component.</em></td>
+        </tr>
+    </table>
+    <br>
+    <h4>shortcode</h4>
+    <pre class="prettyprint linenums">[pacs_tab] ... [/pacs_tab]</pre>
+    <h4>parameters</h4>
+    <table class="table doc-table-parameter">
+        <tr>
+            <th class="attribute"><span>Attribute</span></th>
+            <th class="value"><span>Value</span></th>
+            <th class="description"><span>Description</span></th>
+        </tr>
+        <tr>
+            <td class="attribute"><span>-</span></td>
+            <td class="value"><span>-</span></td>
+            <td class="description">This is a base component (must have to work properly)</td>
+        </tr>
+    </table>
+    <h4>shortcode</h4>
+    <pre class="prettyprint linenums">[pacs_tab_item title=""] content [/pacs_tab_item]</pre>
+    <h4>Parameters</h4>
+    <table class="table doc-table-parameter">
+        <tr>
+            <th class="attribute"><span>Attribute</span></th>
+            <th class="value"><span>Value</span></th>
+            <th class="description"><span>Description</span></th>
+        </tr>
+        <tr>
+            <td class="attribute"><span>title</span></td>
+            <td class="value"><span>text</span></td>
+            <td class="description">Add the title for the tab</td>
+        </tr>
+        <tr>
+            <td class="attribute"><span>content</span></td>
+            <td class="value"><span>text</span></td>
+            <td class="description">Add full text description or information</td>
+        </tr>
+    </table>
+    <h4>sample</h4>
+    <pre class="prettyprint linenums">[pacs_tab]<br>[pacs_tab_item title="PACS Catalogues"] Lorem ipsum dolor sit amet, consectetur adipiscing elit.[/pacs_tab_item]<br>[pacs_tab_item title="PACS Datasheets"] Consectetur adipiscing elit. Suspendisse ac tortor at lectus lacinia accumsan at ut ante.[/pacs_tab_item]<br>[/pacs_tab]</pre>
+    <hr><br>
+</div>

@@ -1,0 +1,33 @@
+/*********************************************************************************************************
+* LESS AND CSS IMPORT.
+*
+* @import statement has a bug when used in variable interpolation
+* discussed here: http://stackoverflow.com/questions/10676628/less-css-import-path-from-variable
+*********************************************************************************************************/
+
+//ver:0.8 - https://github.com/Oreolek/elements
+@import "../vendors/less-elements/elements.less";
+
+// so much better with namespace
+@import "include/custom-extra-elements.less";
+
+@import "include/helper-colorcode.less";
+
+// must read -> http://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+// template z-index management.
+@import "include/helper-z-index.less";
+
+@import "include/custom-bootstrap.less";
+
+// generated from assemble using data from set.yml
+@import "include/template-lessConfig.less";
+
+@import "include/template-mixin.less";
+
+// template global fonts.
+@import "include/template-font.less";
+
+// remove comment if building for wordpress template.
+// @import "include/template-wordpress.less";
+
+// @import (less) "../vendors/pace/themes/blue/pace-theme-flash.css";
